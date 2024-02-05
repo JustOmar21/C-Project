@@ -9,4 +9,10 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Khateep\" />
+    <Folder Include="FaresAwad\" />
+    <Folder Include="OmarTarek\" />
+  </ItemGroup>
+
 </Project>
