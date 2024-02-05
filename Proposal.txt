@@ -1,0 +1,36 @@
+Brief Description
+
+	"TBN" is an Examination System using Windows Form application 
+	It is designed to streamline and manage the process of conducting exams in an organized and efficient manner.
+	This system provides a user-friendly interface through Windows Forms,
+	making it accessible and intuitive for both administrators( Admin , Manager , Instructor) and Students.
+
+Users
+	Admin
+	Managers
+	Instructors
+	Students
+
+Functionalities
+
+	
+	Admin:
+		-	Admin Have full control of the system as his main role is technical support
+
+	Manager:
+		-	Add, edit, or delete Instructors, Students.
+		-	Add, edit, or delete Facilities (Branch, Class, Department).
+		-	Add, edit, or delete Courses
+		-	View Data about all entities in the system
+		-	Assign Students , Instructors and Courses to their classes
+
+	Instructors:
+		-	Add, edit, or delete Exam , Questions and their choices
+		-	View Exam results and the system will grade the exam automatically
+
+	Students:
+		-	Students can view their exam details like date and time to enter as well as duration
+		-	Students can enter their exams at the correct time
+		-	Students will be able to view the exam results
+
+
