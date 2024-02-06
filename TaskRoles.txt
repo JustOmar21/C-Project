@@ -1,0 +1,66 @@
+Hard => 
+	Instructor
+
+	1 - View Courses => View Question Pool # Fares
+			- Validtion part
+				- Question have two types MCQ and True/False
+				- Question row in the Model Question will be linked to Model Question_Choices
+				- MCQ Questions will have Four Entries in Question_Choices
+				- True/False Questions will have Two Entries in Question_Choices ,
+				  Two other entires will be null so we can update the question later to MCQ if we want
+				
+				- Question will have a property called CorrectChoiceNumber and it must be between 1 and 4
+				- Make sure that the Instructor will be not be able to add, update , delete question pool 
+				  if he doesn't teach the course that the question pool belongs
+
+
+	
+
+	2 - View Exams => Add Update Delete them # Khateep
+		       => Add Students to Exam
+				- Validtion part
+				- Make sure that the exams shown for the instructor are from the same courses that he teaches
+				- Make sure the exams that the Instructor choose consist of 10 question 
+				  AND they don't break the Min/Max degree constraint
+				- An Instructor cannot make an Exam for a course that has less than 10 questions in the question pool
+
+	Student 
+
+	3 - -=> maybe print? => View Exam => Start Exam => Answer Question # Omar	
+		-	View Classes => View Details => maybe print?
+
+
+
+
+
+Medium =>
+		Manager
+
+		1 - View Students => Add Update Delete them => maybe print? # Omar
+			- Validation using regex , remember that you need classes , tracks and Intakes to be avaliable to add/update students
+		
+		2 - View Instructors => Add Update Delete them => maybe print? # Fares
+			- Validtion using regex
+
+		3 - View Courses => Add Update Delete them => maybe print? # Khateep
+			- Validtion using regex
+				- Make sure Max Degree is > Min Degree
+				- Remember to document how the deletion process work
+
+Easy =>
+		1 -Login Page	=> 4 type of accounts (Admin , Manager , Instructor , Students)	# Fares
+				- Validate Email , Password (using regex)
+				- When user log in be sure to take a copy of his ID in a static variable in static Class Utilities
+
+		Manager
+
+		2 - View Exams => maybe print? #Khateep
+
+		3 - View Branch , Department , Tracks , Intakes , Classes => Add Update Delete them => maybe print? # Omar
+			- Validation using regex , take care of the delete process at the end
+				- remember a Intake cannot exist without a Track remember using this drawing   Branch => Department => Track => Intake
+
+		Instructor
+		
+		4 -	View Classes => maybe report? #Khateep
+

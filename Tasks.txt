@@ -1,26 +1,28 @@
 Tasks
 
-	-	Models from Code First
-	-	Login Page	=> 4 type of accounts (Admin , Manager , Instructor , Students)	
+	-	Models from Code First #Hard #JustOmar
+
+
+	-	Login Page	=> 4 type of accounts (Admin , Manager , Instructor , Students)	#Easy
 		-	Validate Email , Password (using regex)
 		-	When user log in be sure to take a copy of his ID in a static variable in static Class Utilities
 
 
 	-	Manager
-		- View Branch , Department , Tracks , Intakes => Add Update Delete them => maybe print?
+		- View Branch , Department , Tracks , Intakes , Class => Add Update Delete them => maybe print? #Easy
 			- Validation using regex , take care of the delete process at the end
 				- remember a Intake cannot exist without a Track remember using this drawing   Branch => Department => Track => Intake
 
-		- View Students => Add Update Delete them => maybe print?
+		- View Students => Add Update Delete them => maybe print? #Med
 			- Validation using regex , remember that you need classes , tracks and Intakes to be avaliable to add/update students
 
 
-		- View Instructors => Add Update Delete them => maybe print?
+		- View Instructors => Add Update Delete them => maybe print? #Med
 			- Validtion using regex
 
-		- View Exams => maybe print?
+		- View Exams => maybe print? #Easy
 
-		- View Courses => Add Update Delete them => maybe print?
+		- View Courses => Add Update Delete them => maybe print? #Med
 			- Validtion using regex
 				- Make sure Max Degree is > Min Degree
 				- Remember to document how the deletion process work
@@ -28,12 +30,12 @@ Tasks
 
 
 	-	Student
-		-=> maybe print? => View Exam => Start Exam => Answer Question	
+		-=> maybe print? => View Exam => Start Exam => Answer Question	#Hard
 		-	View Classes => View Details => maybe print?
 	
 	
 	-	Instructor
-		-	View Exams => Add Update Delete them
+		-	View Exams => Add Update Delete them #Hard
 					   => Add Students to Exam
 							- Validtion part
 								- Make sure that the exams shown for the instructor are from the same courses that he teaches
@@ -42,7 +44,7 @@ Tasks
 								- An Instructor cannot make an Exam for a course that has less than 10 questions in the question pool
 
 
-		-	View Courses => View Question Pool
+		-	View Courses => View Question Pool #Hard
 			- Validtion part
 				- Question have two types MCQ and True/False
 				- Question row in the Model Question will be linked to Model Question_Choices
@@ -54,4 +56,4 @@ Tasks
 				- Make sure that the Instructor will be not be able to add, update , delete question pool 
 				  if he doesn't teach the course that the question pool belongs
 						
-		-	View Classes => maybe report?
+		-	View Classes => maybe report? #Easy
