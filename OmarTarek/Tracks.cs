@@ -1,0 +1,169 @@
+﻿using C__Project.Models;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TreeView;
+
+namespace C__Project.OmarTarek
+{
+    public partial class Tracks : Form
+    {
+        Form previousForm;
+        ExamSystemContext Context;
+        Regex TrackRegex = new Regex(@"^(?=.{3,50}$)[a-zA-Z0-9]+(?:[' -][a-zA-Z0-9]+)*$");
+        public Tracks(Form previousForm)
+        {
+            InitializeComponent();
+            this.previousForm = previousForm;
+            Context = new ExamSystemContext();
+            GetData();
+            addBTN.Enabled = false;
+        }
+        public void GetData()
+        {
+            var departments = Context.Departments.Select(b => new { Name = b.Name, ID = b.Id }).OrderBy(b=>b.Name).ToList();
+            dataGridView1.DataSource =
+                Context.Tracks.Include(track => track.Department)
+                .ThenInclude(dept => dept.Branch)
+                .Where(track => track.Name.Contains(SearchTXT.Text.Trim()))
+                .Select(track => new
+                {
+                    track.Id,
+                    DeptID = track.DepartmentId,
+                    track.Name,
+                    Department = track.Department.Name,
+                    Branch = track.Department.Branch.Name,
+                    track.Description
+                })
+                .OrderBy(track => track.Branch)
+                .ThenBy(track => track.Department)
+                .ToList();
+            deptCB.DataSource = departments;
+            deptCB.DisplayMember = "Name";
+            deptCB.SelectedIndex = 0;
+            deptCB.ValueMember = "ID";
+            deptCB.DropDownStyle = ComboBoxStyle.DropDownList;
+            dataGridView1.Columns["Id"].Visible = false;
+            dataGridView1.Columns["DeptID"].Visible = false;
+            dataGridView1.TopLeftHeaderCell.Value = "Edit";
+            dataGridView1.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridView1.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridView1.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridView1.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dataGridView1.AutoResizeColumns();
+        }
+
+        private void Tracks_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            previousForm.Show();
+        }
+        public void RegexTest()
+        {
+            bool nameVali = TrackRegex.IsMatch(nameTXT.Text.Trim());
+            bool descVali = descTXT.Text.Trim() != "";
+
+            if (nameVali && descVali)
+            { addBTN.Enabled = true; updateBTN.Enabled = true; }
+            else
+            { addBTN.Enabled = false; updateBTN.Enabled = false; }
+
+        }
+
+        private void nameTXT_TextChanged(object sender, EventArgs e)
+        {
+            bool nameVali = TrackRegex.IsMatch(nameTXT.Text.Trim());
+            if (nameVali) { nameValiLBL.Visible = false; } else { nameValiLBL.Visible = true; }
+            RegexTest();
+        }
+
+        private void descTXT_TextChanged(object sender, EventArgs e)
+        {
+            bool descVali = descTXT.Text.Trim() != "";
+            if (descVali) { descValiLBL.Visible = false; } else { descValiLBL.Visible = true; }
+            RegexTest();
+        }
+
+        private void addBTN_Click(object sender, EventArgs e)
+        {
+            Track track = new Track()
+            {
+                Name = nameTXT.Text.Trim(),
+                Description = descTXT.Text.Trim(),
+                DepartmentId = (int)deptCB.SelectedValue
+            };
+            Context.Tracks.Add(track);
+            Context.SaveChanges();
+            EndModification();
+            GetData();
+        }
+        private void EndModification()
+        {
+            nameTXT.Text = idTXT.Text = descTXT.Text = "";
+            nameValiLBL.Visible = descValiLBL.Visible = false;
+            deptCB.SelectedIndex = 0;
+            addBTN.Visible = true;
+            updateBTN.Visible = false;
+            deleteBTN.Visible = false;
+            exitModiBTN.Visible = false;
+        }
+
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == -1 && e.RowIndex != -1)
+            {
+                idTXT.Text = dataGridView1[0, e.RowIndex].Value.ToString();
+                deptCB.SelectedValue = dataGridView1[1, e.RowIndex].Value;
+                nameTXT.Text = dataGridView1[2, e.RowIndex].Value.ToString();
+                descTXT.Text = dataGridView1[3, e.RowIndex].Value.ToString();
+
+                addBTN.Visible = false;
+                updateBTN.Visible = true;
+                deleteBTN.Visible = true;
+                exitModiBTN.Visible = true;
+            }
+        }
+
+        private void updateBTN_Click(object sender, EventArgs e)
+        {
+            Track track = Context.Tracks.Where(track => track.Id == int.Parse(idTXT.Text)).SingleOrDefault();
+            track.Name = nameTXT.Text.Trim();
+            track.Description = descTXT.Text.Trim();
+            track.DepartmentId = (int)deptCB.SelectedValue;
+            Context.SaveChanges();
+            EndModification();
+            GetData();
+        }
+
+        private void deleteBTN_Click(object sender, EventArgs e)
+        {
+            Track track = Context.Tracks.Where(track => track.Id == int.Parse(idTXT.Text)).SingleOrDefault();
+            Context.Tracks.Remove(track);
+            Context.SaveChanges();
+            EndModification();
+            GetData();
+        }
+
+        private void exitModiBTN_Click(object sender, EventArgs e)
+        {
+            EndModification();
+        }
+
+        private void returnButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void SearchTXT_TextChanged(object sender, EventArgs e)
+        {
+            GetData();
+        }
+    }
+}
