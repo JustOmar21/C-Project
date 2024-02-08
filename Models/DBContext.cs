@@ -35,7 +35,7 @@ namespace C__Project.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Login>().HasKey(Login => new { Login.Email, Login.Type });
-            modelBuilder.Entity<Login>().ToTable(Login => Login.HasCheckConstraint("CK_Log_Type", "[Type] = 'Admin' OR [Type] = 'Student' OR [Type] = 'Manager'"));
+            modelBuilder.Entity<Login>().ToTable(Login => Login.HasCheckConstraint("CK_Log_Type", "[Type] = 'Admin' OR [Type] = 'Student' OR [Type] = 'Manager' OR [Type] = 'Instructor'"));
             modelBuilder.Entity<Login>().HasData(
                 new Login() { Email="Admin@gmail.com" , Password="123456789sS" , Type="Admin"}
                 );
@@ -76,7 +76,7 @@ namespace C__Project.Models
             modelBuilder.Entity<Course>().ToTable(Crs => Crs.HasCheckConstraint("CK_Crs_MinDeg", "MinDegree > 0"));
 
             modelBuilder.Entity<Intake>().ToTable(Int => Int.HasCheckConstraint("CK_Int_StartEndTime", "StartTime < EndTime"));
-            modelBuilder.Entity<Intake>().ToTable(Int => Int.HasCheckConstraint("CK_Int_StartTime", "DATEDIFF(YEAR, GetDate() , StartTime) >= 5"));
+            modelBuilder.Entity<Intake>().ToTable(Int => Int.HasCheckConstraint("CK_Int_StartTime", "DATEDIFF(YEAR, GetDate() , StartTime) <= 5"));
             modelBuilder.Entity<Intake>().ToTable(Int => Int.HasCheckConstraint("CK_Int_StartEndTimeMonths", "DATEDIFF(MONTH, StartTime , EndTime) >= 3"));
 
         }
