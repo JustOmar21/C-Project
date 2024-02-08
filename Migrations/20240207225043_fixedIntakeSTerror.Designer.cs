@@ -4,6 +4,7 @@ using C__Project.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace C__Project.Migrations
 {
     [DbContext(typeof(ExamSystemContext))]
-    partial class ExamSystemContextModelSnapshot : ModelSnapshot
+    [Migration("20240207225043_fixedIntakeSTerror")]
+    partial class fixedIntakeSTerror
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -280,7 +283,7 @@ namespace C__Project.Migrations
 
                     b.ToTable("Logins", t =>
                         {
-                            t.HasCheckConstraint("CK_Log_Type", "[Type] = 'Admin' OR [Type] = 'Student' OR [Type] = 'Manager' OR [Type] = 'Instructor'");
+                            t.HasCheckConstraint("CK_Log_Type", "[Type] = 'Admin' OR [Type] = 'Student' OR [Type] = 'Manager'");
                         });
 
                     b.HasData(
