@@ -36,7 +36,7 @@ namespace C__Project.OmarTarek
             dynamic classes = null;
             int? currentBranch = (int?)trackCB.SelectedValue == null ? null : Context.Tracks
                 .Include(b => b.Department)
-                .Where(trk => trk.Id == (int)trackCB.SelectedValue).Select(t => t.Department.BranchId).FirstOrDefault();
+                .Where(trk => trk.Id == (int?)trackCB.SelectedValue).Select(t => (int?)t.Department.BranchId).FirstOrDefault();
             var intakes = Context.Intakes.Select(i => new { Name = i.Name, ID = i.Id }).OrderBy(i => i.Name).ToList();
             var tracks = Context.Tracks.Select(t => new { Name = t.Name, ID = t.Id }).OrderBy(t => t.Name).ToList();
             if (currentBranch != null)
@@ -105,7 +105,7 @@ namespace C__Project.OmarTarek
             dynamic classes = null;
             int? currentBranch = (int?)trackCB.SelectedValue == null ? null : Context.Tracks
                 .Include(b => b.Department)
-                .Where(trk => trk.Id == (int)trackCB.SelectedValue).Select(t => t.Department.BranchId).FirstOrDefault();
+                .Where(trk => trk.Id == (int?)trackCB.SelectedValue).Select(t => (int?)t.Department.BranchId).FirstOrDefault() ?? null;
             var tracks = Context.Tracks.Select(t => new { Name = t.Name, ID = t.Id }).OrderBy(t => t.Name).ToList();
             if (currentBranch != null)
             {
@@ -148,20 +148,41 @@ namespace C__Project.OmarTarek
 
         private void addBTN_Click(object sender, EventArgs e)
         {
-            Student s = new Student()
+            try
             {
-                Name = nameTXT.Text.Trim(),
-                Email = emailTXT.Text.Trim(),
-                DOB = dobDP.Value.Date,
-                IntakeId = (int?)intakeCB.SelectedValue,
-                TrackId = (int?)trackCB.SelectedValue,
-                ClassId = (int?)classCB.SelectedValue
-            };
-            Context.Students.Add(s);
-            addStudentEmail(s);
-            Context.SaveChanges();
-            EndModification();
-            GetData();
+                Student s = new Student()
+                {
+                    Name = nameTXT.Text.Trim(),
+                    Email = emailTXT.Text.Trim(),
+                    DOB = dobDP.Value.Date,
+                    IntakeId = (int?)intakeCB.SelectedValue,
+                    TrackId = (int?)trackCB.SelectedValue,
+                    ClassId = (int?)classCB.SelectedValue
+                };
+                var doesEmailExist = Context.Students.Where(x => x.Email == s.Email);
+                if(doesEmailExist.Count() > 0 ) { throw new Exception("The email you entered is already in use by another Student"); }
+                Context.Students.Add(s);
+                Context.SaveChanges();
+                addStudentEmail(s);
+                Context.SaveChanges();
+            }
+            catch(Exception ex)
+            {
+                if(ex.InnerException != null)
+                {
+                    MessageBox.Show(ex.InnerException.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }    
+                else
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                
+            }
+            finally
+            {
+                EndModification();
+                GetData();
+            }
         }
         private void addStudentEmail(Student s , string password = "123456789sS" )
         {
@@ -204,18 +225,39 @@ namespace C__Project.OmarTarek
 
         private void updateBTN_Click(object sender, EventArgs e)
         {
-            Student student = Context.Students.Where(student => student.Id == int.Parse(idTXT.Text)).SingleOrDefault();
-            string oldEmail = student.Email;
-            student.Name = nameTXT.Text.Trim();
-            student.Email = emailTXT.Text.Trim();
-            student.DOB = dobDP.Value.Date;
-            student.IntakeId = (int?)intakeCB.SelectedValue;
-            student.TrackId = (int?)trackCB.SelectedValue;
-            student.ClassId = (int?)classCB.SelectedValue;
-            updateStudentEmail(oldEmail , student);
-            Context.SaveChanges();
-            EndModification();
-            GetData();
+            try
+            {
+                Student student = Context.Students.Where(student => student.Id == int.Parse(idTXT.Text)).SingleOrDefault();
+                string oldEmail = student.Email;
+                var doesEmailExist = Context.Students.Where(x => x.Email == emailTXT.Text.Trim() && x.Email != student.Email);
+                if (doesEmailExist.Count() > 0) { throw new Exception("The email you entered is already in use by another Student"); }
+                student.Name = nameTXT.Text.Trim();
+                student.Email = emailTXT.Text.Trim();
+                student.DOB = dobDP.Value.Date;
+                student.IntakeId = (int?)intakeCB.SelectedValue;
+                student.TrackId = (int?)trackCB.SelectedValue;
+                student.ClassId = (int?)classCB.SelectedValue;
+                Context.SaveChanges();
+                updateStudentEmail(oldEmail, student);
+                Context.SaveChanges();
+                
+            }
+            catch(Exception ex)
+            {
+                if (ex.InnerException != null)
+                {
+                    MessageBox.Show(ex.InnerException.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            finally
+            {
+                EndModification();
+                GetData();
+            }
         }
 
         private void updateStudentEmail(string oldEmail , Student s)
@@ -229,12 +271,31 @@ namespace C__Project.OmarTarek
 
         private void deleteBTN_Click(object sender, EventArgs e)
         {
-            Student student = Context.Students.Where(student => student.Id == int.Parse(idTXT.Text)).SingleOrDefault();
-            deleteStudentEmail(student.Email);
-            Context.Students.Remove(student);
-            Context.SaveChanges();
-            EndModification();
-            GetData();
+            try
+            {
+                Student student = Context.Students.Where(student => student.Id == int.Parse(idTXT.Text)).SingleOrDefault();
+                deleteStudentEmail(student.Email);
+                Context.SaveChanges();
+                Context.Students.Remove(student);
+                Context.SaveChanges();
+            }
+            catch(Exception ex)
+            {
+                if (ex.InnerException != null)
+                {
+                    MessageBox.Show(ex.InnerException.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            finally
+            {
+                EndModification();
+                GetData();
+            }
+
         }
         private void deleteStudentEmail(string email)
         {
