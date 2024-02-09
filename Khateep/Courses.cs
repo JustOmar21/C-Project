@@ -16,12 +16,15 @@ namespace C__Project.Khateep
     {
         Form previousForm;
         ExamSystemContext Context;
-        Regex TrackRegex = new Regex(@"^(?=.{3,50}$)[a-zA-Z0-9]+(?:[' -][a-zA-Z0-9]+)*$");
+        Regex courseRegex = new Regex(@"^(?=.{3,50}$)[a-zA-Z0-9]+(?:[' -][a-zA-Z0-9]+)*$");
+        Regex nameRegex = new Regex(@"^(?=.{3,50}$)[a-zA-Z0-9]+(?:[' -][a-zA-Z0-9]+)*$");
+
         public Courses(Form previousForm)
         {
             InitializeComponent();
             this.previousForm = previousForm;
             Context = new ExamSystemContext();
+            addBTN.Enabled = false;
             GetData();
         }
         public void GetData()
@@ -41,6 +44,32 @@ namespace C__Project.Khateep
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+
+        }
+
+        private void addBTN_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void deleteBTN_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void updateBTN_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void exitModiBTN_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void nameTXT_TextChanged(object sender, EventArgs e)
+        {
+            bool nameVali = nameRegex.IsMatch(nameTXT.Text.Trim());
 
         }
     }

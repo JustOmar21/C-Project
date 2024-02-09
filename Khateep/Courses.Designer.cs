@@ -31,6 +31,12 @@
             returnButton = new Button();
             SearchTXT = new TextBox();
             dataGridView1 = new DataGridView();
+            addBTN = new Button();
+            nameLBL = new Label();
+            nameTXT = new TextBox();
+            deleteBTN = new Button();
+            updateBTN = new Button();
+            exitModiBTN = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -66,11 +72,76 @@
             dataGridView1.TabIndex = 37;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
+            // addBTN
+            // 
+            addBTN.Location = new Point(493, 314);
+            addBTN.Name = "addBTN";
+            addBTN.Size = new Size(210, 23);
+            addBTN.TabIndex = 40;
+            addBTN.Text = "Add";
+            addBTN.UseVisualStyleBackColor = true;
+            addBTN.Click += addBTN_Click;
+            // 
+            // nameLBL
+            // 
+            nameLBL.AutoSize = true;
+            nameLBL.Location = new Point(427, -3);
+            nameLBL.Name = "nameLBL";
+            nameLBL.Size = new Size(39, 15);
+            nameLBL.TabIndex = 42;
+            nameLBL.Text = "Name";
+            // 
+            // nameTXT
+            // 
+            nameTXT.Location = new Point(427, 14);
+            nameTXT.Margin = new Padding(3, 2, 3, 2);
+            nameTXT.MaxLength = 50;
+            nameTXT.Name = "nameTXT";
+            nameTXT.Size = new Size(276, 23);
+            nameTXT.TabIndex = 41;
+            nameTXT.TextChanged += nameTXT_TextChanged;
+            // 
+            // deleteBTN
+            // 
+            deleteBTN.Location = new Point(465, 281);
+            deleteBTN.Name = "deleteBTN";
+            deleteBTN.Size = new Size(75, 23);
+            deleteBTN.TabIndex = 43;
+            deleteBTN.Text = "Delete";
+            deleteBTN.UseVisualStyleBackColor = true;
+            deleteBTN.Click += deleteBTN_Click;
+            // 
+            // updateBTN
+            // 
+            updateBTN.Location = new Point(564, 281);
+            updateBTN.Name = "updateBTN";
+            updateBTN.Size = new Size(75, 23);
+            updateBTN.TabIndex = 44;
+            updateBTN.Text = "Update";
+            updateBTN.UseVisualStyleBackColor = true;
+            updateBTN.Click += updateBTN_Click;
+            // 
+            // exitModiBTN
+            // 
+            exitModiBTN.Location = new Point(660, 281);
+            exitModiBTN.Name = "exitModiBTN";
+            exitModiBTN.Size = new Size(112, 23);
+            exitModiBTN.TabIndex = 45;
+            exitModiBTN.Text = "Exit Modification";
+            exitModiBTN.UseVisualStyleBackColor = true;
+            exitModiBTN.Click += exitModiBTN_Click;
+            // 
             // Courses
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(784, 378);
+            Controls.Add(exitModiBTN);
+            Controls.Add(updateBTN);
+            Controls.Add(deleteBTN);
+            Controls.Add(nameLBL);
+            Controls.Add(nameTXT);
+            Controls.Add(addBTN);
             Controls.Add(returnButton);
             Controls.Add(SearchTXT);
             Controls.Add(dataGridView1);
@@ -86,5 +157,11 @@
         private Button returnButton;
         private TextBox SearchTXT;
         private DataGridView dataGridView1;
+        private Button addBTN;
+        private Label nameLBL;
+        private TextBox nameTXT;
+        private Button deleteBTN;
+        private Button updateBTN;
+        private Button exitModiBTN;
     }
 }
