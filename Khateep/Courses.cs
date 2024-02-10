@@ -16,7 +16,7 @@ namespace C__Project.Khateep
     {
         Form previousForm;
         ExamSystemContext Context;
-        Regex courseRegex = new Regex(@"^(?=.{3,50}$)[a-zA-Z0-9]+(?:[' -][a-zA-Z0-9]+)*$");
+        Regex descritionRegex = new Regex(@"^(?=.{3,50}$)[a-zA-Z0-9]+(?:[' -][a-zA-Z0-9]+)*$");
         Regex nameRegex = new Regex(@"^(?=.{3,50}$)[a-zA-Z0-9]+(?:[' -][a-zA-Z0-9]+)*$");
 
         public Courses(Form previousForm)
@@ -49,6 +49,37 @@ namespace C__Project.Khateep
 
         private void addBTN_Click(object sender, EventArgs e)
         {
+            try
+            {
+                /*Course c = new Course()
+                {
+                    Name = nameTXT.Text.Trim(),
+                    Description = ,
+                    MaxDegree = ,
+                    MinDegree =
+
+                };*/
+/*                Context.Courses.Add(c);
+*/                Context.SaveChanges();
+                Context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                if (ex.InnerException != null)
+                {
+                    MessageBox.Show(ex.InnerException.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            }
+            finally
+            {
+                EndModification();
+                GetData();
+            }
 
         }
 
@@ -70,7 +101,37 @@ namespace C__Project.Khateep
         private void nameTXT_TextChanged(object sender, EventArgs e)
         {
             bool nameVali = nameRegex.IsMatch(nameTXT.Text.Trim());
+            if (nameVali) { nameValiLBL.Visible = false; } else { nameValiLBL.Visible = true; }
+            RegexTest();
 
+        }
+        private void EndModification()
+        {
+            nameValiLBL.Visible = false;
+
+        }
+        public void RegexTest()
+        {
+            bool nameVali = nameRegex.IsMatch(nameTXT.Text.Trim());
+            bool descriptionVali = descritionRegex.IsMatch(descritionTXT.Text.Trim());
+
+            if (nameVali && descriptionVali)
+            { addBTN.Enabled = true; updateBTN.Enabled = true; }
+            else
+            { addBTN.Enabled = false; updateBTN.Enabled = false; }
+
+        }
+
+        private void nameValiLBL_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void descritionTXT_TextChanged(object sender, EventArgs e)
+        {
+            bool descriptionVali = descritionRegex.IsMatch(descritionTXT.Text.Trim());
+            if (descriptionVali) { descriptionValiLBL.Visible = false; } else { descriptionValiLBL.Visible = true; }
+            RegexTest();
         }
     }
 }

@@ -37,6 +37,10 @@
             deleteBTN = new Button();
             updateBTN = new Button();
             exitModiBTN = new Button();
+            nameValiLBL = new Label();
+            descritionLBL = new Label();
+            descritionTXT = new TextBox();
+            descriptionValiLBL = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -97,7 +101,7 @@
             nameTXT.Margin = new Padding(3, 2, 3, 2);
             nameTXT.MaxLength = 50;
             nameTXT.Name = "nameTXT";
-            nameTXT.Size = new Size(276, 23);
+            nameTXT.Size = new Size(345, 23);
             nameTXT.TabIndex = 41;
             nameTXT.TextChanged += nameTXT_TextChanged;
             // 
@@ -131,11 +135,56 @@
             exitModiBTN.UseVisualStyleBackColor = true;
             exitModiBTN.Click += exitModiBTN_Click;
             // 
+            // nameValiLBL
+            // 
+            nameValiLBL.AutoSize = true;
+            nameValiLBL.ForeColor = Color.Red;
+            nameValiLBL.Location = new Point(427, 42);
+            nameValiLBL.Name = "nameValiLBL";
+            nameValiLBL.Size = new Size(232, 15);
+            nameValiLBL.TabIndex = 46;
+            nameValiLBL.Text = "3- 50 Characters , letters and numbers only";
+            nameValiLBL.Visible = false;
+            nameValiLBL.Click += nameValiLBL_Click;
+            // 
+            // descritionLBL
+            // 
+            descritionLBL.AutoSize = true;
+            descritionLBL.Location = new Point(428, 84);
+            descritionLBL.Name = "descritionLBL";
+            descritionLBL.Size = new Size(67, 15);
+            descritionLBL.TabIndex = 47;
+            descritionLBL.Text = "Description";
+            // 
+            // descritionTXT
+            // 
+            descritionTXT.Location = new Point(428, 102);
+            descritionTXT.Multiline = true;
+            descritionTXT.Name = "descritionTXT";
+            descritionTXT.Size = new Size(344, 139);
+            descritionTXT.TabIndex = 48;
+            descritionTXT.TextChanged += descritionTXT_TextChanged;
+            // 
+            // descriptionValiLBL
+            // 
+            descriptionValiLBL.AutoSize = true;
+            descriptionValiLBL.ForeColor = Color.Red;
+            descriptionValiLBL.Location = new Point(428, 244);
+            descriptionValiLBL.Name = "descriptionValiLBL";
+            descriptionValiLBL.Size = new Size(232, 15);
+            descriptionValiLBL.TabIndex = 49;
+            descriptionValiLBL.Text = "3- 50 Characters , letters and numbers only";
+            descriptionValiLBL.Visible = false;
+            // 
             // Courses
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(784, 378);
+            Controls.Add(descriptionValiLBL);
+            Controls.Add(descritionTXT);
+            Controls.Add(descritionLBL);
+            Controls.Add(nameValiLBL);
             Controls.Add(exitModiBTN);
             Controls.Add(updateBTN);
             Controls.Add(deleteBTN);
@@ -163,5 +212,9 @@
         private Button deleteBTN;
         private Button updateBTN;
         private Button exitModiBTN;
+        private Label nameValiLBL;
+        private Label descritionLBL;
+        private TextBox descritionTXT;
+        private Label descriptionValiLBL;
     }
 }
