@@ -56,7 +56,7 @@ namespace C__Project.Models
             modelBuilder.Entity<TeachesAt>().HasKey(TA => new { TA.CourseId, TA.ClassId });
 
             modelBuilder.Entity<Exam>().ToTable(EX => EX.HasCheckConstraint("CK_EX_StartEndTime", "StartTime < EndTime"));
-            modelBuilder.Entity<Exam>().ToTable(EX => EX.HasCheckConstraint("CK_EX_StartTime", "DATEDIFF(YEAR, GetDate() , StartTime) >= 10"));
+            modelBuilder.Entity<Exam>().ToTable(EX => EX.HasCheckConstraint("CK_EX_StartTime", "DATEDIFF(YEAR, GetDate() , StartTime) <= 10"));
             modelBuilder.Entity<Exam>().ToTable(EX => EX.HasCheckConstraint("CK_EX_StartEndTimeHourDiffBefore", "DATEDIFF(HOUR, StartTime , EndTime) >= 1 "));
             modelBuilder.Entity<Exam>().ToTable(EX => EX.HasCheckConstraint("CK_EX_StartEndTimeHourDiffAfter", "DATEDIFF(HOUR, StartTime , EndTime) <= 4 "));
             modelBuilder.Entity<Exam>().ToTable(EX => EX.HasCheckConstraint("CK_EX_StartEndTimeDayDiff", "DATEDIFF(DAY, StartTime , EndTime) = 0 "));
