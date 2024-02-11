@@ -149,6 +149,7 @@
             // cmbUserType
             // 
             cmbUserType.BackColor = Color.FromArgb(230, 231, 233);
+            cmbUserType.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbUserType.FlatStyle = FlatStyle.Flat;
             cmbUserType.Font = new Font("Calibri", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             cmbUserType.FormattingEnabled = true;
