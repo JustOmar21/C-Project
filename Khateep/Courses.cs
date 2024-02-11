@@ -29,7 +29,25 @@ namespace C__Project.Khateep
         }
         public void GetData()
         {
-
+            dataGridView1.DataSource =
+                Context.Courses
+                .Where(course => course.Name.Contains(SearchTXT.Text.Trim()))
+                .Select(course => new
+                {
+                    course.Id,
+                    course.Name, 
+                    course.Description, 
+                    course.MaxDegree, 
+                    course.MinDegree,
+                    
+                })
+                .OrderBy(track => track.Name) //ask omar
+                .ToList();
+            dataGridView1.Columns["Id"].Visible = false;
+            dataGridView1.TopLeftHeaderCell.Value = "Edit";
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dataGridView1.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView1.AutoResizeColumns();
         }
 
         private void returnButton_Click(object sender, EventArgs e)
@@ -51,6 +69,15 @@ namespace C__Project.Khateep
         {
             try
             {
+                Course c = new Course() 
+                { 
+                    Name = nameTXT.Text.Trim(),
+                    Description = descritionTXT.Text.Trim()
+                };
+                Context.Add(c);
+                Context.SaveChanges();
+                EndModification();
+                GetData();
                 /*Course c = new Course()
                 {
                     Name = nameTXT.Text.Trim(),
@@ -59,9 +86,8 @@ namespace C__Project.Khateep
                     MinDegree =
 
                 };*/
-/*                Context.Courses.Add(c);
-*/                Context.SaveChanges();
-                Context.SaveChanges();
+                /*                Context.Courses.Add(c);
+                */
             }
             catch (Exception ex)
             {
@@ -95,6 +121,7 @@ namespace C__Project.Khateep
 
         private void exitModiBTN_Click(object sender, EventArgs e)
         {
+            EndModification();
 
         }
 
@@ -108,6 +135,12 @@ namespace C__Project.Khateep
         private void EndModification()
         {
             nameValiLBL.Visible = false;
+            nameTXT.Text = descritionTXT.Text = "";
+            nameValiLBL.Visible = descriptionValiLBL.Visible = false;
+            addBTN.Visible = true;
+            updateBTN.Visible = false;
+            deleteBTN.Visible = false;
+            exitModiBTN.Visible = false;
 
         }
         public void RegexTest()
