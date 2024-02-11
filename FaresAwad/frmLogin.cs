@@ -71,25 +71,25 @@ namespace C__Project.FaresAwad
                                         case "Admin":
                                             this.Hide();
                                             AdminForm adminForm = new AdminForm();
-                                            adminForm.Show();
+                                            adminForm.ShowDialog();
                                             break;
 
                                         case "Manager":
                                             this.Hide();
                                             ManagerForm managerForm = new ManagerForm();
-                                            managerForm.Show();
+                                            managerForm.ShowDialog();
                                             break;
 
                                         case "Instructor":
                                             this.Hide();
                                             InstructorForm instructorForm = new InstructorForm();
-                                            instructorForm.Show();
+                                            instructorForm.ShowDialog();
                                             break;
 
                                         case "Student":
                                             this.Hide();
                                             StudentForm studentForm = new StudentForm();
-                                            studentForm.Show();
+                                            studentForm.ShowDialog();
                                             break;
 
                                         default:
