@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label6 = new Label();
-            label5 = new Label();
             button2 = new Button();
             btnLogin = new Button();
             checkbxShowPas = new CheckBox();
@@ -41,29 +39,6 @@
             label4 = new Label();
             cmbUserType = new ComboBox();
             SuspendLayout();
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Cursor = Cursors.Hand;
-            label6.Font = new Font("Nirmala UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label6.ForeColor = Color.FromArgb(116, 86, 174);
-            label6.Location = new Point(96, 438);
-            label6.Name = "label6";
-            label6.Size = new Size(116, 20);
-            label6.TabIndex = 16;
-            label6.Text = "Create Account";
-            label6.Click += label6_Click;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Nirmala UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label5.Location = new Point(63, 416);
-            label5.Name = "label5";
-            label5.Size = new Size(185, 20);
-            label5.TabIndex = 17;
-            label5.Text = "Already Have an Account";
             // 
             // button2
             // 
@@ -190,8 +165,6 @@
             BackColor = Color.White;
             ClientSize = new Size(325, 489);
             Controls.Add(cmbUserType);
-            Controls.Add(label6);
-            Controls.Add(label5);
             Controls.Add(button2);
             Controls.Add(btnLogin);
             Controls.Add(checkbxShowPas);
@@ -212,9 +185,6 @@
         }
 
         #endregion
-
-        private Label label6;
-        private Label label5;
         private Button button2;
         private Button btnLogin;
         private CheckBox checkbxShowPas;

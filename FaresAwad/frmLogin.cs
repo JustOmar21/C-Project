@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using Microsoft.Data.SqlClient;
+using C__Project.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace C__Project.FaresAwad
 {
@@ -36,73 +38,56 @@ namespace C__Project.FaresAwad
 
             try
             {
-                using (SqlConnection con = new SqlConnection("Data Source=DESKTOP-RR5U94D;Initial Catalog=\"TBN Exam System\";Integrated Security=True;TrustServerCertificate=True;"))
+                using (var dbContext = new ExamSystemContext())
                 {
-                    con.Open();
+                    var userCount = dbContext.Logins
+                        .Where(l => l.Email == txtEmail.Text && l.Password == txtPassword.Text && l.Type == cmbUserType.Text)
+                        .Count();
 
-                    string query = "SELECT COUNT(*) FROM Logins WHERE Email = @Email and Password = @Password and Type = @UserType";
-
-                    using (SqlDataAdapter sda = new SqlDataAdapter(query, con))
+                    if (userCount == 1)
                     {
-                        sda.SelectCommand.Parameters.AddWithValue("@Email", txtEmail.Text);
-                        sda.SelectCommand.Parameters.AddWithValue("@Password", txtPassword.Text);
-                        sda.SelectCommand.Parameters.AddWithValue("@UserType", cmbUserType.Text);
+                        var userType = dbContext.Logins
+                            .Where(l => l.Email == txtEmail.Text && l.Password == txtPassword.Text)
+                            .Select(l => l.Type)
+                            .FirstOrDefault();
 
-                        DataTable dt = new DataTable();
-                        sda.Fill(dt);
-
-                        if (dt.Rows.Count > 0 && Convert.ToInt32(dt.Rows[0][0]) == 1)
+                        if (userType != null)
                         {
-                            string userTypeQuery = "SELECT Type FROM Logins WHERE Email = @Email and Password = @Password";
-                            using (SqlDataAdapter sda1 = new SqlDataAdapter(userTypeQuery, con))
+                            switch (userType)
                             {
-                                sda1.SelectCommand.Parameters.AddWithValue("@Email", txtEmail.Text);
-                                sda1.SelectCommand.Parameters.AddWithValue("@Password", txtPassword.Text);
+                                case "Admin":
+                                    this.Hide();
+                                    AdminForm adminForm = new AdminForm();
+                                    adminForm.ShowDialog();
+                                    break;
 
-                                DataTable dt1 = new DataTable();
-                                sda1.Fill(dt1);
+                                case "Manager":
+                                    this.Hide();
+                                    ManagerForm managerForm = new ManagerForm();
+                                    managerForm.ShowDialog();
+                                    break;
 
-                                if (dt1.Rows.Count > 0)
-                                {
-                                    string userType = dt1.Rows[0][0].ToString();
+                                case "Instructor":
+                                    this.Hide();
+                                    InstructorForm instructorForm = new InstructorForm();
+                                    instructorForm.ShowDialog();
+                                    break;
 
-                                    switch (userType)
-                                    {
-                                        case "Admin":
-                                            this.Hide();
-                                            AdminForm adminForm = new AdminForm();
-                                            adminForm.ShowDialog();
-                                            break;
+                                case "Student":
+                                    this.Hide();
+                                    StudentForm studentForm = new StudentForm();
+                                    studentForm.ShowDialog();
+                                    break;
 
-                                        case "Manager":
-                                            this.Hide();
-                                            ManagerForm managerForm = new ManagerForm();
-                                            managerForm.ShowDialog();
-                                            break;
-
-                                        case "Instructor":
-                                            this.Hide();
-                                            InstructorForm instructorForm = new InstructorForm();
-                                            instructorForm.ShowDialog();
-                                            break;
-
-                                        case "Student":
-                                            this.Hide();
-                                            StudentForm studentForm = new StudentForm();
-                                            studentForm.ShowDialog();
-                                            break;
-
-                                        default:
-                                            MessageBox.Show("Invalid user type.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                            break;
-                                    }
-                                }
+                                default:
+                                    MessageBox.Show("Invalid user type.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    break;
                             }
                         }
-                        else
-                        {
-                            MessageBox.Show("Invalid login credentials.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Invalid login credentials.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
@@ -131,14 +116,6 @@ namespace C__Project.FaresAwad
             txtEmail.Clear();
             txtPassword.Clear();
             cmbUserType.SelectedIndex = -1;
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-            // Hide current form and open registration form
-            this.Hide();
-            frmRegister registrationForm = new frmRegister();
-            registrationForm.Show();
         }
     }
 }
