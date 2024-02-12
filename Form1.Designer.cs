@@ -36,6 +36,7 @@
             button6 = new Button();
             button7 = new Button();
             button8 = new Button();
+            button9 = new Button();
             SuspendLayout();
             // 
             // button1
@@ -101,7 +102,7 @@
             // button7
             // 
             button7.Location = new Point(12, 122);
-            button7.Margin = new Padding(2, 2, 2, 2);
+            button7.Margin = new Padding(2);
             button7.Name = "button7";
             button7.Size = new Size(328, 27);
             button7.TabIndex = 6;
@@ -120,11 +121,23 @@
             button8.UseVisualStyleBackColor = true;
             button8.Click += button8_Click;
             // 
+            // button9
+            // 
+            button9.Location = new Point(12, 213);
+            button9.Margin = new Padding(2);
+            button9.Name = "button9";
+            button9.Size = new Size(328, 27);
+            button9.TabIndex = 8;
+            button9.Text = "Student Profile";
+            button9.UseVisualStyleBackColor = true;
+            button9.Click += button9_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(button9);
             Controls.Add(button8);
             Controls.Add(button7);
             Controls.Add(button6);
@@ -148,5 +161,6 @@
         private Button button6;
         private Button button7;
         private Button button8;
+        private Button button9;
     }
 }

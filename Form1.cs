@@ -2,6 +2,7 @@ using C__Project.FaresAwad;
 using C__Project.Models;
 using C__Project.OmarTarek;
 using C__Project.OmarTarek.Student_Forms;
+using System.Media;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TreeView;
 
 namespace C__Project
@@ -93,6 +94,13 @@ namespace C__Project
         {
             frmLogin form = new frmLogin();
             form.ShowDialog();
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            StudentProfile studentProfile = new StudentProfile(this);
+            this.Hide();
+            studentProfile.Show();
         }
     }
 }
