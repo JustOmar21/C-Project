@@ -200,8 +200,8 @@ namespace C__Project.Models
                 );
 
             modelBuilder.Entity<Exam>().HasData(
-                new Exam() { Id = 1 , Name = "Exam 1" , StartTime = DateTime.Parse("13/2/2024 15:00:00"), EndTime = DateTime.Parse("13/2/2024 18:00:00"), InstructorId = null , CourseId = 1 },
-                new Exam() { Id = 2 , Name = "Exam 2" , StartTime = DateTime.Parse("13/12/2024 15:00:00"), EndTime = DateTime.Parse("13/12/2024 18:00:00"), InstructorId = null , CourseId = 1 }
+                new Exam() { Id = 1 , Name = "Exam 1" , StartTime = DateTime.Parse("13/2/2025 15:00:00"), EndTime = DateTime.Parse("13/2/2025 18:00:00"), InstructorId = null , CourseId = 1 },
+                new Exam() { Id = 2 , Name = "Exam 2" , StartTime = DateTime.Parse("13/12/2025 15:00:00"), EndTime = DateTime.Parse("13/12/2025 18:00:00"), InstructorId = null , CourseId = 1 }
                 );
 
             modelBuilder.Entity<ExamQuestion>().HasData(
