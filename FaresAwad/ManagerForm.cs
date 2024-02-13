@@ -93,7 +93,7 @@ namespace C__Project.FaresAwad
                 string email = txtEmail.Text;
 
                 // Check if the entered salary is a valid double
-                if (double.TryParse(txtSalary.Text, out double salary))
+                if (float.TryParse(txtSalary.Text, out float salary))
                 {
                     // Gather date of birth from DateTimePicker
                     DateTime dob = pickDateTime.Value;
@@ -133,12 +133,26 @@ namespace C__Project.FaresAwad
             catch (DbUpdateException ex)
             {
                 // Display detailed exception information
-                MessageBox.Show($"Error creating instructor: {ex.Message}\n\nStackTrace: {ex.StackTrace}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if(ex.InnerException != null)
+                {
+                    MessageBox.Show($"{ex.InnerException.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    MessageBox.Show($"Error creating instructor: {ex.Message}\n\nStackTrace: {ex.StackTrace}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             catch (Exception ex)
             {
                 // Display generic exception information
-                MessageBox.Show($"Error creating instructor: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (ex.InnerException != null)
+                {
+                    MessageBox.Show($"{ex.InnerException.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    MessageBox.Show($"Error creating instructor: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
     }
