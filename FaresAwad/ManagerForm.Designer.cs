@@ -225,8 +225,9 @@
             Controls.Add(btnSearch);
             Controls.Add(txtId);
             Controls.Add(dataGridView);
+            FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Name = "ManagerForm";
-            Text = "ManagerForm";
+            Text = "CRUD operations on instructor By Manager";
             ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
             ResumeLayout(false);
             PerformLayout();
