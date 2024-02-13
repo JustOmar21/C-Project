@@ -102,5 +102,12 @@ namespace C__Project
             this.Hide();
             studentProfile.Show();
         }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            StudentClasses studentClasses = new StudentClasses(this);
+            this.Hide();
+            studentClasses.Show();
+        }
     }
 }
