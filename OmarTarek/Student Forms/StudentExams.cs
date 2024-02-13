@@ -70,6 +70,7 @@ namespace C__Project.OmarTarek.Student_Forms
                 date.Text = ExamDate;
                 startTime.Text = ExamStart;
                 endTime.Text = ExamEnd;
+                courseTXT.Text = dataGridView1[6,e.RowIndex].Value.ToString();
 
                 DateTime dateTime = DateTime.Parse(dataGridView1[3, e.RowIndex].Value.ToString());
                 DateTime start = DateTime.Parse($"{ExamDate} {ExamStart}");
@@ -113,7 +114,8 @@ namespace C__Project.OmarTarek.Student_Forms
                 .Where(student => student.Id == int.Parse(idLBL.Text))
                 .Include(student => student.Exam)
                 .SingleOrDefault();
-            StudentAnswering studentAnswer = new StudentAnswering(this, student);
+            string exam = $"{examName.Text} - {courseTXT.Text}";
+            StudentAnswering studentAnswer = new StudentAnswering(this, student , exam);
             this.Hide();
             studentAnswer.Show();
         }

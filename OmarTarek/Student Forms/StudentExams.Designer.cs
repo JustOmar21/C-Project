@@ -42,6 +42,8 @@
             dateLBL = new Label();
             idLBL = new Label();
             SearchTXT = new TextBox();
+            courseTXT = new Label();
+            courseLBL = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -59,7 +61,7 @@
             // examNameLBL
             // 
             examNameLBL.AutoSize = true;
-            examNameLBL.Location = new Point(443, 45);
+            examNameLBL.Location = new Point(443, 16);
             examNameLBL.Margin = new Padding(2, 0, 2, 0);
             examNameLBL.Name = "examNameLBL";
             examNameLBL.Size = new Size(89, 20);
@@ -69,7 +71,7 @@
             // examName
             // 
             examName.AutoSize = true;
-            examName.Location = new Point(497, 75);
+            examName.Location = new Point(497, 46);
             examName.Margin = new Padding(2, 0, 2, 0);
             examName.Name = "examName";
             examName.Size = new Size(0, 20);
@@ -101,7 +103,7 @@
             // startTime
             // 
             startTime.AutoSize = true;
-            startTime.Location = new Point(497, 197);
+            startTime.Location = new Point(497, 168);
             startTime.Margin = new Padding(2, 0, 2, 0);
             startTime.Name = "startTime";
             startTime.Size = new Size(0, 20);
@@ -110,7 +112,7 @@
             // startTimeLBL
             // 
             startTimeLBL.AutoSize = true;
-            startTimeLBL.Location = new Point(443, 167);
+            startTimeLBL.Location = new Point(443, 138);
             startTimeLBL.Margin = new Padding(2, 0, 2, 0);
             startTimeLBL.Name = "startTimeLBL";
             startTimeLBL.Size = new Size(77, 20);
@@ -131,7 +133,7 @@
             // endTime
             // 
             endTime.AutoSize = true;
-            endTime.Location = new Point(497, 260);
+            endTime.Location = new Point(497, 231);
             endTime.Margin = new Padding(2, 0, 2, 0);
             endTime.Name = "endTime";
             endTime.Size = new Size(0, 20);
@@ -140,7 +142,7 @@
             // endTimeLBL
             // 
             endTimeLBL.AutoSize = true;
-            endTimeLBL.Location = new Point(443, 230);
+            endTimeLBL.Location = new Point(443, 201);
             endTimeLBL.Margin = new Padding(2, 0, 2, 0);
             endTimeLBL.Name = "endTimeLBL";
             endTimeLBL.Size = new Size(71, 20);
@@ -150,7 +152,7 @@
             // date
             // 
             date.AutoSize = true;
-            date.Location = new Point(497, 129);
+            date.Location = new Point(497, 100);
             date.Margin = new Padding(2, 0, 2, 0);
             date.Name = "date";
             date.Size = new Size(0, 20);
@@ -159,7 +161,7 @@
             // dateLBL
             // 
             dateLBL.AutoSize = true;
-            dateLBL.Location = new Point(443, 99);
+            dateLBL.Location = new Point(443, 70);
             dateLBL.Margin = new Padding(2, 0, 2, 0);
             dateLBL.Name = "dateLBL";
             dateLBL.Size = new Size(41, 20);
@@ -169,7 +171,7 @@
             // idLBL
             // 
             idLBL.AutoSize = true;
-            idLBL.Location = new Point(443, 5);
+            idLBL.Location = new Point(368, -12);
             idLBL.Margin = new Padding(2, 0, 2, 0);
             idLBL.Name = "idLBL";
             idLBL.Size = new Size(50, 20);
@@ -186,11 +188,32 @@
             SearchTXT.TabIndex = 24;
             SearchTXT.TextChanged += SearchTXT_TextChanged;
             // 
+            // courseTXT
+            // 
+            courseTXT.AutoSize = true;
+            courseTXT.Location = new Point(497, 281);
+            courseTXT.Margin = new Padding(2, 0, 2, 0);
+            courseTXT.Name = "courseTXT";
+            courseTXT.Size = new Size(0, 20);
+            courseTXT.TabIndex = 26;
+            // 
+            // courseLBL
+            // 
+            courseLBL.AutoSize = true;
+            courseLBL.Location = new Point(443, 251);
+            courseLBL.Margin = new Padding(2, 0, 2, 0);
+            courseLBL.Name = "courseLBL";
+            courseLBL.Size = new Size(54, 20);
+            courseLBL.TabIndex = 25;
+            courseLBL.Text = "Course";
+            // 
             // StudentExams
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(640, 360);
+            Controls.Add(courseTXT);
+            Controls.Add(courseLBL);
             Controls.Add(SearchTXT);
             Controls.Add(idLBL);
             Controls.Add(date);
@@ -230,5 +253,7 @@
         private Label dateLBL;
         private Label idLBL;
         private TextBox SearchTXT;
+        private Label courseTXT;
+        private Label courseLBL;
     }
 }

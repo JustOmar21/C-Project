@@ -28,11 +28,12 @@ namespace C__Project.OmarTarek.Student_Forms
         ExamSystemContext Context = new ExamSystemContext();
         List<ExamQuestionDetails> Questions;
         bool stopRadioEvent = false;
-        internal StudentAnswering(Form previousForm, StudentExam studentExam)
+        internal StudentAnswering(Form previousForm, StudentExam studentExam , string name = "Exam Name")
         {
             InitializeComponent();
             this.studentExam = studentExam;
             this.previousForm = previousForm;
+            this.Text = name;
             choice1.Text = "1";
             choice2.Text = "2";
             choice3.Text = "3";
