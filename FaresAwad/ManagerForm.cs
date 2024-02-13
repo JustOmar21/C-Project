@@ -92,50 +92,73 @@ namespace C__Project.FaresAwad
                 string title = txtTitle.Text;
                 string email = txtEmail.Text;
 
-                // Check if the entered salary is a valid double
-                if (float.TryParse(txtSalary.Text, out float salary))
+                // Check if the entered email already exists in the Login table
+                var existingLogin = dbContext.Logins.Find(email, "Instructor");
+
+                if (existingLogin == null)
                 {
-                    // Gather date of birth from DateTimePicker
-                    DateTime dob = pickDateTime.Value;
-
-                    // Check if the instructor meets the minimum age requirement (21 years)
-                    if (IsMinimumAgeValid(dob))
+                    // Email doesn't exist, proceed with creating a new instructor and login
+                    // Check if the entered salary is a valid double
+                    if (float.TryParse(txtSalary.Text, out float salary))
                     {
-                        // Create a new Instructor object
-                        var newInstructor = new Instructor
+                        // Gather date of birth from DateTimePicker
+                        DateTime dob = pickDateTime.Value;
+
+                        // Check if the instructor meets the minimum age requirement (21 years)
+                        if (IsMinimumAgeValid(dob))
                         {
-                            Name = name,
-                            Title = title,
-                            Email = email,
-                            DOB = dob,
-                            Salary = salary
-                        };
+                            // Create a new Login object for the new instructor
+                            var newLogin = new Login
+                            {
+                                Email = email,
+                                Type = "Instructor",
+                                Password = "DefaultPassword"  // You should handle password more securely in a real application
+                            };
 
-                        // Add the new instructor to the database
-                        dbContext.Instructors.Add(newInstructor);
+                            // Add the new login to the Login table
+                            dbContext.Logins.Add(newLogin);
 
-                        // Save changes and get the number of affected rows
-                        int affectedRows = dbContext.SaveChanges();
+                            // Create a new Instructor object
+                            var newInstructor = new Instructor
+                            {
+                                Name = name,
+                                Title = title,
+                                Email = email,
+                                DOB = dob,
+                                Salary = salary
+                            };
 
-                        if (affectedRows > 0)
-                        {
-                            // Changes saved successfully
-                            MessageBox.Show("Instructor created successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            LoadInstructors(); // Refresh the DataGridView with the updated data
+                            // Add the new instructor to the database
+                            dbContext.Instructors.Add(newInstructor);
+
+                            // Save changes and get the number of affected rows
+                            int affectedRows = dbContext.SaveChanges();
+
+                            if (affectedRows > 0)
+                            {
+                                // Changes saved successfully
+                                MessageBox.Show("Instructor created successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                LoadInstructors(); // Refresh the DataGridView with the updated data
+                            }
+                            else
+                            {
+                                MessageBox.Show("No changes were made to the database.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            }
                         }
                         else
                         {
-                            MessageBox.Show("No changes were made to the database.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBox.Show("Instructor must be at least 21 years old.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
                     }
                     else
                     {
-                        MessageBox.Show("Instructor must be at least 21 years old.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("Please enter a valid numeric salary.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Please enter a valid numeric salary.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    // Email already exists, show a message to the user
+                    MessageBox.Show($"Email '{email}' already exists. Please choose a different email.", "Duplicate Email", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (Microsoft.EntityFrameworkCore.DbUpdateException ex)
@@ -189,6 +212,22 @@ namespace C__Project.FaresAwad
                             // Check if the instructor meets the minimum age requirement (21 years)
                             if (IsMinimumAgeValid(dob))
                             {
+                                // Check if the email exists in the Login table
+                                var loginEntry = dbContext.Logins.FirstOrDefault(l => l.Email == email && l.Type == "Instructor");
+
+                                if (loginEntry == null)
+                                {
+                                    // If the email doesn't exist, add it to the Login table
+                                    var newLogin = new Login
+                                    {
+                                        Email = email,
+                                        Type = "Instructor",
+                                        Password = "YourDefaultPassword" // You should set a default password here
+                                    };
+
+                                    dbContext.Logins.Add(newLogin);
+                                }
+
                                 // Update the properties of the existing instructor
                                 instructorToUpdate.Name = name;
                                 instructorToUpdate.Title = title;
@@ -261,7 +300,16 @@ namespace C__Project.FaresAwad
 
                     if (instructorToDelete != null)
                     {
-                        // Remove the instructor from the database
+                        // Check if the email exists in the Login table
+                        var loginEntry = dbContext.Logins.FirstOrDefault(l => l.Email == instructorToDelete.Email && l.Type == "Instructor");
+
+                        // If the email exists, remove the corresponding entry from the Login table
+                        if (loginEntry != null)
+                        {
+                            dbContext.Logins.Remove(loginEntry);
+                        }
+
+                        // Remove the instructor from the Instructors table
                         dbContext.Instructors.Remove(instructorToDelete);
 
                         // Save changes and get the number of affected rows
@@ -306,6 +354,5 @@ namespace C__Project.FaresAwad
                 MessageBox.Show($"Error deleting instructor: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
     }
 }
