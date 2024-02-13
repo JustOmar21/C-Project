@@ -129,11 +129,38 @@ namespace C__Project.OmarTarek
 
         private void deleteBTN_Click(object sender, EventArgs e)
         {
-            Class singleClass = Context.Classes.Where(Class => Class.Id == int.Parse(idTXT.Text)).SingleOrDefault();
-            Context.Classes.Remove(singleClass);
-            Context.SaveChanges();
-            EndModification();
-            GetData();
+            try
+            {
+                Class singleClass = Context.Classes
+                    .Where(Class => Class.Id == int.Parse(idTXT.Text))
+                    .Include(Class => Class.TeachesClass)
+                    .Include(Class => Class.Students)
+                    .SingleOrDefault();
+
+                if (singleClass.TeachesClass.Count > 0)
+                    throw new Exception($"You cannot Delete this class since it contains {singleClass.TeachesClass.Count} {(singleClass.TeachesClass.Count == 1 ? "Course" : "Courses")} being teached there");
+                if (singleClass.Students.Count > 0)
+                    throw new Exception($"You cannot delete this class since it contains {singleClass.Students.Count} {(singleClass.Students.Count == 1 ? "Student" : "Students")}");
+
+                Context.Classes.Remove(singleClass);
+                Context.SaveChanges();
+            }
+            catch(Exception ex)
+            {
+                if(ex.InnerException != null)
+                {
+                    MessageBox.Show($"{ex.InnerException}" ,"Error" ,MessageBoxButtons.OK , MessageBoxIcon.Error);
+                }
+                else
+                {
+                    MessageBox.Show($"{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            finally
+            {
+                EndModification();
+                GetData();
+            }
         }
 
         private void exitModiBTN_Click(object sender, EventArgs e)

@@ -133,22 +133,50 @@ namespace C__Project.OmarTarek
 
         private void updateBTN_Click(object sender, EventArgs e)
         {
-            Track track = Context.Tracks.Where(track => track.Id == int.Parse(idTXT.Text)).SingleOrDefault();
-            track.Name = nameTXT.Text.Trim();
-            track.Description = descTXT.Text.Trim();
-            track.DepartmentId = (int)deptCB.SelectedValue;
-            Context.SaveChanges();
-            EndModification();
-            GetData();
+
+              Track track = Context.Tracks
+               .Where(track => track.Id == int.Parse(idTXT.Text))
+               .SingleOrDefault();
+
+              track.Name = nameTXT.Text.Trim();
+              track.Description = descTXT.Text.Trim();
+              track.DepartmentId = (int)deptCB.SelectedValue;
+              Context.SaveChanges();
+              EndModification();
+              GetData();
         }
 
         private void deleteBTN_Click(object sender, EventArgs e)
         {
-            Track track = Context.Tracks.Where(track => track.Id == int.Parse(idTXT.Text)).SingleOrDefault();
-            Context.Tracks.Remove(track);
-            Context.SaveChanges();
-            EndModification();
-            GetData();
+            try
+            {
+                Track track = Context.Tracks
+                .Where(track => track.Id == int.Parse(idTXT.Text))
+                .Include(track => track.Students)
+                .SingleOrDefault();
+
+                if (track.Students.Count > 0) throw new Exception($"You cannot delete this Track since it contains {track.Students.Count} {(track.Students.Count == 1 ? "Student" : "Students")}");
+
+                Context.Tracks.Remove(track);
+                Context.SaveChanges();
+            }
+            
+            catch (Exception ex)
+            {
+                if (ex.InnerException != null)
+                {
+                    MessageBox.Show($"{ex.InnerException}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    MessageBox.Show($"{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            finally
+            {
+                EndModification();
+                GetData();
+            }
         }
 
         private void exitModiBTN_Click(object sender, EventArgs e)

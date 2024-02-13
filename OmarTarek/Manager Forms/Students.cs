@@ -273,7 +273,13 @@ namespace C__Project.OmarTarek
         {
             try
             {
-                Student student = Context.Students.Where(student => student.Id == int.Parse(idTXT.Text)).SingleOrDefault();
+                Student student = Context.Students
+                    .Where(student => student.Id == int.Parse(idTXT.Text))
+                    .Include(student => student.Exams)
+                    .SingleOrDefault();
+
+                if (student.Exams.Count > 0) throw new Exception($"You cannot delete this student since this student has {student.Exams.Count} {(student.Exams.Count == 1 ? "Exam" : "Exams")}");
+
                 deleteStudentEmail(student.Email);
                 Context.SaveChanges();
                 Context.Students.Remove(student);

@@ -117,11 +117,34 @@ namespace C__Project.OmarTarek
 
         private void deleteBTN_Click(object sender, EventArgs e)
         {
-            Department dept = Context.Departments.Where(dept => dept.Id == int.Parse(idTXT.Text)).SingleOrDefault();
-            Context.Departments.Remove(dept);
-            Context.SaveChanges();
-            EndModification();
-            GetData();
+            try
+            {
+                Department dept = Context.Departments
+                .Where(dept => dept.Id == int.Parse(idTXT.Text))
+                .Include(dept => dept.Tracks)
+                .SingleOrDefault();
+
+                if (dept.Tracks.Count > 0) throw new Exception($"You cannot delete this department since it contains {dept.Tracks.Count} {(dept.Tracks.Count == 1 ? "Track" : "Tracks")}");
+
+                Context.Departments.Remove(dept);
+                Context.SaveChanges();
+            }
+            catch(Exception ex)
+            {
+                if (ex.InnerException != null)
+                {
+                    MessageBox.Show($"{ex.InnerException}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    MessageBox.Show($"{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            finally
+            {
+                EndModification();
+                GetData();
+            }
         }
 
         private void exitModiBTN_Click(object sender, EventArgs e)

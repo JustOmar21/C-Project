@@ -124,11 +124,34 @@ namespace C__Project.OmarTarek
 
         private void deleteBTN_Click(object sender, EventArgs e)
         {
-            Intake intake = Context.Intakes.Where(intake => intake.Id == int.Parse(idTXT.Text)).SingleOrDefault();
-            Context.Intakes.Remove(intake);
-            Context.SaveChanges();
-            EndModification();
-            GetData();
+            try
+            {
+                Intake intake = Context.Intakes
+                .Where(intake => intake.Id == int.Parse(idTXT.Text))
+                .Include(intake => intake.Students)
+                .SingleOrDefault();
+
+                if (intake.Students.Count > 0) throw new Exception($"You cannot delete this Intake since it contains {intake.Students.Count} {(intake.Students.Count == 1 ? "Student" : "Students")}");
+
+                Context.Intakes.Remove(intake);
+                Context.SaveChanges();
+            }
+            catch(Exception ex)
+            {
+                if (ex.InnerException != null)
+                {
+                    MessageBox.Show($"{ex.InnerException}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    MessageBox.Show($"{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            finally
+            {
+                EndModification();
+                GetData();
+            }
         }
 
         private void exitModiBTN_Click(object sender, EventArgs e)
