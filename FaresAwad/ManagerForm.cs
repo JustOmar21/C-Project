@@ -59,10 +59,9 @@ namespace C__Project.FaresAwad
                         dataGridView.DataSource = null;
 
                         // Display the found instructor in the DataGridView
-                        dataGridView.Rows.Clear();
-                        dataGridView.Rows.Add(instructor.Id, instructor.Name, instructor.Title, instructor.Email, instructor.DOB, instructor.Salary);
+                        var instructors = new List<Instructor> { instructor };
+                        dataGridView.DataSource = instructors;
 
-                        // Optional: Adjust the DataGridView appearance if needed
                         dataGridView.Columns["Exams"].Visible = false;
                         dataGridView.Columns["Questions"].Visible = false;
                         dataGridView.Columns["TeachesClass"].Visible = false;
