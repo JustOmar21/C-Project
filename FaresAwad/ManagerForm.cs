@@ -98,31 +98,39 @@ namespace C__Project.FaresAwad
                     // Gather date of birth from DateTimePicker
                     DateTime dob = pickDateTime.Value;
 
-                    // Create a new Instructor object
-                    var newInstructor = new Instructor
+                    // Check if the instructor meets the minimum age requirement (21 years)
+                    if (IsMinimumAgeValid(dob))
                     {
-                        Name = name,
-                        Title = title,
-                        Email = email,
-                        DOB = dob,
-                        Salary = salary
-                    };
+                        // Create a new Instructor object
+                        var newInstructor = new Instructor
+                        {
+                            Name = name,
+                            Title = title,
+                            Email = email,
+                            DOB = dob,
+                            Salary = salary
+                        };
 
-                    // Add the new instructor to the database
-                    dbContext.Instructors.Add(newInstructor);
+                        // Add the new instructor to the database
+                        dbContext.Instructors.Add(newInstructor);
 
-                    // Save changes and get the number of affected rows
-                    int affectedRows = dbContext.SaveChanges();
+                        // Save changes and get the number of affected rows
+                        int affectedRows = dbContext.SaveChanges();
 
-                    if (affectedRows > 0)
-                    {
-                        // Changes saved successfully
-                        MessageBox.Show("Instructor created successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        LoadInstructors(); // Refresh the DataGridView with the updated data
+                        if (affectedRows > 0)
+                        {
+                            // Changes saved successfully
+                            MessageBox.Show("Instructor created successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            LoadInstructors(); // Refresh the DataGridView with the updated data
+                        }
+                        else
+                        {
+                            MessageBox.Show("No changes were made to the database.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
                     }
                     else
                     {
-                        MessageBox.Show("No changes were made to the database.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("Instructor must be at least 21 years old.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
                 else
@@ -130,30 +138,174 @@ namespace C__Project.FaresAwad
                     MessageBox.Show("Please enter a valid numeric salary.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
-            catch (DbUpdateException ex)
+            catch (Microsoft.EntityFrameworkCore.DbUpdateException ex)
             {
                 // Display detailed exception information
-                if(ex.InnerException != null)
+                if (ex.InnerException != null)
                 {
-                    MessageBox.Show($"{ex.InnerException.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"Database error: {ex.InnerException.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
-                    MessageBox.Show($"Error creating instructor: {ex.Message}\n\nStackTrace: {ex.StackTrace}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"Database error: {ex.Message}\n\nStackTrace: {ex.StackTrace}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
                 // Display generic exception information
-                if (ex.InnerException != null)
+                MessageBox.Show($"Error creating instructor: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private bool IsMinimumAgeValid(DateTime dob)
+        {
+            // Check if the instructor is at least 21 years old
+            return (DateTime.Now - dob).TotalDays / 365.25 >= 21;
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Retrieve the instructor ID from the textInsId TextBox
+                if (int.TryParse(textInsId.Text, out int instructorId))
                 {
-                    MessageBox.Show($"{ex.InnerException.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    // Search for the instructor by ID in the database
+                    var instructorToUpdate = dbContext.Instructors.Find(instructorId);
+
+                    if (instructorToUpdate != null)
+                    {
+                        // Gather updated values from the TextBoxes and DateTimePicker
+                        string name = txtName.Text;
+                        string title = txtTitle.Text;
+                        string email = txtEmail.Text;
+
+                        // Check if the entered salary is a valid double
+                        if (float.TryParse(txtSalary.Text, out float salary))
+                        {
+                            // Gather date of birth from DateTimePicker
+                            DateTime dob = pickDateTime.Value;
+
+                            // Check if the instructor meets the minimum age requirement (21 years)
+                            if (IsMinimumAgeValid(dob))
+                            {
+                                // Update the properties of the existing instructor
+                                instructorToUpdate.Name = name;
+                                instructorToUpdate.Title = title;
+                                instructorToUpdate.Email = email;
+                                instructorToUpdate.DOB = dob;
+                                instructorToUpdate.Salary = salary;
+
+                                // Save changes and get the number of affected rows
+                                int affectedRows = dbContext.SaveChanges();
+
+                                if (affectedRows > 0)
+                                {
+                                    // Changes saved successfully
+                                    MessageBox.Show("Instructor updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    LoadInstructors(); // Refresh the DataGridView with the updated data
+                                }
+                                else
+                                {
+                                    MessageBox.Show("No changes were made to the database.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("Instructor must be at least 21 years old.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Please enter a valid numeric salary.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Instructor with ID {instructorId} not found.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show($"Error creating instructor: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Please enter a valid numeric ID.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
+            catch (Microsoft.EntityFrameworkCore.DbUpdateException ex)
+            {
+                // Display detailed exception information
+                if (ex.InnerException != null)
+                {
+                    MessageBox.Show($"Database error: {ex.InnerException.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    MessageBox.Show($"Database error: {ex.Message}\n\nStackTrace: {ex.StackTrace}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Display generic exception information
+                MessageBox.Show($"Error updating instructor: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Retrieve the instructor ID from the textInsId TextBox
+                if (int.TryParse(textInsId.Text, out int instructorId))
+                {
+                    // Search for the instructor by ID in the database
+                    var instructorToDelete = dbContext.Instructors.Find(instructorId);
+
+                    if (instructorToDelete != null)
+                    {
+                        // Remove the instructor from the database
+                        dbContext.Instructors.Remove(instructorToDelete);
+
+                        // Save changes and get the number of affected rows
+                        int affectedRows = dbContext.SaveChanges();
+
+                        if (affectedRows > 0)
+                        {
+                            // Changes saved successfully
+                            MessageBox.Show("Instructor deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            LoadInstructors(); // Refresh the DataGridView with the updated data
+                        }
+                        else
+                        {
+                            MessageBox.Show("No changes were made to the database.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Instructor with ID {instructorId} not found.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please enter a valid numeric ID.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Microsoft.EntityFrameworkCore.DbUpdateException ex)
+            {
+                // Display detailed exception information
+                if (ex.InnerException != null)
+                {
+                    MessageBox.Show($"Database error: {ex.InnerException.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    MessageBox.Show($"Database error: {ex.Message}\n\nStackTrace: {ex.StackTrace}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Display generic exception information
+                MessageBox.Show($"Error deleting instructor: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
     }
 }

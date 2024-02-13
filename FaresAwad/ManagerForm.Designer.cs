@@ -37,15 +37,6 @@
             txtEmail = new TextBox();
             label3 = new Label();
             pickDateTime = new DateTimePicker();
-            label5 = new Label();
-            label6 = new Label();
-            label7 = new Label();
-            comIntake = new ComboBox();
-            comTrack = new ComboBox();
-            comClass = new ComboBox();
-            intakeNull = new Button();
-            classNull = new Button();
-            trackNull = new Button();
             btnCreate = new Button();
             btnUpdate = new Button();
             btnDelete = new Button();
@@ -53,6 +44,8 @@
             txtTitle = new TextBox();
             label8 = new Label();
             txtSalary = new TextBox();
+            label5 = new Label();
+            textInsId = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
             SuspendLayout();
             // 
@@ -131,89 +124,11 @@
             pickDateTime.Size = new Size(330, 27);
             pickDateTime.TabIndex = 7;
             // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new Point(437, 309);
-            label5.Name = "label5";
-            label5.Size = new Size(42, 20);
-            label5.TabIndex = 11;
-            label5.Text = "Class";
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Location = new Point(437, 250);
-            label6.Name = "label6";
-            label6.Size = new Size(43, 20);
-            label6.TabIndex = 12;
-            label6.Text = "Track";
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Location = new Point(437, 185);
-            label7.Name = "label7";
-            label7.Size = new Size(49, 20);
-            label7.TabIndex = 9;
-            label7.Text = "Intake";
-            // 
-            // comIntake
-            // 
-            comIntake.FormattingEnabled = true;
-            comIntake.Location = new Point(441, 217);
-            comIntake.Name = "comIntake";
-            comIntake.Size = new Size(181, 28);
-            comIntake.TabIndex = 13;
-            // 
-            // comTrack
-            // 
-            comTrack.FormattingEnabled = true;
-            comTrack.Location = new Point(441, 273);
-            comTrack.Name = "comTrack";
-            comTrack.Size = new Size(181, 28);
-            comTrack.TabIndex = 14;
-            // 
-            // comClass
-            // 
-            comClass.FormattingEnabled = true;
-            comClass.Location = new Point(441, 332);
-            comClass.Name = "comClass";
-            comClass.Size = new Size(181, 28);
-            comClass.TabIndex = 15;
-            // 
-            // intakeNull
-            // 
-            intakeNull.Location = new Point(637, 216);
-            intakeNull.Name = "intakeNull";
-            intakeNull.Size = new Size(134, 29);
-            intakeNull.TabIndex = 16;
-            intakeNull.Text = "Set Null";
-            intakeNull.UseVisualStyleBackColor = true;
-            // 
-            // classNull
-            // 
-            classNull.Location = new Point(637, 331);
-            classNull.Name = "classNull";
-            classNull.Size = new Size(134, 29);
-            classNull.TabIndex = 17;
-            classNull.Text = "Set Null";
-            classNull.UseVisualStyleBackColor = true;
-            // 
-            // trackNull
-            // 
-            trackNull.Location = new Point(637, 273);
-            trackNull.Name = "trackNull";
-            trackNull.Size = new Size(134, 29);
-            trackNull.TabIndex = 18;
-            trackNull.Text = "Set Null";
-            trackNull.UseVisualStyleBackColor = true;
-            // 
             // btnCreate
             // 
-            btnCreate.Location = new Point(441, 390);
+            btnCreate.Location = new Point(441, 190);
             btnCreate.Name = "btnCreate";
-            btnCreate.Size = new Size(108, 29);
+            btnCreate.Size = new Size(330, 29);
             btnCreate.TabIndex = 19;
             btnCreate.Text = "Create";
             btnCreate.UseVisualStyleBackColor = true;
@@ -221,21 +136,23 @@
             // 
             // btnUpdate
             // 
-            btnUpdate.Location = new Point(555, 390);
+            btnUpdate.Location = new Point(441, 302);
             btnUpdate.Name = "btnUpdate";
-            btnUpdate.Size = new Size(102, 29);
+            btnUpdate.Size = new Size(330, 46);
             btnUpdate.TabIndex = 20;
             btnUpdate.Text = "Update";
             btnUpdate.UseVisualStyleBackColor = true;
+            btnUpdate.Click += btnUpdate_Click;
             // 
             // btnDelete
             // 
-            btnDelete.Location = new Point(663, 390);
+            btnDelete.Location = new Point(441, 354);
             btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(108, 29);
+            btnDelete.Size = new Size(330, 51);
             btnDelete.TabIndex = 21;
             btnDelete.Text = "Delete";
             btnDelete.UseVisualStyleBackColor = true;
+            btnDelete.Click += btnDelete_Click;
             // 
             // label4
             // 
@@ -269,6 +186,22 @@
             txtSalary.Size = new Size(157, 27);
             txtSalary.TabIndex = 6;
             // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(441, 235);
+            label5.Name = "label5";
+            label5.Size = new Size(90, 20);
+            label5.TabIndex = 3;
+            label5.Text = "Instructor ID";
+            // 
+            // textInsId
+            // 
+            textInsId.Location = new Point(441, 258);
+            textInsId.Name = "textInsId";
+            textInsId.Size = new Size(330, 27);
+            textInsId.TabIndex = 4;
+            // 
             // ManagerForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -277,15 +210,6 @@
             Controls.Add(btnDelete);
             Controls.Add(btnUpdate);
             Controls.Add(btnCreate);
-            Controls.Add(trackNull);
-            Controls.Add(classNull);
-            Controls.Add(intakeNull);
-            Controls.Add(comClass);
-            Controls.Add(comTrack);
-            Controls.Add(comIntake);
-            Controls.Add(label5);
-            Controls.Add(label6);
-            Controls.Add(label7);
             Controls.Add(pickDateTime);
             Controls.Add(label3);
             Controls.Add(txtSalary);
@@ -294,7 +218,9 @@
             Controls.Add(label2);
             Controls.Add(txtTitle);
             Controls.Add(label4);
+            Controls.Add(textInsId);
             Controls.Add(txtName);
+            Controls.Add(label5);
             Controls.Add(label1);
             Controls.Add(btnSearch);
             Controls.Add(txtId);
@@ -317,15 +243,6 @@
         private TextBox txtEmail;
         private Label label3;
         private DateTimePicker pickDateTime;
-        private Label label5;
-        private Label label6;
-        private Label label7;
-        private ComboBox comIntake;
-        private ComboBox comTrack;
-        private ComboBox comClass;
-        private Button intakeNull;
-        private Button classNull;
-        private Button trackNull;
         private Button btnCreate;
         private Button btnUpdate;
         private Button btnDelete;
@@ -333,5 +250,7 @@
         private TextBox txtTitle;
         private Label label8;
         private TextBox txtSalary;
+        private Label label5;
+        private TextBox textInsId;
     }
 }
