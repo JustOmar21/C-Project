@@ -39,6 +39,7 @@
             button9 = new Button();
             button10 = new Button();
             coursesBTN = new Button();
+            examsBTN = new Button();
             SuspendLayout();
             // 
             // button1
@@ -161,11 +162,22 @@
             coursesBTN.UseVisualStyleBackColor = true;
             coursesBTN.Click += coursesBTN_Click;
             // 
+            // examsBTN
+            // 
+            examsBTN.Location = new Point(303, 52);
+            examsBTN.Name = "examsBTN";
+            examsBTN.Size = new Size(97, 22);
+            examsBTN.TabIndex = 11;
+            examsBTN.Text = "Exams";
+            examsBTN.UseVisualStyleBackColor = true;
+            examsBTN.Click += examsBTN_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(700, 338);
+            Controls.Add(examsBTN);
             Controls.Add(coursesBTN);
             Controls.Add(button10);
             Controls.Add(button9);
@@ -197,5 +209,6 @@
         private Button button9;
         private Button button10;
         private Button coursesBTN;
+        private Button examsBTN;
     }
 }

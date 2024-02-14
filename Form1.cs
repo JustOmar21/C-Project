@@ -122,5 +122,13 @@ namespace C__Project
         {
 
         }
+
+        private void examsBTN_Click(object sender, EventArgs e)
+        {
+            Exams exam = new Exams(this);
+            this.Hide();
+            exam.Show();
+
+        }
     }
 }
