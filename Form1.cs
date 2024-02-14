@@ -2,6 +2,7 @@ using C__Project.FaresAwad;
 using C__Project.Khateep;
 using C__Project.Models;
 using C__Project.OmarTarek;
+using C__Project.OmarTarek.Manager_Forms;
 using C__Project.OmarTarek.Student_Forms;
 using System.Media;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TreeView;
@@ -136,6 +137,13 @@ namespace C__Project
             StudentsToExam ste = new StudentsToExam(this);
             this.Hide();
             ste.Show();
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            ManagerProfile manager = new ManagerProfile(this);
+            this.Hide();
+            manager.Show();
         }
     }
 }
