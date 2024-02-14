@@ -50,10 +50,9 @@
             // 
             // returnButton
             // 
-            returnButton.Location = new Point(12, 14);
-            returnButton.Margin = new Padding(3, 2, 3, 2);
+            returnButton.Location = new Point(14, 19);
             returnButton.Name = "returnButton";
-            returnButton.Size = new Size(409, 22);
+            returnButton.Size = new Size(467, 29);
             returnButton.TabIndex = 65;
             returnButton.Text = "Return";
             returnButton.UseVisualStyleBackColor = true;
@@ -62,29 +61,28 @@
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(12, 85);
-            dataGridView1.Margin = new Padding(3, 2, 3, 2);
+            dataGridView1.Location = new Point(14, 113);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(409, 273);
+            dataGridView1.Size = new Size(467, 364);
             dataGridView1.TabIndex = 66;
+            dataGridView1.CellDoubleClick += dataGridView1_CellDoubleClick;
             // 
             // nameTXT
             // 
-            nameTXT.Location = new Point(428, 54);
-            nameTXT.Margin = new Padding(3, 2, 3, 2);
+            nameTXT.Location = new Point(489, 131);
             nameTXT.MaxLength = 50;
             nameTXT.Name = "nameTXT";
-            nameTXT.Size = new Size(276, 23);
+            nameTXT.Size = new Size(315, 27);
             nameTXT.TabIndex = 67;
             nameTXT.TextChanged += nameTXT_TextChanged;
             // 
             // nameLBL
             // 
             nameLBL.AutoSize = true;
-            nameLBL.Location = new Point(428, 37);
+            nameLBL.Location = new Point(489, 108);
             nameLBL.Name = "nameLBL";
-            nameLBL.Size = new Size(39, 15);
+            nameLBL.Size = new Size(49, 20);
             nameLBL.TabIndex = 71;
             nameLBL.Text = "Name";
             nameLBL.Click += nameLBL_Click;
@@ -92,18 +90,17 @@
             // deptLBL
             // 
             deptLBL.AutoSize = true;
-            deptLBL.Location = new Point(425, 235);
+            deptLBL.Location = new Point(486, 313);
             deptLBL.Name = "deptLBL";
-            deptLBL.Size = new Size(49, 15);
+            deptLBL.Size = new Size(60, 20);
             deptLBL.TabIndex = 73;
             deptLBL.Text = "Courses";
             // 
             // addBTN
             // 
-            addBTN.Location = new Point(425, 298);
-            addBTN.Margin = new Padding(3, 2, 3, 2);
+            addBTN.Location = new Point(486, 397);
             addBTN.Name = "addBTN";
-            addBTN.Size = new Size(276, 22);
+            addBTN.Size = new Size(315, 29);
             addBTN.TabIndex = 75;
             addBTN.Text = "Add";
             addBTN.UseVisualStyleBackColor = true;
@@ -111,10 +108,9 @@
             // 
             // idTXT
             // 
-            idTXT.Location = new Point(428, 15);
-            idTXT.Margin = new Padding(3, 2, 3, 2);
+            idTXT.Location = new Point(489, 20);
             idTXT.Name = "idTXT";
-            idTXT.Size = new Size(276, 23);
+            idTXT.Size = new Size(315, 27);
             idTXT.TabIndex = 77;
             idTXT.Visible = false;
             idTXT.TextChanged += idTXT_TextChanged;
@@ -123,19 +119,18 @@
             // 
             nameValiLBL.AutoSize = true;
             nameValiLBL.ForeColor = Color.Red;
-            nameValiLBL.Location = new Point(427, 76);
+            nameValiLBL.Location = new Point(488, 160);
             nameValiLBL.Name = "nameValiLBL";
-            nameValiLBL.Size = new Size(235, 15);
+            nameValiLBL.Size = new Size(294, 20);
             nameValiLBL.TabIndex = 78;
             nameValiLBL.Text = "3 - 50 Characters , letters and numbers only";
             nameValiLBL.Visible = false;
             // 
             // deleteBTN
             // 
-            deleteBTN.Location = new Point(424, 324);
-            deleteBTN.Margin = new Padding(3, 2, 3, 2);
+            deleteBTN.Location = new Point(485, 432);
             deleteBTN.Name = "deleteBTN";
-            deleteBTN.Size = new Size(132, 22);
+            deleteBTN.Size = new Size(151, 29);
             deleteBTN.TabIndex = 72;
             deleteBTN.Text = "Delete";
             deleteBTN.UseVisualStyleBackColor = true;
@@ -144,10 +139,9 @@
             // 
             // exitModiBTN
             // 
-            exitModiBTN.Location = new Point(570, 324);
-            exitModiBTN.Margin = new Padding(3, 2, 3, 2);
+            exitModiBTN.Location = new Point(651, 432);
             exitModiBTN.Name = "exitModiBTN";
-            exitModiBTN.Size = new Size(132, 22);
+            exitModiBTN.Size = new Size(151, 29);
             exitModiBTN.TabIndex = 74;
             exitModiBTN.Text = "Exit Modification";
             exitModiBTN.UseVisualStyleBackColor = true;
@@ -156,10 +150,9 @@
             // 
             // updateBTN
             // 
-            updateBTN.Location = new Point(426, 279);
-            updateBTN.Margin = new Padding(3, 2, 3, 2);
+            updateBTN.Location = new Point(487, 372);
             updateBTN.Name = "updateBTN";
-            updateBTN.Size = new Size(276, 22);
+            updateBTN.Size = new Size(315, 29);
             updateBTN.TabIndex = 70;
             updateBTN.Text = "Update";
             updateBTN.UseVisualStyleBackColor = true;
@@ -168,63 +161,63 @@
             // 
             // SearchTXT
             // 
-            SearchTXT.Location = new Point(12, 60);
-            SearchTXT.Margin = new Padding(3, 2, 3, 2);
+            SearchTXT.Location = new Point(14, 80);
             SearchTXT.Name = "SearchTXT";
             SearchTXT.PlaceholderText = "Search by name";
-            SearchTXT.Size = new Size(408, 23);
+            SearchTXT.Size = new Size(466, 27);
             SearchTXT.TabIndex = 79;
             // 
             // corsCB
             // 
             corsCB.FormattingEnabled = true;
-            corsCB.Location = new Point(426, 252);
-            corsCB.Margin = new Padding(3, 2, 3, 2);
+            corsCB.Location = new Point(487, 336);
             corsCB.Name = "corsCB";
-            corsCB.Size = new Size(276, 23);
+            corsCB.Size = new Size(315, 28);
             corsCB.TabIndex = 69;
             // 
             // endLBL
             // 
             endLBL.AutoSize = true;
-            endLBL.Location = new Point(428, 194);
+            endLBL.Location = new Point(489, 259);
             endLBL.Name = "endLBL";
-            endLBL.Size = new Size(56, 15);
+            endLBL.Size = new Size(71, 20);
             endLBL.TabIndex = 83;
             endLBL.Text = "End Time";
             // 
             // startLBL
             // 
             startLBL.AutoSize = true;
-            startLBL.Location = new Point(427, 135);
+            startLBL.Location = new Point(488, 180);
             startLBL.Name = "startLBL";
-            startLBL.Size = new Size(60, 15);
+            startLBL.Size = new Size(77, 20);
             startLBL.TabIndex = 82;
             startLBL.Text = "Start Time";
             // 
             // endTimeDP
             // 
-            endTimeDP.Format = DateTimePickerFormat.Time;
-            endTimeDP.Location = new Point(428, 211);
-            endTimeDP.Margin = new Padding(3, 2, 3, 2);
+            endTimeDP.CustomFormat = "yyyy/mm/dd hh:mm tt";
+            endTimeDP.Format = DateTimePickerFormat.Custom;
+            endTimeDP.Location = new Point(489, 281);
             endTimeDP.Name = "endTimeDP";
-            endTimeDP.Size = new Size(275, 23);
+            endTimeDP.Size = new Size(314, 27);
             endTimeDP.TabIndex = 81;
+            endTimeDP.ValueChanged += endTimeDP_ValueChanged;
             // 
             // startTimeDP
             // 
-            startTimeDP.Format = DateTimePickerFormat.Time;
-            startTimeDP.Location = new Point(427, 152);
-            startTimeDP.Margin = new Padding(3, 2, 3, 2);
+            startTimeDP.CustomFormat = "yyyy/mm/dd hh:mm tt";
+            startTimeDP.Format = DateTimePickerFormat.Custom;
+            startTimeDP.Location = new Point(488, 203);
             startTimeDP.Name = "startTimeDP";
-            startTimeDP.Size = new Size(275, 23);
+            startTimeDP.Size = new Size(314, 27);
             startTimeDP.TabIndex = 80;
+            startTimeDP.ValueChanged += startTimeDP_ValueChanged;
             // 
             // Exams
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(727, 355);
+            ClientSize = new Size(831, 473);
             Controls.Add(endLBL);
             Controls.Add(startLBL);
             Controls.Add(endTimeDP);
@@ -242,8 +235,10 @@
             Controls.Add(nameTXT);
             Controls.Add(dataGridView1);
             Controls.Add(returnButton);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "Exams";
             Text = "Exams";
+            FormClosing += Exams_FormClosing;
             Load += Exams_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
