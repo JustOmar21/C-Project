@@ -13,12 +13,12 @@ using System.Windows.Forms;
 
 namespace C__Project.OmarTarek
 {
-    public partial class Classes : Form
+    public partial class Departments : Form
     {
         Form previousForm;
         ExamSystemContext Context;
-        Regex nameRegex = new Regex(@"^(?=.{3,50}$)[a-zA-Z0-9]+(?:[' -][a-zA-Z0-9]+)*$");
-        public Classes(Form previousForm)
+        Regex DepartmentRegex = new Regex(@"^(?=.{3,50}$)[a-zA-Z0-9]+(?:[' -][a-zA-Z0-9]+)*$");
+        public Departments(Form previousForm)
         {
 
             InitializeComponent();
@@ -26,22 +26,13 @@ namespace C__Project.OmarTarek
             Context = new ExamSystemContext();
             GetData();
             addBTN.Enabled = false;
-            floorNum.Minimum = 1;
-            floorNum.Value = floorNum.Minimum;
-            floorNum.Maximum = 10;
-            floorNum.ReadOnly = true;
 
         }
 
         public void GetData()
         {
-            var branches = Context.Branches.Select(b => new { Name = b.Name, ID = b.Id }).OrderBy(b => b.Name).ToList();
-            dataGridView1.DataSource = Context.Classes
-                .Include(Class => Class.Branch)
-                .Where(Class => Class.Name.Contains(SearchTXT.Text.Trim()))
-                .Select(Class => new { Class.Id, Class.Name, Class.Floor, Branch = Class.Branch.Name, BranchID = Class.BranchId })
-                .OrderBy(dept => dept.Branch)
-                .ToList();
+            var branches = Context.Branches.Select(b => new { Name = b.Name, ID = b.Id }).OrderBy(b=>b.Name).ToList();
+            dataGridView1.DataSource = Context.Departments.Include(dept => dept.Branch).Where(dept => dept.Name.Contains(SearchTXT.Text.Trim())).Select(dept => new { dept.Id, dept.Name, Branch = dept.Branch.Name, BranchID = dept.BranchId }).OrderBy(dept=> dept.Branch).ToList();
             branchCB.DataSource = branches;
             branchCB.DisplayMember = "Name";
             branchCB.SelectedIndex = 0;
@@ -63,7 +54,7 @@ namespace C__Project.OmarTarek
 
         public void RegexTest()
         {
-            bool nameVali = nameRegex.IsMatch(nameTXT.Text.Trim());
+            bool nameVali = DepartmentRegex.IsMatch(nameTXT.Text.Trim());
 
             if (nameVali)
             { addBTN.Enabled = true; updateBTN.Enabled = true; }
@@ -74,15 +65,15 @@ namespace C__Project.OmarTarek
 
         private void nameTXT_TextChanged(object sender, EventArgs e)
         {
-            bool nameVali = nameRegex.IsMatch(nameTXT.Text.Trim());
+            bool nameVali = DepartmentRegex.IsMatch(nameTXT.Text.Trim());
             if (nameVali) { nameValiLBL.Visible = false; } else { nameValiLBL.Visible = true; }
             RegexTest();
         }
 
         private void addBTN_Click(object sender, EventArgs e)
         {
-            Class newClass = new Class() { Name = nameTXT.Text.Trim(), Floor = (int)floorNum.Value, BranchId = (int)branchCB.SelectedValue };
-            Context.Classes.Add(newClass);
+            Department dept = new Department() { Name = nameTXT.Text.Trim(), BranchId = (int)branchCB.SelectedValue };
+            Context.Departments.Add(dept);
             Context.SaveChanges();
             EndModification();
             GetData();
@@ -91,7 +82,6 @@ namespace C__Project.OmarTarek
         private void EndModification()
         {
             nameTXT.Text = idTXT.Text = "";
-            floorNum.Value = 1;
             nameValiLBL.Visible = false;
             branchCB.SelectedIndex = 0;
             addBTN.Visible = true;
@@ -106,8 +96,7 @@ namespace C__Project.OmarTarek
             {
                 idTXT.Text = dataGridView1[0, e.RowIndex].Value.ToString();
                 nameTXT.Text = dataGridView1[1, e.RowIndex].Value.ToString();
-                floorNum.Value = (int)dataGridView1[2, e.RowIndex].Value;
-                branchCB.SelectedValue = dataGridView1[4, e.RowIndex].Value;
+                branchCB.SelectedValue = dataGridView1[3, e.RowIndex].Value;
 
                 addBTN.Visible = false;
                 updateBTN.Visible = true;
@@ -118,10 +107,9 @@ namespace C__Project.OmarTarek
 
         private void updateBTN_Click(object sender, EventArgs e)
         {
-            Class singleClass = Context.Classes.Where(Class => Class.Id == int.Parse(idTXT.Text)).SingleOrDefault();
-            singleClass.Name = nameTXT.Text.Trim();
-            singleClass.Floor = (int)floorNum.Value;
-            singleClass.BranchId = (int)branchCB.SelectedValue;
+            Department dept = Context.Departments.Where(dept => dept.Id == int.Parse(idTXT.Text)).SingleOrDefault();
+            dept.Name = nameTXT.Text.Trim();
+            dept.BranchId = (int)branchCB.SelectedValue;
             Context.SaveChanges();
             EndModification();
             GetData();
@@ -129,11 +117,34 @@ namespace C__Project.OmarTarek
 
         private void deleteBTN_Click(object sender, EventArgs e)
         {
-            Class singleClass = Context.Classes.Where(Class => Class.Id == int.Parse(idTXT.Text)).SingleOrDefault();
-            Context.Classes.Remove(singleClass);
-            Context.SaveChanges();
-            EndModification();
-            GetData();
+            try
+            {
+                Department dept = Context.Departments
+                .Where(dept => dept.Id == int.Parse(idTXT.Text))
+                .Include(dept => dept.Tracks)
+                .SingleOrDefault();
+
+                if (dept.Tracks.Count > 0) throw new Exception($"You cannot delete this department since it contains {dept.Tracks.Count} {(dept.Tracks.Count == 1 ? "Track" : "Tracks")}");
+
+                Context.Departments.Remove(dept);
+                Context.SaveChanges();
+            }
+            catch(Exception ex)
+            {
+                if (ex.InnerException != null)
+                {
+                    MessageBox.Show($"{ex.InnerException}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    MessageBox.Show($"{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            finally
+            {
+                EndModification();
+                GetData();
+            }
         }
 
         private void exitModiBTN_Click(object sender, EventArgs e)

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace C__Project.Migrations
 {
     [DbContext(typeof(ExamSystemContext))]
-    [Migration("20240209155348_firstTryMigrationKh")]
-    partial class firstTryMigrationKh
+    [Migration("20240212204007_AddedUniqueConstraintForExamQuestionAndSeededData")]
+    partial class AddedUniqueConstraintForExamQuestionAndSeededData
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,6 +44,26 @@ namespace C__Project.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Branches");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Location = "Menofia",
+                            Name = "ITI Menofia"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Location = "Beni Suef",
+                            Name = "ITI Beni Suef"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Location = "Btengan",
+                            Name = "ITI Btengan"
+                        });
                 });
 
             modelBuilder.Entity("C__Project.Models.Class", b =>
@@ -69,6 +89,71 @@ namespace C__Project.Migrations
                     b.HasIndex("BranchId");
 
                     b.ToTable("Classes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            BranchId = 1,
+                            Floor = 1,
+                            Name = "MN Class 1"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            BranchId = 1,
+                            Floor = 2,
+                            Name = "MN Class 2"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            BranchId = 1,
+                            Floor = 3,
+                            Name = "MN Class 3"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            BranchId = 2,
+                            Floor = 1,
+                            Name = "BS Class 1"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            BranchId = 2,
+                            Floor = 2,
+                            Name = "BS Class 2"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            BranchId = 2,
+                            Floor = 3,
+                            Name = "BS Class 3"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            BranchId = 3,
+                            Floor = 1,
+                            Name = "BT Class 1"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            BranchId = 3,
+                            Floor = 2,
+                            Name = "BT Class 2"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            BranchId = 3,
+                            Floor = 3,
+                            Name = "BT Class 3"
+                        });
                 });
 
             modelBuilder.Entity("C__Project.Models.Course", b =>
@@ -101,6 +186,32 @@ namespace C__Project.Migrations
 
                             t.HasCheckConstraint("CK_Crs_MinMax", "MaxDegree > MinDegree");
                         });
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "Whatever",
+                            MaxDegree = 100,
+                            MinDegree = 50,
+                            Name = "C#"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "Whatever",
+                            MaxDegree = 100,
+                            MinDegree = 70,
+                            Name = "SQL"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "Whatever",
+                            MaxDegree = 100,
+                            MinDegree = 10,
+                            Name = "ASP DOTNET"
+                        });
                 });
 
             modelBuilder.Entity("C__Project.Models.Department", b =>
@@ -123,6 +234,62 @@ namespace C__Project.Migrations
                     b.HasIndex("BranchId");
 
                     b.ToTable("Departments");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            BranchId = 1,
+                            Name = "Internet of Things"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            BranchId = 2,
+                            Name = "Strike Back"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            BranchId = 3,
+                            Name = "Watermelon"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            BranchId = 1,
+                            Name = "Web Development"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            BranchId = 2,
+                            Name = "Bad Sugarcane Juice"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            BranchId = 3,
+                            Name = "Banana"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            BranchId = 1,
+                            Name = "Good Sugarcane Juice"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            BranchId = 2,
+                            Name = "Headphones"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            BranchId = 3,
+                            Name = "Apples"
+                        });
                 });
 
             modelBuilder.Entity("C__Project.Models.Exam", b =>
@@ -165,7 +332,25 @@ namespace C__Project.Migrations
 
                             t.HasCheckConstraint("CK_EX_StartEndTimeHourDiffBefore", "DATEDIFF(HOUR, StartTime , EndTime) >= 1 ");
 
-                            t.HasCheckConstraint("CK_EX_StartTime", "DATEDIFF(YEAR, GetDate() , StartTime) >= 10");
+                            t.HasCheckConstraint("CK_EX_StartTime", "DATEDIFF(YEAR, GetDate() , StartTime) <= 10");
+                        });
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CourseId = 1,
+                            EndTime = new DateTime(2024, 2, 13, 18, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Exam 1",
+                            StartTime = new DateTime(2024, 2, 13, 15, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CourseId = 1,
+                            EndTime = new DateTime(2024, 12, 13, 18, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Exam 2",
+                            StartTime = new DateTime(2024, 12, 13, 15, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -190,11 +375,84 @@ namespace C__Project.Migrations
 
                     b.HasIndex("ExamId");
 
-                    b.HasIndex("QuestionId");
+                    b.HasIndex("QuestionId", "ExamId")
+                        .IsUnique();
 
                     b.ToTable("ExamQuestions", t =>
                         {
                             t.HasCheckConstraint("CK_EQ_Degree", "Degree > 0");
+                        });
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Degree = 10,
+                            ExamId = 1,
+                            QuestionId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Degree = 10,
+                            ExamId = 1,
+                            QuestionId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Degree = 10,
+                            ExamId = 1,
+                            QuestionId = 3
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Degree = 10,
+                            ExamId = 1,
+                            QuestionId = 4
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Degree = 10,
+                            ExamId = 1,
+                            QuestionId = 5
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Degree = 10,
+                            ExamId = 1,
+                            QuestionId = 6
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Degree = 10,
+                            ExamId = 1,
+                            QuestionId = 7
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Degree = 10,
+                            ExamId = 1,
+                            QuestionId = 8
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Degree = 10,
+                            ExamId = 1,
+                            QuestionId = 9
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Degree = 10,
+                            ExamId = 1,
+                            QuestionId = 10
                         });
                 });
 
@@ -265,6 +523,29 @@ namespace C__Project.Migrations
 
                             t.HasCheckConstraint("CK_Int_StartTime", "DATEDIFF(YEAR, GetDate() , StartTime) <= 5");
                         });
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            EndTime = new DateTime(2025, 2, 12, 0, 0, 0, 0, DateTimeKind.Local),
+                            Name = "Intake 42",
+                            StartTime = new DateTime(2024, 2, 12, 0, 0, 0, 0, DateTimeKind.Local)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            EndTime = new DateTime(2024, 6, 12, 0, 0, 0, 0, DateTimeKind.Local),
+                            Name = "Intake 43",
+                            StartTime = new DateTime(2024, 2, 12, 0, 0, 0, 0, DateTimeKind.Local)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            EndTime = new DateTime(2026, 2, 12, 0, 0, 0, 0, DateTimeKind.Local),
+                            Name = "Intake 44",
+                            StartTime = new DateTime(2025, 2, 12, 0, 0, 0, 0, DateTimeKind.Local)
+                        });
                 });
 
             modelBuilder.Entity("C__Project.Models.Login", b =>
@@ -291,6 +572,12 @@ namespace C__Project.Migrations
                         {
                             Email = "Admin@gmail.com",
                             Type = "Admin",
+                            Password = "123456789sS"
+                        },
+                        new
+                        {
+                            Email = "tarekes68@gmail.com",
+                            Type = "Student",
                             Password = "123456789sS"
                         });
                 });
@@ -371,6 +658,88 @@ namespace C__Project.Migrations
 
                             t.HasCheckConstraint("CK_Q_Type", "[Type] = 'MCQ' OR [Type] = 'TF'");
                         });
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Body = "Correct Choice is 1",
+                            CorrectChoiceNumber = 1,
+                            CourseId = 1,
+                            Type = "MCQ"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Body = "Correct Choice is 2",
+                            CorrectChoiceNumber = 2,
+                            CourseId = 1,
+                            Type = "TF"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Body = "Correct Choice is 3",
+                            CorrectChoiceNumber = 3,
+                            CourseId = 1,
+                            Type = "MCQ"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Body = "Correct Choice is 4",
+                            CorrectChoiceNumber = 4,
+                            CourseId = 1,
+                            Type = "MCQ"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Body = "Correct Choice is 1",
+                            CorrectChoiceNumber = 1,
+                            CourseId = 1,
+                            Type = "TF"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Body = "Correct Choice is 3",
+                            CorrectChoiceNumber = 3,
+                            CourseId = 1,
+                            Type = "MCQ"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Body = "Correct Choice is 2",
+                            CorrectChoiceNumber = 2,
+                            CourseId = 1,
+                            Type = "TF"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Body = "Correct Choice is 1",
+                            CorrectChoiceNumber = 1,
+                            CourseId = 1,
+                            Type = "TF"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Body = "Correct Choice is 4",
+                            CorrectChoiceNumber = 4,
+                            CourseId = 1,
+                            Type = "MCQ"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Body = "Correct Choice is 3",
+                            CorrectChoiceNumber = 3,
+                            CourseId = 1,
+                            Type = "MCQ"
+                        });
                 });
 
             modelBuilder.Entity("C__Project.Models.QuestionChoices", b =>
@@ -389,6 +758,240 @@ namespace C__Project.Migrations
                     b.ToTable("QuestionChoices", t =>
                         {
                             t.HasCheckConstraint("CK_QC_CN", "ChoiceNumber >= 1 AND ChoiceNumber <= 4 ");
+                        });
+
+                    b.HasData(
+                        new
+                        {
+                            QuestionId = 1,
+                            ChoiceNumber = 1,
+                            Choice = "Choice 1"
+                        },
+                        new
+                        {
+                            QuestionId = 1,
+                            ChoiceNumber = 2,
+                            Choice = "Choice 2"
+                        },
+                        new
+                        {
+                            QuestionId = 1,
+                            ChoiceNumber = 3,
+                            Choice = "Choice 3"
+                        },
+                        new
+                        {
+                            QuestionId = 1,
+                            ChoiceNumber = 4,
+                            Choice = "Choice 4"
+                        },
+                        new
+                        {
+                            QuestionId = 2,
+                            ChoiceNumber = 1,
+                            Choice = "True"
+                        },
+                        new
+                        {
+                            QuestionId = 2,
+                            ChoiceNumber = 2,
+                            Choice = "False"
+                        },
+                        new
+                        {
+                            QuestionId = 2,
+                            ChoiceNumber = 3
+                        },
+                        new
+                        {
+                            QuestionId = 2,
+                            ChoiceNumber = 4
+                        },
+                        new
+                        {
+                            QuestionId = 3,
+                            ChoiceNumber = 1,
+                            Choice = "Choice 1"
+                        },
+                        new
+                        {
+                            QuestionId = 3,
+                            ChoiceNumber = 2,
+                            Choice = "Choice 2"
+                        },
+                        new
+                        {
+                            QuestionId = 3,
+                            ChoiceNumber = 3,
+                            Choice = "Choice 3"
+                        },
+                        new
+                        {
+                            QuestionId = 3,
+                            ChoiceNumber = 4,
+                            Choice = "Choice 4"
+                        },
+                        new
+                        {
+                            QuestionId = 4,
+                            ChoiceNumber = 1,
+                            Choice = "Choice 1"
+                        },
+                        new
+                        {
+                            QuestionId = 4,
+                            ChoiceNumber = 2,
+                            Choice = "Choice 2"
+                        },
+                        new
+                        {
+                            QuestionId = 4,
+                            ChoiceNumber = 3,
+                            Choice = "Choice 3"
+                        },
+                        new
+                        {
+                            QuestionId = 4,
+                            ChoiceNumber = 4,
+                            Choice = "Choice 4"
+                        },
+                        new
+                        {
+                            QuestionId = 5,
+                            ChoiceNumber = 1,
+                            Choice = "True"
+                        },
+                        new
+                        {
+                            QuestionId = 5,
+                            ChoiceNumber = 2,
+                            Choice = "False"
+                        },
+                        new
+                        {
+                            QuestionId = 5,
+                            ChoiceNumber = 3
+                        },
+                        new
+                        {
+                            QuestionId = 5,
+                            ChoiceNumber = 4
+                        },
+                        new
+                        {
+                            QuestionId = 6,
+                            ChoiceNumber = 1,
+                            Choice = "Choice 1"
+                        },
+                        new
+                        {
+                            QuestionId = 6,
+                            ChoiceNumber = 2,
+                            Choice = "Choice 2"
+                        },
+                        new
+                        {
+                            QuestionId = 6,
+                            ChoiceNumber = 3,
+                            Choice = "Choice 3"
+                        },
+                        new
+                        {
+                            QuestionId = 6,
+                            ChoiceNumber = 4,
+                            Choice = "Choice 4"
+                        },
+                        new
+                        {
+                            QuestionId = 7,
+                            ChoiceNumber = 1,
+                            Choice = "True"
+                        },
+                        new
+                        {
+                            QuestionId = 7,
+                            ChoiceNumber = 2,
+                            Choice = "False"
+                        },
+                        new
+                        {
+                            QuestionId = 7,
+                            ChoiceNumber = 3
+                        },
+                        new
+                        {
+                            QuestionId = 7,
+                            ChoiceNumber = 4
+                        },
+                        new
+                        {
+                            QuestionId = 8,
+                            ChoiceNumber = 1,
+                            Choice = "True"
+                        },
+                        new
+                        {
+                            QuestionId = 8,
+                            ChoiceNumber = 2,
+                            Choice = "False"
+                        },
+                        new
+                        {
+                            QuestionId = 8,
+                            ChoiceNumber = 3
+                        },
+                        new
+                        {
+                            QuestionId = 8,
+                            ChoiceNumber = 4
+                        },
+                        new
+                        {
+                            QuestionId = 9,
+                            ChoiceNumber = 1,
+                            Choice = "Choice 1"
+                        },
+                        new
+                        {
+                            QuestionId = 9,
+                            ChoiceNumber = 2,
+                            Choice = "Choice 2"
+                        },
+                        new
+                        {
+                            QuestionId = 9,
+                            ChoiceNumber = 3,
+                            Choice = "Choice 3"
+                        },
+                        new
+                        {
+                            QuestionId = 9,
+                            ChoiceNumber = 4,
+                            Choice = "Choice 4"
+                        },
+                        new
+                        {
+                            QuestionId = 10,
+                            ChoiceNumber = 1,
+                            Choice = "Choice 1"
+                        },
+                        new
+                        {
+                            QuestionId = 10,
+                            ChoiceNumber = 2,
+                            Choice = "Choice 2"
+                        },
+                        new
+                        {
+                            QuestionId = 10,
+                            ChoiceNumber = 3,
+                            Choice = "Choice 3"
+                        },
+                        new
+                        {
+                            QuestionId = 10,
+                            ChoiceNumber = 4,
+                            Choice = "Choice 4"
                         });
                 });
 
@@ -434,6 +1037,18 @@ namespace C__Project.Migrations
                     b.ToTable("Students", t =>
                         {
                             t.HasCheckConstraint("CK_Std_DOB", "DATEDIFF(YEAR, DOB , GetDate()) >= 15");
+                        });
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ClassId = 3,
+                            DOB = new DateTime(2001, 6, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "tarekes68@gmail.com",
+                            IntakeId = 2,
+                            Name = "Omar Tarek",
+                            TrackId = 2
                         });
                 });
 
@@ -483,6 +1098,22 @@ namespace C__Project.Migrations
                         {
                             t.HasCheckConstraint("CK_SE_Degree", "Degree >= 0");
                         });
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Degree = 0,
+                            ExamId = 1,
+                            StudentId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Degree = 0,
+                            ExamId = 2,
+                            StudentId = 1
+                        });
                 });
 
             modelBuilder.Entity("C__Project.Models.TeachesAt", b =>
@@ -529,6 +1160,29 @@ namespace C__Project.Migrations
                     b.HasIndex("DepartmentId");
 
                     b.ToTable("Tracks");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DepartmentId = 5,
+                            Description = "No Way Jose",
+                            Name = "DotNet Core"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DepartmentId = 7,
+                            Description = "Ahmed is there",
+                            Name = "Alexandria IOT"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            DepartmentId = 1,
+                            Description = "Bringing a wave of freedom",
+                            Name = "Tsunami"
+                        });
                 });
 
             modelBuilder.Entity("C__Project.Models.Class", b =>

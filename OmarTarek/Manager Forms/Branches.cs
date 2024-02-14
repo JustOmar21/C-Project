@@ -126,11 +126,37 @@ namespace C__Project.OmarTarek
 
         private void deleteBTN_Click(object sender, EventArgs e)
         {
-            Branch b = Context.Branches.Where(b => b.Id == int.Parse(idTXT.Text)).SingleOrDefault();
-            Context.Branches.Remove(b);
-            Context.SaveChanges();
-            GetData();
-            EndModification();
+            try
+            {
+                Branch b = Context.Branches
+                .Where(b => b.Id == int.Parse(idTXT.Text))
+                .Include(b => b.Departments)
+                .Include(b => b.Classes)
+                .SingleOrDefault();
+
+                if (b.Departments.Count > 0) throw new Exception($"You cannot delete this branch since it contains {b.Departments.Count} {(b.Departments.Count == 1 ? "Department" : "Departments")}");
+                if (b.Classes.Count > 0) throw new Exception($"You cannot delete this branch since it contains {b.Classes.Count} {(b.Classes.Count == 1 ? "Class" : "Classes")}");
+
+
+                Context.Branches.Remove(b);
+                Context.SaveChanges();
+            }
+            catch(Exception ex)
+            {
+                if (ex.InnerException != null)
+                {
+                    MessageBox.Show($"{ex.InnerException}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    MessageBox.Show($"{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            finally
+            {
+                EndModification();
+                GetData();
+            }
         }
 
         private void returnButton_Click(object sender, EventArgs e)

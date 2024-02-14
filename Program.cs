@@ -1,3 +1,5 @@
+using C__Project.FaresAwad;
+
 namespace C__Project
 {
     internal static class Program
