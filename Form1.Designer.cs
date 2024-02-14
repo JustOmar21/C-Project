@@ -38,13 +38,15 @@
             button8 = new Button();
             button9 = new Button();
             button10 = new Button();
+            coursesBTN = new Button();
             SuspendLayout();
             // 
             // button1
             // 
-            button1.Location = new Point(12, 12);
+            button1.Location = new Point(10, 9);
+            button1.Margin = new Padding(3, 2, 3, 2);
             button1.Name = "button1";
-            button1.Size = new Size(94, 29);
+            button1.Size = new Size(82, 22);
             button1.TabIndex = 0;
             button1.Text = "Branches";
             button1.UseVisualStyleBackColor = true;
@@ -52,9 +54,10 @@
             // 
             // button2
             // 
-            button2.Location = new Point(112, 12);
+            button2.Location = new Point(98, 9);
+            button2.Margin = new Padding(3, 2, 3, 2);
             button2.Name = "button2";
-            button2.Size = new Size(111, 29);
+            button2.Size = new Size(97, 22);
             button2.TabIndex = 1;
             button2.Text = "Departments";
             button2.UseVisualStyleBackColor = true;
@@ -62,9 +65,10 @@
             // 
             // button3
             // 
-            button3.Location = new Point(229, 12);
+            button3.Location = new Point(200, 9);
+            button3.Margin = new Padding(3, 2, 3, 2);
             button3.Name = "button3";
-            button3.Size = new Size(111, 29);
+            button3.Size = new Size(97, 22);
             button3.TabIndex = 2;
             button3.Text = "Tracks";
             button3.UseVisualStyleBackColor = true;
@@ -72,9 +76,10 @@
             // 
             // button4
             // 
-            button4.Location = new Point(12, 69);
+            button4.Location = new Point(10, 52);
+            button4.Margin = new Padding(3, 2, 3, 2);
             button4.Name = "button4";
-            button4.Size = new Size(94, 29);
+            button4.Size = new Size(82, 22);
             button4.TabIndex = 3;
             button4.Text = "Intakes";
             button4.UseVisualStyleBackColor = true;
@@ -82,9 +87,10 @@
             // 
             // button5
             // 
-            button5.Location = new Point(112, 69);
+            button5.Location = new Point(98, 52);
+            button5.Margin = new Padding(3, 2, 3, 2);
             button5.Name = "button5";
-            button5.Size = new Size(111, 29);
+            button5.Size = new Size(97, 22);
             button5.TabIndex = 4;
             button5.Text = "Classes";
             button5.UseVisualStyleBackColor = true;
@@ -92,9 +98,10 @@
             // 
             // button6
             // 
-            button6.Location = new Point(229, 69);
+            button6.Location = new Point(200, 52);
+            button6.Margin = new Padding(3, 2, 3, 2);
             button6.Name = "button6";
-            button6.Size = new Size(111, 29);
+            button6.Size = new Size(97, 22);
             button6.TabIndex = 5;
             button6.Text = "Students";
             button6.UseVisualStyleBackColor = true;
@@ -102,10 +109,10 @@
             // 
             // button7
             // 
-            button7.Location = new Point(12, 122);
+            button7.Location = new Point(10, 92);
             button7.Margin = new Padding(2);
             button7.Name = "button7";
-            button7.Size = new Size(328, 27);
+            button7.Size = new Size(287, 20);
             button7.TabIndex = 6;
             button7.Text = "Student Exam";
             button7.UseVisualStyleBackColor = true;
@@ -113,10 +120,10 @@
             // 
             // button8
             // 
-            button8.Location = new Point(12, 170);
+            button8.Location = new Point(10, 128);
             button8.Margin = new Padding(2);
             button8.Name = "button8";
-            button8.Size = new Size(328, 27);
+            button8.Size = new Size(287, 20);
             button8.TabIndex = 7;
             button8.Text = "Login";
             button8.UseVisualStyleBackColor = true;
@@ -124,10 +131,10 @@
             // 
             // button9
             // 
-            button9.Location = new Point(12, 213);
+            button9.Location = new Point(10, 160);
             button9.Margin = new Padding(2);
             button9.Name = "button9";
-            button9.Size = new Size(328, 27);
+            button9.Size = new Size(287, 20);
             button9.TabIndex = 8;
             button9.Text = "Student Profile";
             button9.UseVisualStyleBackColor = true;
@@ -135,20 +142,31 @@
             // 
             // button10
             // 
-            button10.Location = new Point(11, 255);
+            button10.Location = new Point(10, 191);
             button10.Margin = new Padding(2);
             button10.Name = "button10";
-            button10.Size = new Size(328, 27);
+            button10.Size = new Size(287, 20);
             button10.TabIndex = 9;
             button10.Text = "Student Classes";
             button10.UseVisualStyleBackColor = true;
             button10.Click += button10_Click;
             // 
+            // coursesBTN
+            // 
+            coursesBTN.Location = new Point(303, 9);
+            coursesBTN.Name = "coursesBTN";
+            coursesBTN.Size = new Size(97, 22);
+            coursesBTN.TabIndex = 10;
+            coursesBTN.Text = "Courses";
+            coursesBTN.UseVisualStyleBackColor = true;
+            coursesBTN.Click += coursesBTN_Click;
+            // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(700, 338);
+            Controls.Add(coursesBTN);
             Controls.Add(button10);
             Controls.Add(button9);
             Controls.Add(button8);
@@ -159,8 +177,10 @@
             Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(button1);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "Form1";
             Text = "Form1";
+            Load += Form1_Load;
             ResumeLayout(false);
         }
 
@@ -176,5 +196,6 @@
         private Button button8;
         private Button button9;
         private Button button10;
+        private Button coursesBTN;
     }
 }

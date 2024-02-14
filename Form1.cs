@@ -1,4 +1,5 @@
 using C__Project.FaresAwad;
+using C__Project.Khateep;
 using C__Project.Models;
 using C__Project.OmarTarek;
 using C__Project.OmarTarek.Student_Forms;
@@ -108,6 +109,18 @@ namespace C__Project
             StudentClasses studentClasses = new StudentClasses(this);
             this.Hide();
             studentClasses.Show();
+        }
+
+        private void coursesBTN_Click(object sender, EventArgs e)
+        {
+            Courses course = new Courses(this);
+            this.Hide();
+            course.Show();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
