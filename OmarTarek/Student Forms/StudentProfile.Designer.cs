@@ -43,6 +43,8 @@
             classTXT = new Label();
             classLBL = new Label();
             returnBTN = new Button();
+            classesBTN = new Button();
+            examsBTN = new Button();
             SuspendLayout();
             // 
             // idLBL
@@ -181,11 +183,34 @@
             returnBTN.UseVisualStyleBackColor = true;
             returnBTN.Click += returnBTN_Click;
             // 
+            // classesBTN
+            // 
+            classesBTN.Location = new Point(677, 67);
+            classesBTN.Name = "classesBTN";
+            classesBTN.Size = new Size(111, 29);
+            classesBTN.TabIndex = 17;
+            classesBTN.Text = "Classes";
+            classesBTN.UseVisualStyleBackColor = true;
+            classesBTN.Click += classesBTN_Click;
+            // 
+            // examsBTN
+            // 
+            examsBTN.Location = new Point(677, 120);
+            examsBTN.Margin = new Padding(3, 4, 3, 4);
+            examsBTN.Name = "examsBTN";
+            examsBTN.Size = new Size(111, 29);
+            examsBTN.TabIndex = 18;
+            examsBTN.Text = "Exams";
+            examsBTN.UseVisualStyleBackColor = true;
+            examsBTN.Click += examsBTN_Click;
+            // 
             // StudentProfile
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(examsBTN);
+            Controls.Add(classesBTN);
             Controls.Add(returnBTN);
             Controls.Add(classTXT);
             Controls.Add(classLBL);
@@ -225,5 +250,7 @@
         private Label classTXT;
         private Label classLBL;
         private Button returnBTN;
+        private Button classesBTN;
+        private Button examsBTN;
     }
 }

@@ -45,5 +45,19 @@ namespace C__Project.OmarTarek.Student_Forms
         {
             previousForm.Show();
         }
+
+        private void classesBTN_Click(object sender, EventArgs e)
+        {
+            StudentClasses studentClasses = new StudentClasses(this);
+            this.Hide();
+            studentClasses.Show();
+        }
+
+        private void examsBTN_Click(object sender, EventArgs e)
+        {
+            StudentExams student = new StudentExams(this);
+            this.Hide();
+            student.Show();
+        }
     }
 }
