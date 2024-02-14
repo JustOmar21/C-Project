@@ -43,6 +43,7 @@
             endTimeDP = new DateTimePicker();
             startLBL = new Label();
             endLBL = new Label();
+            printBTN = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -188,11 +189,22 @@
             endLBL.TabIndex = 57;
             endLBL.Text = "End Time";
             // 
+            // printBTN
+            // 
+            printBTN.Location = new Point(477, 9);
+            printBTN.Name = "printBTN";
+            printBTN.Size = new Size(317, 29);
+            printBTN.TabIndex = 58;
+            printBTN.Text = "Print";
+            printBTN.UseVisualStyleBackColor = true;
+            printBTN.Click += printBTN_Click;
+            // 
             // Intakes
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(printBTN);
             Controls.Add(endLBL);
             Controls.Add(startLBL);
             Controls.Add(endTimeDP);
@@ -232,5 +244,6 @@
         private DateTimePicker endTimeDP;
         private Label startLBL;
         private Label endLBL;
+        private Button printBTN;
     }
 }

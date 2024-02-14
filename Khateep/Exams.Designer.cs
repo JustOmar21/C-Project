@@ -45,6 +45,7 @@
             startLBL = new Label();
             endTimeDP = new DateTimePicker();
             startTimeDP = new DateTimePicker();
+            printBTN = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -108,7 +109,7 @@
             // 
             // idTXT
             // 
-            idTXT.Location = new Point(489, 20);
+            idTXT.Location = new Point(76, 54);
             idTXT.Name = "idTXT";
             idTXT.Size = new Size(315, 27);
             idTXT.TabIndex = 77;
@@ -213,11 +214,22 @@
             startTimeDP.TabIndex = 80;
             startTimeDP.ValueChanged += startTimeDP_ValueChanged;
             // 
+            // printBTN
+            // 
+            printBTN.Location = new Point(487, 19);
+            printBTN.Name = "printBTN";
+            printBTN.Size = new Size(317, 29);
+            printBTN.TabIndex = 84;
+            printBTN.Text = "Print";
+            printBTN.UseVisualStyleBackColor = true;
+            printBTN.Click += printBTN_Click;
+            // 
             // Exams
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(831, 473);
+            Controls.Add(printBTN);
             Controls.Add(endLBL);
             Controls.Add(startLBL);
             Controls.Add(endTimeDP);
@@ -263,5 +275,6 @@
         private Label startLBL;
         private DateTimePicker endTimeDP;
         private DateTimePicker startTimeDP;
+        private Button printBTN;
     }
 }

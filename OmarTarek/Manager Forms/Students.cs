@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -96,7 +97,6 @@ namespace C__Project.OmarTarek
             dataGridView1.TopLeftHeaderCell.Value = "Edit";
             dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridView1.Columns[10].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridView1.AutoResizeColumns();
 
         }
@@ -160,23 +160,23 @@ namespace C__Project.OmarTarek
                     ClassId = (int?)classCB.SelectedValue
                 };
                 var doesEmailExist = Context.Students.Where(x => x.Email == s.Email);
-                if(doesEmailExist.Count() > 0 ) { throw new Exception("The email you entered is already in use by another Student"); }
+                if (doesEmailExist.Count() > 0) { throw new Exception("The email you entered is already in use by another Student"); }
                 Context.Students.Add(s);
                 Context.SaveChanges();
                 addStudentEmail(s);
                 Context.SaveChanges();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                if(ex.InnerException != null)
+                if (ex.InnerException != null)
                 {
                     MessageBox.Show(ex.InnerException.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }    
+                }
                 else
                 {
                     MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                
+
             }
             finally
             {
@@ -184,9 +184,9 @@ namespace C__Project.OmarTarek
                 GetData();
             }
         }
-        private void addStudentEmail(Student s , string password = "123456789sS" )
+        private void addStudentEmail(Student s, string password = "123456789sS")
         {
-            Login log = new Login() { Email = s.Email , Password = password , Type ="Student"};
+            Login log = new Login() { Email = s.Email, Password = password, Type = "Student" };
             Context.Logins.Add(log);
         }
         private void EndModification()
@@ -240,9 +240,9 @@ namespace C__Project.OmarTarek
                 Context.SaveChanges();
                 updateStudentEmail(oldEmail, student);
                 Context.SaveChanges();
-                
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 if (ex.InnerException != null)
                 {
@@ -260,13 +260,13 @@ namespace C__Project.OmarTarek
             }
         }
 
-        private void updateStudentEmail(string oldEmail , Student s)
+        private void updateStudentEmail(string oldEmail, Student s)
         {
-            var log = Context.Logins.Where(log=> log.Email == oldEmail && log.Type == "Student").SingleOrDefault();
+            var log = Context.Logins.Where(log => log.Email == oldEmail && log.Type == "Student").SingleOrDefault();
             string password = log.Password;
             deleteStudentEmail(oldEmail);
             addStudentEmail(s, password);
-            
+
         }
 
         private void deleteBTN_Click(object sender, EventArgs e)
@@ -285,7 +285,7 @@ namespace C__Project.OmarTarek
                 Context.Students.Remove(student);
                 Context.SaveChanges();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 if (ex.InnerException != null)
                 {
@@ -341,6 +341,121 @@ namespace C__Project.OmarTarek
         private void classNullBTN_Click(object sender, EventArgs e)
         {
             classCB.SelectedIndex = -1;
+        }
+
+        private void PrintDocument_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            DataGridViewRow row = dataGridView1.CurrentRow;
+            int rowHeight = dataGridView1.RowTemplate.Height;
+            int x = 2;
+            int y = 50;
+
+            for (int i = 0; i < dataGridView1.ColumnCount; i++)
+            {
+                if (i == 1 || i == 2 || i == 3)
+                {
+                    continue;
+                }
+                else if(i == 0)
+                {
+                    e.Graphics.FillRectangle(Brushes.White, new Rectangle(x, y, 20, rowHeight));
+                    e.Graphics.DrawRectangle(Pens.Black, new Rectangle(x, y, 20, rowHeight));
+                    e.Graphics.DrawString(dataGridView1.Columns[i].HeaderText,
+                                          dataGridView1.Font,
+                                          Brushes.Black,
+                                          new RectangleF(x + 2, y, 20, rowHeight),
+                                          new StringFormat() { Alignment = StringAlignment.Near, LineAlignment = StringAlignment.Center });
+                    x += 20;
+                }
+                else if(i == 6)
+                {
+                    e.Graphics.FillRectangle(Brushes.White, new Rectangle(x, y, 75, rowHeight));
+                    e.Graphics.DrawRectangle(Pens.Black, new Rectangle(x, y, 75, rowHeight));
+                    e.Graphics.DrawString(dataGridView1.Columns[i].HeaderText,
+                                          dataGridView1.Font,
+                                          Brushes.Black,
+                                          new RectangleF(x + 2, y, 75, rowHeight),
+                                          new StringFormat() { Alignment = StringAlignment.Near, LineAlignment = StringAlignment.Center });
+                    x += 75;
+                }
+                else
+                {
+                    e.Graphics.FillRectangle(Brushes.White, new Rectangle(x, y, 125, rowHeight));
+                    e.Graphics.DrawRectangle(Pens.Black, new Rectangle(x, y, 125, rowHeight));
+                    e.Graphics.DrawString(dataGridView1.Columns[i].HeaderText,
+                                          dataGridView1.Font,
+                                          Brushes.Black,
+                                          new RectangleF(x + 2, y, 125, rowHeight),
+                                          new StringFormat() { Alignment = StringAlignment.Near, LineAlignment = StringAlignment.Center });
+                    x += 125;
+                }
+            }
+            x = 2;
+            y += rowHeight;
+
+            foreach (DataGridViewRow rows in dataGridView1.Rows)
+            {
+
+                for (int i = 0; i < rows.Cells.Count; i++)
+                {
+                    if (i == 1 || i == 2 || i == 3)
+                    {
+                        continue;
+                    }
+                    else if(i == 0)
+                    {
+                        e.Graphics.FillRectangle(Brushes.White, new Rectangle(x, y, 20, rowHeight));
+                        e.Graphics.DrawRectangle(Pens.Black, new Rectangle(x, y, 20, rowHeight));
+                        e.Graphics.DrawString(i == 6 ? rows.Cells[i].Value.ToString().Split(" ").First() : rows.Cells[i].Value.ToString(),
+                                          dataGridView1.Font,
+                                          Brushes.Black,
+                                          new RectangleF(x + 2, y, 20, rowHeight),
+                                          new StringFormat() { Alignment = StringAlignment.Near, LineAlignment = StringAlignment.Center });
+                        x += 20;
+                    }
+                    else if(i == 6)
+                    {
+                        e.Graphics.FillRectangle(Brushes.White, new Rectangle(x, y, 75, rowHeight));
+                        e.Graphics.DrawRectangle(Pens.Black, new Rectangle(x, y, 75, rowHeight));
+                        e.Graphics.DrawString(i == 6 ? rows.Cells[i].Value.ToString().Split(" ").First() : rows.Cells[i].Value.ToString(),
+                                          dataGridView1.Font,
+                                          Brushes.Black,
+                                          new RectangleF(x + 2, y, 75, rowHeight),
+                                          new StringFormat() { Alignment = StringAlignment.Near, LineAlignment = StringAlignment.Center });
+                        x += 75;
+                    }
+                    else
+                    {
+                        e.Graphics.FillRectangle(Brushes.White, new Rectangle(x, y, 125, rowHeight));
+                        e.Graphics.DrawRectangle(Pens.Black, new Rectangle(x, y, 125, rowHeight));
+                        e.Graphics.DrawString(i == 6 ? rows.Cells[i].Value.ToString().Split(" ").First() : rows.Cells[i].Value.ToString(),
+                                          dataGridView1.Font,
+                                          Brushes.Black,
+                                          new RectangleF(x + 2, y, 125, rowHeight),
+                                          new StringFormat() { Alignment = StringAlignment.Near, LineAlignment = StringAlignment.Center });
+                        x += 125;
+                    }
+                }
+                x = 2;
+                y += rowHeight;
+
+            }
+        }
+
+        private void printBTN_Click(object sender, EventArgs e)
+        {
+            PrintDocument printDocument = new PrintDocument();
+            PrintPreviewDialog printPreviewDialog = new PrintPreviewDialog();
+            PrintDialog printDialog = new PrintDialog();
+            printDialog.Document = printDocument;
+            printDocument.PrintPage += PrintDocument_PrintPage;
+
+            if (printDialog.ShowDialog() == DialogResult.OK)
+            {
+                // Show print preview
+                printPreviewDialog.Document = printDocument;
+                printPreviewDialog.ShowDialog();
+            }
         }
     }
 }

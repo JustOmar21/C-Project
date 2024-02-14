@@ -47,6 +47,7 @@ namespace C__Project.Khateep
             minDegreeLBL = new Label();
             maxDegreeLBL = new Label();
             idTXT = new TextBox();
+            printBTN = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)maxDegreeNum).BeginInit();
             ((System.ComponentModel.ISupportInitialize)minDegreeNum).BeginInit();
@@ -54,10 +55,9 @@ namespace C__Project.Khateep
             // 
             // returnButton
             // 
-            returnButton.Location = new Point(12, 13);
-            returnButton.Margin = new Padding(3, 2, 3, 2);
+            returnButton.Location = new Point(14, 17);
             returnButton.Name = "returnButton";
-            returnButton.Size = new Size(409, 22);
+            returnButton.Size = new Size(467, 29);
             returnButton.TabIndex = 38;
             returnButton.Text = "Return";
             returnButton.UseVisualStyleBackColor = true;
@@ -65,30 +65,29 @@ namespace C__Project.Khateep
             // 
             // SearchTXT
             // 
-            SearchTXT.Location = new Point(12, 39);
-            SearchTXT.Margin = new Padding(3, 2, 3, 2);
+            SearchTXT.Location = new Point(14, 52);
             SearchTXT.Name = "SearchTXT";
             SearchTXT.PlaceholderText = "Search by name";
-            SearchTXT.Size = new Size(408, 23);
+            SearchTXT.Size = new Size(466, 27);
             SearchTXT.TabIndex = 39;
             SearchTXT.TextChanged += SearchTXT_TextChanged;
             // 
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(12, 64);
-            dataGridView1.Margin = new Padding(3, 2, 3, 2);
+            dataGridView1.Location = new Point(14, 85);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(409, 273);
+            dataGridView1.Size = new Size(467, 364);
             dataGridView1.TabIndex = 37;
             dataGridView1.CellDoubleClick += dataGridView1_CellDoubleClick;
             // 
             // addBTN
             // 
-            addBTN.Location = new Point(493, 339);
+            addBTN.Location = new Point(563, 452);
+            addBTN.Margin = new Padding(3, 4, 3, 4);
             addBTN.Name = "addBTN";
-            addBTN.Size = new Size(210, 23);
+            addBTN.Size = new Size(240, 31);
             addBTN.TabIndex = 40;
             addBTN.Text = "Add";
             addBTN.UseVisualStyleBackColor = true;
@@ -97,27 +96,27 @@ namespace C__Project.Khateep
             // nameLBL
             // 
             nameLBL.AutoSize = true;
-            nameLBL.Location = new Point(427, 47);
+            nameLBL.Location = new Point(488, 63);
             nameLBL.Name = "nameLBL";
-            nameLBL.Size = new Size(39, 15);
+            nameLBL.Size = new Size(49, 20);
             nameLBL.TabIndex = 42;
             nameLBL.Text = "Name";
             // 
             // nameTXT
             // 
-            nameTXT.Location = new Point(427, 64);
-            nameTXT.Margin = new Padding(3, 2, 3, 2);
+            nameTXT.Location = new Point(488, 85);
             nameTXT.MaxLength = 50;
             nameTXT.Name = "nameTXT";
-            nameTXT.Size = new Size(345, 23);
+            nameTXT.Size = new Size(394, 27);
             nameTXT.TabIndex = 41;
             nameTXT.TextChanged += nameTXT_TextChanged;
             // 
             // deleteBTN
             // 
-            deleteBTN.Location = new Point(465, 306);
+            deleteBTN.Location = new Point(531, 408);
+            deleteBTN.Margin = new Padding(3, 4, 3, 4);
             deleteBTN.Name = "deleteBTN";
-            deleteBTN.Size = new Size(75, 23);
+            deleteBTN.Size = new Size(86, 31);
             deleteBTN.TabIndex = 43;
             deleteBTN.Text = "Delete";
             deleteBTN.UseVisualStyleBackColor = true;
@@ -125,9 +124,10 @@ namespace C__Project.Khateep
             // 
             // updateBTN
             // 
-            updateBTN.Location = new Point(564, 306);
+            updateBTN.Location = new Point(645, 408);
+            updateBTN.Margin = new Padding(3, 4, 3, 4);
             updateBTN.Name = "updateBTN";
-            updateBTN.Size = new Size(75, 23);
+            updateBTN.Size = new Size(86, 31);
             updateBTN.TabIndex = 44;
             updateBTN.Text = "Update";
             updateBTN.UseVisualStyleBackColor = true;
@@ -135,9 +135,10 @@ namespace C__Project.Khateep
             // 
             // exitModiBTN
             // 
-            exitModiBTN.Location = new Point(660, 306);
+            exitModiBTN.Location = new Point(754, 408);
+            exitModiBTN.Margin = new Padding(3, 4, 3, 4);
             exitModiBTN.Name = "exitModiBTN";
-            exitModiBTN.Size = new Size(112, 23);
+            exitModiBTN.Size = new Size(128, 31);
             exitModiBTN.TabIndex = 45;
             exitModiBTN.Text = "Exit Modification";
             exitModiBTN.UseVisualStyleBackColor = true;
@@ -147,9 +148,9 @@ namespace C__Project.Khateep
             // 
             nameValiLBL.AutoSize = true;
             nameValiLBL.ForeColor = Color.Red;
-            nameValiLBL.Location = new Point(427, 92);
+            nameValiLBL.Location = new Point(488, 123);
             nameValiLBL.Name = "nameValiLBL";
-            nameValiLBL.Size = new Size(232, 15);
+            nameValiLBL.Size = new Size(290, 20);
             nameValiLBL.TabIndex = 46;
             nameValiLBL.Text = "3- 50 Characters , letters and numbers only";
             nameValiLBL.Visible = false;
@@ -158,18 +159,19 @@ namespace C__Project.Khateep
             // descritionLBL
             // 
             descritionLBL.AutoSize = true;
-            descritionLBL.Location = new Point(427, 118);
+            descritionLBL.Location = new Point(488, 157);
             descritionLBL.Name = "descritionLBL";
-            descritionLBL.Size = new Size(67, 15);
+            descritionLBL.Size = new Size(85, 20);
             descritionLBL.TabIndex = 47;
             descritionLBL.Text = "Description";
             // 
             // descritionTXT
             // 
-            descritionTXT.Location = new Point(427, 136);
+            descritionTXT.Location = new Point(488, 181);
+            descritionTXT.Margin = new Padding(3, 4, 3, 4);
             descritionTXT.Multiline = true;
             descritionTXT.Name = "descritionTXT";
-            descritionTXT.Size = new Size(344, 35);
+            descritionTXT.Size = new Size(393, 45);
             descritionTXT.TabIndex = 48;
             descritionTXT.TextChanged += descritionTXT_TextChanged;
             // 
@@ -177,35 +179,33 @@ namespace C__Project.Khateep
             // 
             descriptionValiLBL.AutoSize = true;
             descriptionValiLBL.ForeColor = Color.Red;
-            descriptionValiLBL.Location = new Point(427, 174);
+            descriptionValiLBL.Location = new Point(488, 232);
             descriptionValiLBL.Name = "descriptionValiLBL";
-            descriptionValiLBL.Size = new Size(232, 15);
+            descriptionValiLBL.Size = new Size(290, 20);
             descriptionValiLBL.TabIndex = 49;
             descriptionValiLBL.Text = "3- 50 Characters , letters and numbers only";
             descriptionValiLBL.Visible = false;
             // 
             // maxDegreeNum
             // 
-            maxDegreeNum.Location = new Point(427, 217);
-            maxDegreeNum.Margin = new Padding(3, 2, 3, 2);
+            maxDegreeNum.Location = new Point(488, 289);
             maxDegreeNum.Name = "maxDegreeNum";
-            maxDegreeNum.Size = new Size(275, 23);
+            maxDegreeNum.Size = new Size(314, 27);
             maxDegreeNum.TabIndex = 57;
             // 
             // minDegreeNum
             // 
-            minDegreeNum.Location = new Point(427, 281);
-            minDegreeNum.Margin = new Padding(3, 2, 3, 2);
+            minDegreeNum.Location = new Point(488, 375);
             minDegreeNum.Name = "minDegreeNum";
-            minDegreeNum.Size = new Size(275, 23);
+            minDegreeNum.Size = new Size(314, 27);
             minDegreeNum.TabIndex = 59;
             // 
             // minDegreeLBL
             // 
             minDegreeLBL.AutoSize = true;
-            minDegreeLBL.Location = new Point(426, 264);
+            minDegreeLBL.Location = new Point(487, 352);
             minDegreeLBL.Name = "minDegreeLBL";
-            minDegreeLBL.Size = new Size(68, 15);
+            minDegreeLBL.Size = new Size(87, 20);
             minDegreeLBL.TabIndex = 58;
             minDegreeLBL.Text = "Min Degree";
             minDegreeLBL.Click += label1_Click;
@@ -213,26 +213,36 @@ namespace C__Project.Khateep
             // maxDegreeLBL
             // 
             maxDegreeLBL.AutoSize = true;
-            maxDegreeLBL.Location = new Point(427, 200);
+            maxDegreeLBL.Location = new Point(488, 267);
             maxDegreeLBL.Name = "maxDegreeLBL";
-            maxDegreeLBL.Size = new Size(70, 15);
+            maxDegreeLBL.Size = new Size(90, 20);
             maxDegreeLBL.TabIndex = 60;
             maxDegreeLBL.Text = "Max Degree";
             // 
             // idTXT
             // 
-            idTXT.Location = new Point(427, 11);
-            idTXT.Margin = new Padding(3, 2, 3, 2);
+            idTXT.Location = new Point(63, 454);
             idTXT.Name = "idTXT";
-            idTXT.Size = new Size(276, 23);
+            idTXT.Size = new Size(315, 27);
             idTXT.TabIndex = 61;
             idTXT.Visible = false;
             // 
+            // printBTN
+            // 
+            printBTN.Location = new Point(488, 17);
+            printBTN.Name = "printBTN";
+            printBTN.Size = new Size(394, 29);
+            printBTN.TabIndex = 62;
+            printBTN.Text = "Print";
+            printBTN.UseVisualStyleBackColor = true;
+            printBTN.Click += printBTN_Click;
+            // 
             // Courses
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(784, 378);
+            ClientSize = new Size(896, 504);
+            Controls.Add(printBTN);
             Controls.Add(idTXT);
             Controls.Add(maxDegreeLBL);
             Controls.Add(minDegreeNum);
@@ -251,6 +261,7 @@ namespace C__Project.Khateep
             Controls.Add(returnButton);
             Controls.Add(SearchTXT);
             Controls.Add(dataGridView1);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "Courses";
             Text = "Courses";
             FormClosing += Courses_FormClosing;
@@ -287,5 +298,6 @@ namespace C__Project.Khateep
         private Label minDegreeLBL;
         private Label maxDegreeLBL;
         private TextBox idTXT;
+        private Button printBTN;
     }
 }

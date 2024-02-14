@@ -42,6 +42,7 @@
             exitModiBTN = new Button();
             updateBTN = new Button();
             returnButton = new Button();
+            printBTN = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -183,11 +184,22 @@
             returnButton.UseVisualStyleBackColor = true;
             returnButton.Click += returnButton_Click;
             // 
+            // printBTN
+            // 
+            printBTN.Location = new Point(473, 6);
+            printBTN.Name = "printBTN";
+            printBTN.Size = new Size(317, 29);
+            printBTN.TabIndex = 14;
+            printBTN.Text = "Print";
+            printBTN.UseVisualStyleBackColor = true;
+            printBTN.Click += printBTN_Click;
+            // 
             // Branches
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(printBTN);
             Controls.Add(returnButton);
             Controls.Add(updateBTN);
             Controls.Add(exitModiBTN);
@@ -226,5 +238,6 @@
         private Button exitModiBTN;
         private Button updateBTN;
         private Button returnButton;
+        private Button printBTN;
     }
 }

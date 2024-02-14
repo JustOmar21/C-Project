@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -31,8 +32,8 @@ namespace C__Project.OmarTarek
 
         public void GetData()
         {
-            var branches = Context.Branches.Select(b => new { Name = b.Name, ID = b.Id }).OrderBy(b=>b.Name).ToList();
-            dataGridView1.DataSource = Context.Departments.Include(dept => dept.Branch).Where(dept => dept.Name.Contains(SearchTXT.Text.Trim())).Select(dept => new { dept.Id, dept.Name, Branch = dept.Branch.Name, BranchID = dept.BranchId }).OrderBy(dept=> dept.Branch).ToList();
+            var branches = Context.Branches.Select(b => new { Name = b.Name, ID = b.Id }).OrderBy(b => b.Name).ToList();
+            dataGridView1.DataSource = Context.Departments.Include(dept => dept.Branch).Where(dept => dept.Name.Contains(SearchTXT.Text.Trim())).Select(dept => new { dept.Id, dept.Name, Branch = dept.Branch.Name, BranchID = dept.BranchId }).OrderBy(dept => dept.Branch).ToList();
             branchCB.DataSource = branches;
             branchCB.DisplayMember = "Name";
             branchCB.SelectedIndex = 0;
@@ -129,7 +130,7 @@ namespace C__Project.OmarTarek
                 Context.Departments.Remove(dept);
                 Context.SaveChanges();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 if (ex.InnerException != null)
                 {
@@ -160,6 +161,62 @@ namespace C__Project.OmarTarek
         private void SearchTXT_TextChanged(object sender, EventArgs e)
         {
             GetData();
+        }
+        private void PrintDocument_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            DataGridViewRow row = dataGridView1.CurrentRow;
+            int rowHeight = dataGridView1.RowTemplate.Height;
+            int x = 50;
+            int y = 50;
+
+            for (int i = 0; i < dataGridView1.ColumnCount; i++)
+            {
+                e.Graphics.FillRectangle(Brushes.White, new Rectangle(x, y, 150, rowHeight));
+                e.Graphics.DrawRectangle(Pens.Black, new Rectangle(x, y, 150, rowHeight));
+                e.Graphics.DrawString(dataGridView1.Columns[i].HeaderText,
+                                      dataGridView1.Font,
+                                      Brushes.Black,
+                                      new RectangleF(x + 40, y, 150, rowHeight),
+                                      new StringFormat() { Alignment = StringAlignment.Near, LineAlignment = StringAlignment.Center });
+                x += 150;
+            }
+            x = 50;
+            y += rowHeight;
+
+            foreach (DataGridViewRow rows in dataGridView1.Rows)
+            {
+
+                for (int i = 0; i < rows.Cells.Count; i++)
+                {
+                    e.Graphics.FillRectangle(Brushes.White, new Rectangle(x, y, 150, rowHeight));
+                    e.Graphics.DrawRectangle(Pens.Black, new Rectangle(x, y, 150, rowHeight));
+                    e.Graphics.DrawString(rows.Cells[i].Value.ToString(),
+                                      dataGridView1.Font,
+                                      Brushes.Black,
+                                      new RectangleF(x + 40, y, 150, rowHeight),
+                                      new StringFormat() { Alignment = StringAlignment.Near, LineAlignment = StringAlignment.Center });
+                    x += 150;
+                }
+                x = 50;
+                y += rowHeight;
+
+            }
+        }
+
+        private void printBTN_Click(object sender, EventArgs e)
+        {
+            PrintDocument printDocument = new PrintDocument();
+            PrintPreviewDialog printPreviewDialog = new PrintPreviewDialog();
+            PrintDialog printDialog = new PrintDialog();
+            printDialog.Document = printDocument;
+            printDocument.PrintPage += PrintDocument_PrintPage;
+
+            if (printDialog.ShowDialog() == DialogResult.OK)
+            {
+                // Show print preview
+                printPreviewDialog.Document = printDocument;
+                printPreviewDialog.ShowDialog();
+            }
         }
     }
 }

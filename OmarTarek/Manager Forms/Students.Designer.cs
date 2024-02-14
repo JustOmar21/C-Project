@@ -53,6 +53,7 @@
             intakeNullBTN = new Button();
             trackNullBTN = new Button();
             classNullBTN = new Button();
+            printBTN = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -69,7 +70,7 @@
             // 
             returnButton.Location = new Point(6, 9);
             returnButton.Name = "returnButton";
-            returnButton.Size = new Size(466, 29);
+            returnButton.Size = new Size(215, 29);
             returnButton.TabIndex = 33;
             returnButton.Text = "Return";
             returnButton.UseVisualStyleBackColor = true;
@@ -292,11 +293,22 @@
             classNullBTN.UseVisualStyleBackColor = true;
             classNullBTN.Click += classNullBTN_Click;
             // 
+            // printBTN
+            // 
+            printBTN.Location = new Point(227, 9);
+            printBTN.Name = "printBTN";
+            printBTN.Size = new Size(245, 29);
+            printBTN.TabIndex = 49;
+            printBTN.Text = "Print";
+            printBTN.UseVisualStyleBackColor = true;
+            printBTN.Click += printBTN_Click;
+            // 
             // Students
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(printBTN);
             Controls.Add(classNullBTN);
             Controls.Add(trackNullBTN);
             Controls.Add(intakeNullBTN);
@@ -357,5 +369,6 @@
         private Button intakeNullBTN;
         private Button trackNullBTN;
         private Button classNullBTN;
+        private Button printBTN;
     }
 }

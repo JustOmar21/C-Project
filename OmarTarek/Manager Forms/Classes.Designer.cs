@@ -43,6 +43,7 @@
             branchCB = new ComboBox();
             floorLBL = new Label();
             floorNum = new NumericUpDown();
+            printBTN = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)floorNum).BeginInit();
             SuspendLayout();
@@ -189,11 +190,22 @@
             floorNum.Size = new Size(314, 27);
             floorNum.TabIndex = 27;
             // 
+            // printBTN
+            // 
+            printBTN.Location = new Point(477, 9);
+            printBTN.Name = "printBTN";
+            printBTN.Size = new Size(317, 29);
+            printBTN.TabIndex = 28;
+            printBTN.Text = "Print";
+            printBTN.UseVisualStyleBackColor = true;
+            printBTN.Click += printBTN_Click;
+            // 
             // Classes
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(printBTN);
             Controls.Add(floorNum);
             Controls.Add(floorLBL);
             Controls.Add(branchCB);
@@ -210,7 +222,7 @@
             Controls.Add(nameTXT);
             Controls.Add(dataGridView1);
             Name = "Classes";
-            Text = "Department";
+            Text = "Classes";
             FormClosing += Department_FormClosing;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)floorNum).EndInit();
@@ -235,5 +247,6 @@
         private DataGridView dataGridView1;
         private Label floorLBL;
         private NumericUpDown floorNum;
+        private Button printBTN;
     }
 }

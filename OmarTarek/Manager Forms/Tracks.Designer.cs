@@ -44,6 +44,7 @@
             descValiLBL = new Label();
             descLBL = new Label();
             descTXT = new TextBox();
+            printBTN = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -203,11 +204,22 @@
             descTXT.TabIndex = 26;
             descTXT.TextChanged += descTXT_TextChanged;
             // 
+            // printBTN
+            // 
+            printBTN.Location = new Point(477, 9);
+            printBTN.Name = "printBTN";
+            printBTN.Size = new Size(317, 29);
+            printBTN.TabIndex = 40;
+            printBTN.Text = "Print";
+            printBTN.UseVisualStyleBackColor = true;
+            printBTN.Click += printBTN_Click;
+            // 
             // Tracks
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(printBTN);
             Controls.Add(descValiLBL);
             Controls.Add(descLBL);
             Controls.Add(descTXT);
@@ -250,5 +262,6 @@
         private Label descValiLBL;
         private Label descLBL;
         private TextBox descTXT;
+        private Button printBTN;
     }
 }

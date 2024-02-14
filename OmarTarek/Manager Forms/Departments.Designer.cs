@@ -41,6 +41,7 @@
             nameTXT = new TextBox();
             dataGridView1 = new DataGridView();
             branchCB = new ComboBox();
+            printBTN = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -170,11 +171,22 @@
             branchCB.Size = new Size(315, 28);
             branchCB.TabIndex = 16;
             // 
+            // printBTN
+            // 
+            printBTN.Location = new Point(477, 9);
+            printBTN.Name = "printBTN";
+            printBTN.Size = new Size(317, 29);
+            printBTN.TabIndex = 24;
+            printBTN.Text = "Print";
+            printBTN.UseVisualStyleBackColor = true;
+            printBTN.Click += printBTN_Click;
+            // 
             // Departments
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(printBTN);
             Controls.Add(branchCB);
             Controls.Add(returnButton);
             Controls.Add(updateBTN);
@@ -213,5 +225,6 @@
         private TextBox nameTXT;
         private DataGridView dataGridView1;
         private ComboBox branchCB;
+        private Button printBTN;
     }
 }

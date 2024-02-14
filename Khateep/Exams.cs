@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -242,6 +243,142 @@ namespace C__Project.Khateep
                 updateBTN.Visible = true;
                 deleteBTN.Visible = true;
                 exitModiBTN.Visible = true;
+            }
+        }
+
+        private void PrintDocument_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            DataGridViewRow row = dataGridView1.CurrentRow;
+            int rowHeight = dataGridView1.RowTemplate.Height;
+            int x = 50;
+            int y = 50;
+
+            for (int i = 0; i < dataGridView1.ColumnCount; i++)
+            {
+                if (i == 1)
+                {
+                    continue;
+                }
+                else if (i == 0)
+                {
+                    e.Graphics.FillRectangle(Brushes.White, new Rectangle(x, y, 20, rowHeight));
+                    e.Graphics.DrawRectangle(Pens.Black, new Rectangle(x, y, 20, rowHeight));
+                    e.Graphics.DrawString(dataGridView1.Columns[i].HeaderText,
+                                          dataGridView1.Font,
+                                          Brushes.Black,
+                                          new RectangleF(x + 2, y, 20, rowHeight),
+                                          new StringFormat() { Alignment = StringAlignment.Near, LineAlignment = StringAlignment.Center });
+                    x += 20;
+                }
+                else if(i == 4)
+                {
+                    e.Graphics.FillRectangle(Brushes.White, new Rectangle(x, y, 150, rowHeight));
+                    e.Graphics.DrawRectangle(Pens.Black, new Rectangle(x, y, 150, rowHeight));
+                    e.Graphics.DrawString("Date",
+                                          dataGridView1.Font,
+                                          Brushes.Black,
+                                          new RectangleF(x + 40, y, 150, rowHeight),
+                                          new StringFormat() { Alignment = StringAlignment.Near, LineAlignment = StringAlignment.Center });
+                    x += 150;
+
+
+                    e.Graphics.FillRectangle(Brushes.White, new Rectangle(x, y, 150, rowHeight));
+                    e.Graphics.DrawRectangle(Pens.Black, new Rectangle(x, y, 150, rowHeight));
+                    e.Graphics.DrawString(dataGridView1.Columns[i].HeaderText,
+                                          dataGridView1.Font,
+                                          Brushes.Black,
+                                          new RectangleF(x + 40, y, 150, rowHeight),
+                                          new StringFormat() { Alignment = StringAlignment.Near, LineAlignment = StringAlignment.Center });
+                    x += 150;
+                }
+                else
+                {
+                    e.Graphics.FillRectangle(Brushes.White, new Rectangle(x, y, 150, rowHeight));
+                    e.Graphics.DrawRectangle(Pens.Black, new Rectangle(x, y, 150, rowHeight));
+                    e.Graphics.DrawString(dataGridView1.Columns[i].HeaderText,
+                                          dataGridView1.Font,
+                                          Brushes.Black,
+                                          new RectangleF(x + 40, y, 150, rowHeight),
+                                          new StringFormat() { Alignment = StringAlignment.Near, LineAlignment = StringAlignment.Center });
+                    x += 150;
+                }
+            }
+            x = 50;
+            y += rowHeight;
+
+            foreach (DataGridViewRow rows in dataGridView1.Rows)
+            {
+
+                for (int i = 0; i < rows.Cells.Count; i++)
+                {
+                    if (i == 1)
+                    {
+                        continue;
+                    }
+                    else if (i == 0)
+                    {
+                        e.Graphics.FillRectangle(Brushes.White, new Rectangle(x, y, 20, rowHeight));
+                        e.Graphics.DrawRectangle(Pens.Black, new Rectangle(x, y, 20, rowHeight));
+                        e.Graphics.DrawString(i == 6 ? rows.Cells[i].Value.ToString().Split(" ").First() : rows.Cells[i].Value.ToString(),
+                                          dataGridView1.Font,
+                                          Brushes.Black,
+                                          new RectangleF(x + 2, y, 20, rowHeight),
+                                          new StringFormat() { Alignment = StringAlignment.Near, LineAlignment = StringAlignment.Center });
+                        x += 20;
+                    }
+                    else if(i == 4)
+                    {
+                        e.Graphics.FillRectangle(Brushes.White, new Rectangle(x, y, 150, rowHeight));
+                        e.Graphics.DrawRectangle(Pens.Black, new Rectangle(x, y, 150, rowHeight));
+                        e.Graphics.DrawString(i == rows.Cells.Count - 1 || i == rows.Cells.Count - 2 ? rows.Cells[i].Value.ToString().Split(" ")[0] : rows.Cells[i].Value.ToString(),
+                                          dataGridView1.Font,
+                                          Brushes.Black,
+                                          new RectangleF(x + 20, y, 150, rowHeight),
+                                          new StringFormat() { Alignment = StringAlignment.Near, LineAlignment = StringAlignment.Center });
+                        x += 150;
+
+
+
+                        e.Graphics.FillRectangle(Brushes.White, new Rectangle(x, y, 150, rowHeight));
+                        e.Graphics.DrawRectangle(Pens.Black, new Rectangle(x, y, 150, rowHeight));
+                        e.Graphics.DrawString(i == rows.Cells.Count - 1 || i == rows.Cells.Count - 2 ? rows.Cells[i].Value.ToString().Split(" ")[1] + " " + rows.Cells[i].Value.ToString().Split(" ")[2] : rows.Cells[i].Value.ToString(),
+                                          dataGridView1.Font,
+                                          Brushes.Black,
+                                          new RectangleF(x + 20, y, 150, rowHeight),
+                                          new StringFormat() { Alignment = StringAlignment.Near, LineAlignment = StringAlignment.Center });
+                        x += 150;
+                    }
+                    else
+                    {
+                        e.Graphics.FillRectangle(Brushes.White, new Rectangle(x, y, 150, rowHeight));
+                        e.Graphics.DrawRectangle(Pens.Black, new Rectangle(x, y, 150, rowHeight));
+                        e.Graphics.DrawString(i == rows.Cells.Count - 1 || i == rows.Cells.Count - 2 ? rows.Cells[i].Value.ToString().Split(" ")[1] + " " + rows.Cells[i].Value.ToString().Split(" ")[2] : rows.Cells[i].Value.ToString() ,
+                                          dataGridView1.Font,
+                                          Brushes.Black,
+                                          new RectangleF(x + 20, y, 150, rowHeight),
+                                          new StringFormat() { Alignment = StringAlignment.Near, LineAlignment = StringAlignment.Center });
+                        x += 150;
+                    }
+                }
+                x = 50;
+                y += rowHeight;
+
+            }
+        }
+
+        private void printBTN_Click(object sender, EventArgs e)
+        {
+            PrintDocument printDocument = new PrintDocument();
+            PrintPreviewDialog printPreviewDialog = new PrintPreviewDialog();
+            PrintDialog printDialog = new PrintDialog();
+            printDialog.Document = printDocument;
+            printDocument.PrintPage += PrintDocument_PrintPage;
+
+            if (printDialog.ShowDialog() == DialogResult.OK)
+            {
+                // Show print preview
+                printPreviewDialog.Document = printDocument;
+                printPreviewDialog.ShowDialog();
             }
         }
     }
