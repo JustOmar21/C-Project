@@ -140,6 +140,9 @@ namespace C__Project.Khateep
             nameValiLBL.Visible = false;
             startTimeDP.Value = DateTime.Now;
             endTimeDP.Value = DateTime.Now;
+            startTimeDP.Value = new DateTime(startTimeDP.Value.Year, startTimeDP.Value.Month, startTimeDP.Value.Day, startTimeDP.Value.Hour, startTimeDP.Value.Minute, 0, 0);
+            endTimeDP.Value = endTimeDP.Value.AddHours(1);
+            endTimeDP.Value = new DateTime(endTimeDP.Value.Year, endTimeDP.Value.Month, endTimeDP.Value.Day, endTimeDP.Value.Hour, endTimeDP.Value.Minute, 0, 0);
             corsCB.SelectedIndex = 0;
             addBTN.Visible = true;
             updateBTN.Visible = false;

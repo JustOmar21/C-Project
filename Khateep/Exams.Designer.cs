@@ -195,7 +195,7 @@
             // 
             // endTimeDP
             // 
-            endTimeDP.CustomFormat = "yyyy/mm/dd hh:mm tt";
+            endTimeDP.CustomFormat = "yyyy/MM/dd hh:mm tt";
             endTimeDP.Format = DateTimePickerFormat.Custom;
             endTimeDP.Location = new Point(489, 281);
             endTimeDP.Name = "endTimeDP";
@@ -205,7 +205,7 @@
             // 
             // startTimeDP
             // 
-            startTimeDP.CustomFormat = "yyyy/mm/dd hh:mm tt";
+            startTimeDP.CustomFormat = "yyyy/MM/dd hh:mm tt";
             startTimeDP.Format = DateTimePickerFormat.Custom;
             startTimeDP.Location = new Point(488, 203);
             startTimeDP.Name = "startTimeDP";
