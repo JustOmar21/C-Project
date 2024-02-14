@@ -70,6 +70,13 @@ namespace C__Project.FaresAwad
                                     break;
 
                                 case "Instructor":
+                                    var instructorId = dbContext.Instructors
+                                        .Where(ins => ins.Email == txtEmail.Text)
+                                        .Select(ins => ins.Id)
+                                        .FirstOrDefault();
+
+                                    UserSession.SetId(instructorId);
+
                                     this.Hide();
                                     InstructorForm instructorForm = new InstructorForm();
                                     instructorForm.ShowDialog();
@@ -122,4 +129,19 @@ namespace C__Project.FaresAwad
             cmbUserType.SelectedIndex = -1;
         }
     }
+    public static class UserSession
+    {
+        public static int Id { get; private set; }
+
+        public static void SetId(int id)
+        {
+            Id = id;
+        }
+
+        public static void ClearUserSession()
+        {
+            Id = 0;
+        }
+    }
+
 }
