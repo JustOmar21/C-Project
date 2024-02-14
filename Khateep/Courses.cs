@@ -31,7 +31,7 @@ namespace C__Project.Khateep
             GetData();
 
             addBTN.Enabled = true;
-            maxDegreeNum.Minimum = 1;
+            maxDegreeNum.Minimum = 2;
             maxDegreeNum.Maximum = 100;
             maxDegreeNum.Value = 100;
             maxDegreeNum.ReadOnly = true;
@@ -153,8 +153,8 @@ namespace C__Project.Khateep
             updateBTN.Visible = false;
             deleteBTN.Visible = false;
             exitModiBTN.Visible = false;
-            maxDegreeNum.Value = 1;
-            minDegreeNum.Value = 0;
+            maxDegreeNum.Value = 100;
+            minDegreeNum.Value = 1;
         }
         private void returnButton_Click(object sender, EventArgs e)
         {
