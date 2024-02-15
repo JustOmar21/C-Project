@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using C__Project.Models;
+using C__Project.OmarTarek;
+using C__Project.OmarTarek.Student_Forms;
 using Microsoft.EntityFrameworkCore;
 
 namespace C__Project.Khateep
@@ -38,16 +40,39 @@ namespace C__Project.Khateep
                       studentExam.Id,
                       studentExam.StudentId,
                       studentExam.ExamId,
-                      examName = studentExam.Exam.Name,
-                      studentName = studentExam.Student.Name,
+                      Exam = studentExam.Exam.Name,
+                      Student = studentExam.Student.Name,
+                      studentExam.Degree
                   })
-                .OrderBy(studentExam => studentExam.examName)
-                .ToList(); ;
+                .OrderByDescending(studentExam => studentExam.ExamId)
+                .ToList();
 
-            /*dataGridView1.Columns["Id"].Visible = false;
-            dataGridView1.Columns["CourseID"].Visible = false;*/
-            stdCB.DropDownStyle = ComboBoxStyle.DropDownList;
+            dataGridView1.DataSource = studentExam;
+            dataGridView1.Columns["Id"].Visible = false;
+            dataGridView1.Columns["StudentId"].Visible = false;
+            dataGridView1.Columns["ExamId"].Visible = false;
+            var exams = Context.Exams.Select(exam => new { ID = exam.Id, exam.Name }).ToList();
+            exmCB.DataSource = exams;
+            exmCB.DisplayMember = "Name";
+            exmCB.SelectedIndex = 0;
+            exmCB.ValueMember = "ID";
             exmCB.DropDownStyle = ComboBoxStyle.DropDownList;
+            var courseID = Context.Exams
+                .Where(exam => exam.Id == (int?)exmCB.SelectedValue)
+                .Select(exam => exam.Course.Id)
+                .SingleOrDefault();
+
+            var students = Context.Students
+                .Include(std => std.Class)
+                .ThenInclude(cls => cls.TeachesClass)
+                .Where(std => std.Class.TeachesClass.Any(cls => cls.CourseId == courseID))
+                .Select(std => new { ID = std.Id, std.Name })
+                .ToList();
+            stdCB.DataSource = students;
+            stdCB.DisplayMember = "Name";
+            stdCB.SelectedIndex = 0;
+            stdCB.ValueMember = "ID";
+            stdCB.DropDownStyle = ComboBoxStyle.DropDownList;
 
 
             dataGridView1.TopLeftHeaderCell.Value = "Edit";
@@ -71,6 +96,22 @@ namespace C__Project.Khateep
 
         }
 
+        private void StudentExamCourse()
+        {
+            var courseID = Context.Exams
+                .Where(exam => exam.Id == (int?)exmCB.SelectedValue)
+                .Select(exam => exam.Course.Id)
+                .SingleOrDefault();
+
+            var students = Context.Students
+                .Include(std => std.Class)
+                .ThenInclude(cls => cls.TeachesClass)
+                .Where(std => std.Class.TeachesClass.Any(cls => cls.CourseId == courseID))
+                .Select(std => new { ID = std.Id, std.Name })
+                .ToList();
+
+            stdCB.DataSource = students;
+        }
         private void StudentsToExam_FormClosing(object sender, FormClosingEventArgs e)
         {
             previousForm.Show();
@@ -133,6 +174,7 @@ namespace C__Project.Khateep
 
         private void exmCB_SelectedIndexChanged(object sender, EventArgs e)
         {
+            StudentExamCourse();
         }
     }
 }
