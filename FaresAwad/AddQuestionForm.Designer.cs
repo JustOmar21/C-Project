@@ -172,9 +172,9 @@
             label7.AutoSize = true;
             label7.Location = new Point(134, 103);
             label7.Name = "label7";
-            label7.Size = new Size(103, 20);
+            label7.Size = new Size(106, 20);
             label7.TabIndex = 2;
-            label7.Text = "Question Type";
+            label7.Text = "Question Body";
             // 
             // label8
             // 
