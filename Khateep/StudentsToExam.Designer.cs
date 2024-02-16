@@ -111,6 +111,8 @@
             dataGridView1.Size = new Size(409, 273);
             dataGridView1.TabIndex = 81;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            dataGridView1.CellContentDoubleClick += dataGridView1_CellContentClick;
+            dataGridView1.CellDoubleClick += dataGridView1_CellDoubleClick;
             // 
             // returnButton
             // 

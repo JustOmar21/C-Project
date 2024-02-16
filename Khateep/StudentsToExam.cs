@@ -137,14 +137,75 @@ namespace C__Project.Khateep
 
         private void deleteBTN_Click(object sender, EventArgs e)
         {
-            EndModification();
-            GetData();
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                int selectedStudentExamId = (int)dataGridView1.SelectedRows[0].Cells["Id"].Value;
+
+                var studentExamToDelete = Context.StudentExams.Find(selectedStudentExamId);
+
+                if (studentExamToDelete != null)
+                {
+                    DialogResult result = MessageBox.Show("Are you sure you want to delete this student from the exam?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    if (result == DialogResult.Yes)
+                    {
+                        Context.StudentExams.Remove(studentExamToDelete);
+                        Context.SaveChanges();
+
+                        GetData();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Selected student exam record not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a student exam record to delete.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void updateBTN_Click(object sender, EventArgs e)
         {
-            EndModification();
-            GetData();
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                int selectedStudentExamId = (int)dataGridView1.SelectedRows[0].Cells["Id"].Value;
+
+                var studentExamToUpdate = Context.StudentExams.Find(selectedStudentExamId);
+
+                if (studentExamToUpdate != null)
+                {
+                    int newStudentId = (int)stdCB.SelectedValue;
+                    int newExamId = (int)exmCB.SelectedValue;
+                    decimal newDegree;
+
+                    if (decimal.TryParse(degreeNum.Text, out newDegree))
+                    {
+                        studentExamToUpdate.StudentId = newStudentId;
+                        studentExamToUpdate.ExamId = newExamId;
+                        studentExamToUpdate.Degree = (int)newDegree;
+
+                        Context.SaveChanges();
+
+                        GetData();
+
+                        EndModification();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please enter a valid degree.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Selected student exam record not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a student exam record to update.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void exitModiBTN_Click(object sender, EventArgs e)
@@ -154,14 +215,23 @@ namespace C__Project.Khateep
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            
+        }
+
+        private void exmCB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            StudentExamCourse();
+        }
+
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
             if (e.ColumnIndex == -1 && e.RowIndex != -1)
             {
                 idTXT.Text = dataGridView1[0, e.RowIndex].Value.ToString();
                 degreeNum.Value = (int)dataGridView1[1, e.RowIndex].Value;
 
                 stdCB.SelectedValue = (int)dataGridView1[2, e.RowIndex].Value;
-                exmCB.SelectedValue = (int)dataGridView1[3, e.RowIndex].Value;
-                stdCB.SelectedValue = (int)dataGridView1[4, e.RowIndex].Value;
+                exmCB.SelectedValue = dataGridView1[3, e.RowIndex].Value;
 
 
 
@@ -170,11 +240,6 @@ namespace C__Project.Khateep
                 deleteBTN.Visible = true;
                 exitModiBTN.Visible = true;
             }
-        }
-
-        private void exmCB_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            StudentExamCourse();
         }
     }
 }
