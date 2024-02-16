@@ -51,5 +51,11 @@ namespace C__Project.FaresAwad
                 return courses;
             }
         }
+
+        private void btnAddEx_Click(object sender, EventArgs e)
+        {
+            AddQuestionToExamForm addQuestionToExamForm = new AddQuestionToExamForm();
+            addQuestionToExamForm.ShowDialog();
+        }
     }
 }

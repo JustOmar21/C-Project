@@ -34,6 +34,7 @@
             btnDisplay = new Button();
             btnEdit = new Button();
             btnDelete = new Button();
+            btnAddEx = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
             SuspendLayout();
             // 
@@ -58,17 +59,17 @@
             // 
             // btnAdd
             // 
-            btnAdd.Location = new Point(76, 389);
+            btnAdd.Location = new Point(76, 368);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new Size(358, 29);
             btnAdd.TabIndex = 2;
-            btnAdd.Text = "Adding a Question";
+            btnAdd.Text = "Adding a Question To Course";
             btnAdd.UseVisualStyleBackColor = true;
             btnAdd.Click += btnAdd_Click;
             // 
             // btnDisplay
             // 
-            btnDisplay.Location = new Point(76, 340);
+            btnDisplay.Location = new Point(76, 326);
             btnDisplay.Name = "btnDisplay";
             btnDisplay.Size = new Size(358, 29);
             btnDisplay.TabIndex = 3;
@@ -78,7 +79,7 @@
             // 
             // btnEdit
             // 
-            btnEdit.Location = new Point(76, 441);
+            btnEdit.Location = new Point(76, 453);
             btnEdit.Name = "btnEdit";
             btnEdit.Size = new Size(358, 29);
             btnEdit.TabIndex = 4;
@@ -96,11 +97,22 @@
             btnDelete.UseVisualStyleBackColor = true;
             btnDelete.Click += btnDelete_Click;
             // 
+            // btnAddEx
+            // 
+            btnAddEx.Location = new Point(76, 411);
+            btnAddEx.Name = "btnAddEx";
+            btnAddEx.Size = new Size(358, 29);
+            btnAddEx.TabIndex = 6;
+            btnAddEx.Text = "Add a Question To Exam";
+            btnAddEx.UseVisualStyleBackColor = true;
+            btnAddEx.Click += btnAddEx_Click;
+            // 
             // InstructorForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(521, 549);
+            Controls.Add(btnAddEx);
             Controls.Add(btnDelete);
             Controls.Add(btnEdit);
             Controls.Add(btnDisplay);
@@ -122,5 +134,6 @@
         private Button btnDisplay;
         private Button btnEdit;
         private Button btnDelete;
+        private Button btnAddEx;
     }
 }
