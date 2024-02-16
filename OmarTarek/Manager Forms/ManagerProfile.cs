@@ -1,4 +1,5 @@
-﻿using C__Project.Khateep;
+﻿using C__Project.FaresAwad;
+using C__Project.Khateep;
 using C__Project.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -16,10 +17,18 @@ namespace C__Project.OmarTarek.Manager_Forms
     public partial class ManagerProfile : Form
     {
         ExamSystemContext Context = new ExamSystemContext();
+        Manager manager;
         Form previousForm;
         public ManagerProfile(Form previousForm)
         {
             InitializeComponent();
+            int managerID = UserSession.Id;
+            manager = Context.Managers.FirstOrDefault(x => x.Id == managerID);
+            IDTXT.Text = manager.Id.ToString();
+            nameTXT.Text = manager.Name;
+            emailTXT.Text = manager.Email;
+            dobTXT.Text = manager.DOB.Date.ToString().Split(" ")[0];
+            salaryTXT.Text = manager.Salary.ToString() + "$";
             this.previousForm = previousForm;
         }
 
@@ -95,13 +104,20 @@ namespace C__Project.OmarTarek.Manager_Forms
                 Class.Show();
             }
         }
-        private void returnBTN_Click(object sender , EventArgs e)
+        private void returnBTN_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-        private void ManagerProfile_FormClosing(object sender , FormClosingEventArgs e)
+        private void ManagerProfile_FormClosing(object sender, FormClosingEventArgs e)
         {
             previousForm.Show();
+        }
+
+        private void instructorsBTN_Click(object sender, EventArgs e)
+        {
+            AddInstructors ins = new AddInstructors(this);
+            this.Hide();
+            ins.Show();
         }
     }
 }

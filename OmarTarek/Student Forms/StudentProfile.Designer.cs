@@ -179,7 +179,7 @@
             returnBTN.Name = "returnBTN";
             returnBTN.Size = new Size(776, 29);
             returnBTN.TabIndex = 14;
-            returnBTN.Text = "Return";
+            returnBTN.Text = "Logout";
             returnBTN.UseVisualStyleBackColor = true;
             returnBTN.Click += returnBTN_Click;
             // 

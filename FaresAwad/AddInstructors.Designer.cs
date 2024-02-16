@@ -1,6 +1,6 @@
 ﻿namespace C__Project.FaresAwad
 {
-    partial class ManagerForm
+    partial class AddInstructors
     {
         /// <summary>
         /// Required designer variable.
@@ -202,7 +202,7 @@
             textInsId.Size = new Size(330, 27);
             textInsId.TabIndex = 4;
             // 
-            // ManagerForm
+            // AddInstructors
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -226,8 +226,9 @@
             Controls.Add(txtId);
             Controls.Add(dataGridView);
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
-            Name = "ManagerForm";
-            Text = "CRUD operations on instructor By Manager";
+            Name = "AddInstructors";
+            Text = "Add Instructors";
+            FormClosing += this.AddInstructors_FormClosing;
             ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
             ResumeLayout(false);
             PerformLayout();

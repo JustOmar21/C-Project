@@ -100,9 +100,9 @@ namespace C__Project
 
         private void button9_Click(object sender, EventArgs e)
         {
-            StudentProfile studentProfile = new StudentProfile(this);
-            this.Hide();
-            studentProfile.Show();
+            //StudentProfile studentProfile = new StudentProfile(this);
+            //this.Hide();
+            //studentProfile.Show();
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -141,7 +141,14 @@ namespace C__Project
 
         private void button11_Click(object sender, EventArgs e)
         {
-            ManagerProfile manager = new ManagerProfile(this);
+            //ManagerProfile manager = new ManagerProfile(this);
+            //this.Hide();
+            //manager.Show();
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            AddManager manager = new AddManager(this);
             this.Hide();
             manager.Show();
         }

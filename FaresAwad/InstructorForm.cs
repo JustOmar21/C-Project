@@ -7,9 +7,11 @@ namespace C__Project.FaresAwad
 {
     public partial class InstructorForm : Form
     {
-        public InstructorForm()
+        Form previousForm;
+        public InstructorForm(Form previousForm)
         {
             InitializeComponent();
+            this.previousForm = previousForm;
         }
 
         private void btnDisplay_Click(object sender, EventArgs e)
@@ -56,6 +58,11 @@ namespace C__Project.FaresAwad
         {
             AddQuestionToExamForm addQuestionToExamForm = new AddQuestionToExamForm();
             addQuestionToExamForm.ShowDialog();
+        }
+
+        private void InstructorForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            previousForm.Show();
         }
     }
 }

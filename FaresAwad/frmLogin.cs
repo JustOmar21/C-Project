@@ -11,6 +11,8 @@ using System.Data.SqlClient;
 using Microsoft.Data.SqlClient;
 using C__Project.Models;
 using Microsoft.EntityFrameworkCore;
+using C__Project.OmarTarek.Student_Forms;
+using C__Project.OmarTarek.Manager_Forms;
 
 namespace C__Project.FaresAwad
 {
@@ -25,6 +27,7 @@ namespace C__Project.FaresAwad
             // Hide the password initially
             isPasswordHidden = true;
             UpdatePasswordVisibility();
+            cmbUserType.SelectedIndex = 0;
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -46,16 +49,14 @@ namespace C__Project.FaresAwad
 
                     if (userCount == 1)
                     {
-                        var userType = dbContext.Logins
-                            .Where(l => l.Email == txtEmail.Text && l.Password == txtPassword.Text)
-                            .Select(l => l.Type)
-                            .FirstOrDefault();
+                        var userType = cmbUserType.Text;
 
                         if (userType != null)
                         {
                             switch (userType)
                             {
                                 case "Admin":
+                                    //UserSession.Id = null;
                                     this.Hide();
                                     AdminForm adminForm = new AdminForm();
                                     adminForm.ShowDialog();
@@ -63,10 +64,15 @@ namespace C__Project.FaresAwad
                                     break;
 
                                 case "Manager":
+                                    var managerId = dbContext.Managers
+                                        .Where(mgr => mgr.Email == txtEmail.Text)
+                                        .Select(mgr => mgr.Id)
+                                        .FirstOrDefault();
+
+                                    UserSession.Id = managerId;
                                     this.Hide();
-                                    ManagerForm managerForm = new ManagerForm();
-                                    managerForm.ShowDialog();
-                                    this.Close();
+                                    ManagerProfile managerForm = new ManagerProfile(this);
+                                    managerForm.Show();
                                     break;
 
                                 case "Instructor":
@@ -75,25 +81,30 @@ namespace C__Project.FaresAwad
                                         .Select(ins => ins.Id)
                                         .FirstOrDefault();
 
-                                    UserSession.SetId(instructorId);
+                                    UserSession.Id = instructorId;
 
                                     this.Hide();
-                                    InstructorForm instructorForm = new InstructorForm();
-                                    instructorForm.ShowDialog();
-                                    this.Close();
+                                    InstructorForm instructorForm = new InstructorForm(this);
+                                    instructorForm.Show();
                                     break;
 
                                 case "Student":
+                                    var studentId = dbContext.Students
+                                        .Where(std => std.Email == txtEmail.Text)
+                                        .Select(std => std.Id)
+                                        .FirstOrDefault();
+
+                                    UserSession.Id = studentId;
                                     this.Hide();
-                                    StudentForm studentForm = new StudentForm();
-                                    studentForm.ShowDialog();
-                                    this.Close();
+                                    StudentProfile studentProfile = new StudentProfile(this);
+                                    studentProfile.Show();
                                     break;
 
                                 default:
                                     MessageBox.Show("Invalid user type.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     break;
                             }
+                            ResetFields();
                         }
                     }
                     else
@@ -106,6 +117,13 @@ namespace C__Project.FaresAwad
             {
                 MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void ResetFields()
+        {
+            txtEmail.Text = "";
+            txtPassword.Text = "";
+            cmbUserType.SelectedIndex = 0;
         }
 
         private void checkbxShowPas_CheckedChanged(object sender, EventArgs e)
@@ -129,19 +147,4 @@ namespace C__Project.FaresAwad
             cmbUserType.SelectedIndex = -1;
         }
     }
-    public static class UserSession
-    {
-        public static int Id { get; private set; }
-
-        public static void SetId(int id)
-        {
-            Id = id;
-        }
-
-        public static void ClearUserSession()
-        {
-            Id = 0;
-        }
-    }
-
 }

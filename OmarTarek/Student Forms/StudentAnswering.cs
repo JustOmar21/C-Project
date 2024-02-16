@@ -19,7 +19,7 @@ namespace C__Project.OmarTarek.Student_Forms
     public partial class StudentAnswering : Form
     {
         int questionNumber = 0;
-        int studentID = 1; // replace this with a static variable of CurrentUserID
+        int studentID = UserSession.Id; // replace this with a static variable of CurrentUserID
         Form previousForm;
         Timer timer;
         TimeSpan timeSpan;

@@ -15,7 +15,7 @@ namespace C__Project.OmarTarek.Student_Forms
     public partial class StudentExams : Form
     {
         ExamSystemContext Context = new ExamSystemContext();
-        int StudentID = 1;  // replace this with a static variable of CurrentUserID
+        int StudentID = UserSession.Id;  // replace this with a static variable of CurrentUserID
         Form previousForm;
         public StudentExams(Form previousForm)
         {

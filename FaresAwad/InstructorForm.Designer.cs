@@ -121,6 +121,7 @@
             Controls.Add(dataGridView);
             Name = "InstructorForm";
             Text = "InstructorForm";
+            FormClosing += InstructorForm_FormClosing;
             ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
             ResumeLayout(false);
             PerformLayout();

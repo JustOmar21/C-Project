@@ -46,6 +46,7 @@
             IDTXT = new Label();
             idLBL = new Label();
             returnBTN = new Button();
+            instructorsBTN = new Button();
             SuspendLayout();
             // 
             // coursesBTN
@@ -211,19 +212,30 @@
             // 
             // returnBTN
             // 
-            returnBTN.Location = new Point(677, 373);
+            returnBTN.Location = new Point(12, 408);
             returnBTN.Name = "returnBTN";
-            returnBTN.Size = new Size(111, 29);
-            returnBTN.TabIndex = 29;
-            returnBTN.Text = "Return";
+            returnBTN.Size = new Size(776, 29);
+            returnBTN.TabIndex = 30;
+            returnBTN.Text = "Logout";
             returnBTN.UseVisualStyleBackColor = true;
             returnBTN.Click += returnBTN_Click;
+            // 
+            // instructorsBTN
+            // 
+            instructorsBTN.Location = new Point(677, 373);
+            instructorsBTN.Name = "instructorsBTN";
+            instructorsBTN.Size = new Size(111, 29);
+            instructorsBTN.TabIndex = 31;
+            instructorsBTN.Text = "Instructors";
+            instructorsBTN.UseVisualStyleBackColor = true;
+            instructorsBTN.Click += instructorsBTN_Click;
             // 
             // ManagerProfile
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(instructorsBTN);
             Controls.Add(returnBTN);
             Controls.Add(salaryTXT);
             Controls.Add(salaryLBL);
@@ -244,7 +256,7 @@
             Controls.Add(branchBTN);
             Name = "ManagerProfile";
             Text = "ManagerForm";
-            FormClosing += this.ManagerProfile_FormClosing;
+            FormClosing += ManagerProfile_FormClosing;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -268,5 +280,6 @@
         private Label IDTXT;
         private Label idLBL;
         private Button returnBTN;
+        private Button instructorsBTN;
     }
 }

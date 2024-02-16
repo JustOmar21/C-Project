@@ -1,4 +1,5 @@
-﻿using C__Project.Models;
+﻿using C__Project.FaresAwad;
+using C__Project.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -17,10 +18,11 @@ namespace C__Project.OmarTarek.Student_Forms
         ExamSystemContext Context = new ExamSystemContext();
         Student student;
         Form previousForm;
+
         public StudentProfile(Form previousForm)
         {
             InitializeComponent();
-            int StudentID = 1; // replace this with a static variable of CurrentUserID
+            int StudentID = UserSession.Id; // replace this with a static variable of CurrentUserID
             this.student = Context.Students
                 .Include(std => std.Class)
                 .Include(std => std.Intake)

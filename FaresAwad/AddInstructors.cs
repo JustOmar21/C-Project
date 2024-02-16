@@ -6,15 +6,20 @@ using System.Windows.Forms;
 
 namespace C__Project.FaresAwad
 {
-    public partial class ManagerForm : Form
+    public partial class AddInstructors : Form
     {
         private ExamSystemContext dbContext;  // Assuming your DbContext is named ExamSystemContext
-
-        public ManagerForm()
+        Form previousForm;
+        public AddInstructors(Form previousForm)
         {
             InitializeComponent();
             dbContext = new ExamSystemContext();  // Initialize your DbContext
             LoadInstructors();  // Call the method to load instructors into DataGridView
+            this.previousForm = previousForm;
+        }
+        private void AddInstructors_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            previousForm.Show();
         }
 
         private void LoadInstructors()

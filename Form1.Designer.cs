@@ -42,6 +42,7 @@
             examsBTN = new Button();
             studentsToExamBTN = new Button();
             button11 = new Button();
+            button12 = new Button();
             SuspendLayout();
             // 
             // button1
@@ -192,11 +193,23 @@
             button11.UseVisualStyleBackColor = true;
             button11.Click += button11_Click;
             // 
+            // button12
+            // 
+            button12.Location = new Point(11, 344);
+            button12.Margin = new Padding(2, 3, 2, 3);
+            button12.Name = "button12";
+            button12.Size = new Size(328, 27);
+            button12.TabIndex = 14;
+            button12.Text = "Add Manager";
+            button12.UseVisualStyleBackColor = true;
+            button12.Click += button12_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 451);
+            Controls.Add(button12);
             Controls.Add(button11);
             Controls.Add(studentsToExamBTN);
             Controls.Add(examsBTN);
@@ -233,5 +246,6 @@
         private Button examsBTN;
         private Button studentsToExamBTN;
         private Button button11;
+        private Button button12;
     }
 }
