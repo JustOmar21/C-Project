@@ -9,7 +9,7 @@ namespace C__Project.FaresAwad
 {
     public partial class AddInstructors : Form
     {
-        private ExamSystemContext dbContext;  // Assuming your DbContext is named ExamSystemContext
+        private ExamSystemContext dbContext;
         Form previousForm;
 
         public AddInstructors(Form previousForm)
