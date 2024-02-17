@@ -13,6 +13,7 @@ using C__Project.Models;
 using Microsoft.EntityFrameworkCore;
 using C__Project.OmarTarek.Student_Forms;
 using C__Project.OmarTarek.Manager_Forms;
+using C__Project.OmarTarek.Admin_Forms;
 
 namespace C__Project.FaresAwad
 {
@@ -56,11 +57,10 @@ namespace C__Project.FaresAwad
                             switch (userType)
                             {
                                 case "Admin":
-                                    //UserSession.Id = null;
+                                    UserSession.Id = -1;
                                     this.Hide();
-                                    AdminForm adminForm = new AdminForm();
-                                    adminForm.ShowDialog();
-                                    this.Close();
+                                    AdminProfile adminForm = new AdminProfile(this);
+                                    adminForm.Show();
                                     break;
 
                                 case "Manager":

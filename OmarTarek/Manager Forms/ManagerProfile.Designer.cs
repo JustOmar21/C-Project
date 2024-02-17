@@ -47,11 +47,12 @@
             idLBL = new Label();
             returnBTN = new Button();
             instructorsBTN = new Button();
+            assignClassBTN = new Button();
             SuspendLayout();
             // 
             // coursesBTN
             // 
-            coursesBTN.Location = new Point(677, 180);
+            coursesBTN.Location = new Point(677, 150);
             coursesBTN.Margin = new Padding(3, 4, 3, 4);
             coursesBTN.Name = "coursesBTN";
             coursesBTN.Size = new Size(111, 29);
@@ -62,7 +63,7 @@
             // 
             // studentBTN
             // 
-            studentBTN.Location = new Point(677, 226);
+            studentBTN.Location = new Point(677, 195);
             studentBTN.Name = "studentBTN";
             studentBTN.Size = new Size(111, 29);
             studentBTN.TabIndex = 17;
@@ -72,7 +73,7 @@
             // 
             // classesBTN
             // 
-            classesBTN.Location = new Point(677, 323);
+            classesBTN.Location = new Point(677, 286);
             classesBTN.Name = "classesBTN";
             classesBTN.Size = new Size(111, 29);
             classesBTN.TabIndex = 16;
@@ -82,7 +83,7 @@
             // 
             // intakeBTN
             // 
-            intakeBTN.Location = new Point(677, 275);
+            intakeBTN.Location = new Point(677, 240);
             intakeBTN.Name = "intakeBTN";
             intakeBTN.Size = new Size(111, 29);
             intakeBTN.TabIndex = 15;
@@ -92,7 +93,7 @@
             // 
             // trackBTN
             // 
-            trackBTN.Location = new Point(677, 131);
+            trackBTN.Location = new Point(677, 101);
             trackBTN.Name = "trackBTN";
             trackBTN.Size = new Size(111, 29);
             trackBTN.TabIndex = 14;
@@ -102,7 +103,7 @@
             // 
             // deptBTN
             // 
-            deptBTN.Location = new Point(677, 83);
+            deptBTN.Location = new Point(677, 54);
             deptBTN.Name = "deptBTN";
             deptBTN.Size = new Size(111, 29);
             deptBTN.TabIndex = 13;
@@ -112,7 +113,7 @@
             // 
             // branchBTN
             // 
-            branchBTN.Location = new Point(677, 34);
+            branchBTN.Location = new Point(677, 6);
             branchBTN.Name = "branchBTN";
             branchBTN.Size = new Size(111, 29);
             branchBTN.TabIndex = 12;
@@ -212,7 +213,7 @@
             // 
             // returnBTN
             // 
-            returnBTN.Location = new Point(12, 408);
+            returnBTN.Location = new Point(12, 415);
             returnBTN.Name = "returnBTN";
             returnBTN.Size = new Size(776, 29);
             returnBTN.TabIndex = 30;
@@ -222,7 +223,7 @@
             // 
             // instructorsBTN
             // 
-            instructorsBTN.Location = new Point(677, 373);
+            instructorsBTN.Location = new Point(677, 330);
             instructorsBTN.Name = "instructorsBTN";
             instructorsBTN.Size = new Size(111, 29);
             instructorsBTN.TabIndex = 31;
@@ -230,11 +231,21 @@
             instructorsBTN.UseVisualStyleBackColor = true;
             instructorsBTN.Click += instructorsBTN_Click;
             // 
+            // assignClassBTN
+            // 
+            assignClassBTN.Location = new Point(586, 380);
+            assignClassBTN.Name = "assignClassBTN";
+            assignClassBTN.Size = new Size(202, 29);
+            assignClassBTN.TabIndex = 44;
+            assignClassBTN.Text = "Assign Classes and Courses";
+            assignClassBTN.UseVisualStyleBackColor = true;
+            // 
             // ManagerProfile
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(assignClassBTN);
             Controls.Add(instructorsBTN);
             Controls.Add(returnBTN);
             Controls.Add(salaryTXT);
@@ -281,5 +292,6 @@
         private Label idLBL;
         private Button returnBTN;
         private Button instructorsBTN;
+        private Button assignClassBTN;
     }
 }
