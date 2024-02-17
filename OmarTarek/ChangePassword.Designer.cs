@@ -38,6 +38,7 @@
             oldPassValiLBL = new Label();
             newPassValiLBL = new Label();
             confirmPassLBL = new Label();
+            returnBTN = new Button();
             SuspendLayout();
             // 
             // oldPassTXT
@@ -138,11 +139,22 @@
             confirmPassLBL.Text = "New Password and this are not the same";
             confirmPassLBL.Visible = false;
             // 
+            // returnBTN
+            // 
+            returnBTN.Location = new Point(12, 12);
+            returnBTN.Name = "returnBTN";
+            returnBTN.Size = new Size(94, 29);
+            returnBTN.TabIndex = 10;
+            returnBTN.Text = "Return";
+            returnBTN.UseVisualStyleBackColor = true;
+            returnBTN.Click += returnBTN_Click;
+            // 
             // ChangePassword
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(returnBTN);
             Controls.Add(confirmPassLBL);
             Controls.Add(newPassValiLBL);
             Controls.Add(oldPassValiLBL);
@@ -172,5 +184,6 @@
         private Label oldPassValiLBL;
         private Label newPassValiLBL;
         private Label confirmPassLBL;
+        private Button returnBTN;
     }
 }

@@ -126,5 +126,10 @@ namespace C__Project.OmarTarek
         {
             previousForm.Show();
         }
+
+        private void returnBTN_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
