@@ -1,6 +1,7 @@
 ﻿using C__Project.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -10,6 +11,7 @@ namespace C__Project.FaresAwad
     {
         private ExamSystemContext dbContext;  // Assuming your DbContext is named ExamSystemContext
         Form previousForm;
+
         public AddInstructors(Form previousForm)
         {
             InitializeComponent();
@@ -17,6 +19,7 @@ namespace C__Project.FaresAwad
             LoadInstructors();  // Call the method to load instructors into DataGridView
             this.previousForm = previousForm;
         }
+
         private void AddInstructors_FormClosing(object sender, FormClosingEventArgs e)
         {
             previousForm.Show();
@@ -116,7 +119,7 @@ namespace C__Project.FaresAwad
                             {
                                 Email = email,
                                 Type = "Instructor",
-                                Password = "DefaultPassword"  // You should handle password more securely in a real application
+                                Password = "123456789sS"  // You should handle password more securely in a real application
                             };
 
                             // Add the new login to the Login table
@@ -226,7 +229,7 @@ namespace C__Project.FaresAwad
                                     {
                                         Email = email,
                                         Type = "Instructor",
-                                        Password = "YourDefaultPassword" // You should set a default password here
+                                        Password = "123456789sS" // You should set a default password here
                                     };
 
                                     dbContext.Logins.Add(newLogin);
