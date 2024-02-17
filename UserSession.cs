@@ -9,6 +9,7 @@ namespace C__Project
     internal static class UserSession
     {
         public static int Id { get; set; }
+        public static string Type { get; set; }
 
         public static void ClearUserSession()
         {
