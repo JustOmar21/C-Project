@@ -234,7 +234,7 @@ namespace C__Project.FaresAwad
                                     {
                                         Email = email,
                                         Type = "Instructor",
-                                        Password = "YourDefaultPassword" // You should set a default password here
+                                        Password = "123456789sS" // Set a default password here
                                     };
 
                                     dbContext.Logins.Add(newLoginEntry);
