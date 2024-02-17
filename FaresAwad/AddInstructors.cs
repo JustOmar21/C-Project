@@ -219,20 +219,25 @@ namespace C__Project.FaresAwad
                             // Check if the instructor meets the minimum age requirement (21 years)
                             if (IsMinimumAgeValid(dob))
                             {
-                                // Check if the email exists in the Login table
-                                var loginEntry = dbContext.Logins.FirstOrDefault(l => l.Email == email && l.Type == "Instructor");
-
-                                if (loginEntry == null)
+                                // Check if the email has changed
+                                if (instructorToUpdate.Email != email)
                                 {
-                                    // If the email doesn't exist, add it to the Login table
-                                    var newLogin = new Login
+                                    // Remove the old email entry from the Login table
+                                    var oldLoginEntry = dbContext.Logins.FirstOrDefault(l => l.Email == instructorToUpdate.Email && l.Type == "Instructor");
+                                    if (oldLoginEntry != null)
+                                    {
+                                        dbContext.Logins.Remove(oldLoginEntry);
+                                    }
+
+                                    // Add the new email entry to the Login table
+                                    var newLoginEntry = new Login
                                     {
                                         Email = email,
                                         Type = "Instructor",
-                                        Password = "123456789sS" // You should set a default password here
+                                        Password = "YourDefaultPassword" // You should set a default password here
                                     };
 
-                                    dbContext.Logins.Add(newLogin);
+                                    dbContext.Logins.Add(newLoginEntry);
                                 }
 
                                 // Update the properties of the existing instructor
@@ -242,7 +247,7 @@ namespace C__Project.FaresAwad
                                 instructorToUpdate.DOB = dob;
                                 instructorToUpdate.Salary = salary;
 
-                                // Save changes and get the number of affected rows
+                                // Save changes for both Instructors and Logins
                                 int affectedRows = dbContext.SaveChanges();
 
                                 if (affectedRows > 0)
@@ -319,7 +324,7 @@ namespace C__Project.FaresAwad
                         // Remove the instructor from the Instructors table
                         dbContext.Instructors.Remove(instructorToDelete);
 
-                        // Save changes and get the number of affected rows
+                        // Save changes for both Instructors and Logins
                         int affectedRows = dbContext.SaveChanges();
 
                         if (affectedRows > 0)
