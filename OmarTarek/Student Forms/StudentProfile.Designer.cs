@@ -45,6 +45,7 @@
             returnBTN = new Button();
             classesBTN = new Button();
             examsBTN = new Button();
+            changePassBTN = new Button();
             SuspendLayout();
             // 
             // idLBL
@@ -204,11 +205,23 @@
             examsBTN.UseVisualStyleBackColor = true;
             examsBTN.Click += examsBTN_Click;
             // 
+            // changePassBTN
+            // 
+            changePassBTN.Location = new Point(614, 408);
+            changePassBTN.Margin = new Padding(3, 4, 3, 4);
+            changePassBTN.Name = "changePassBTN";
+            changePassBTN.Size = new Size(174, 29);
+            changePassBTN.TabIndex = 19;
+            changePassBTN.Text = "Change Password";
+            changePassBTN.UseVisualStyleBackColor = true;
+            changePassBTN.Click += changePassBTN_Click;
+            // 
             // StudentProfile
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(changePassBTN);
             Controls.Add(examsBTN);
             Controls.Add(classesBTN);
             Controls.Add(returnBTN);
@@ -252,5 +265,6 @@
         private Button returnBTN;
         private Button classesBTN;
         private Button examsBTN;
+        private Button changePassBTN;
     }
 }

@@ -61,5 +61,12 @@ namespace C__Project.OmarTarek.Student_Forms
             this.Hide();
             student.Show();
         }
+
+        private void changePassBTN_Click(object sender, EventArgs e)
+        {
+            ChangePassword password = new ChangePassword(this);
+            this.Hide();
+            password.Show();
+        }
     }
 }

@@ -58,6 +58,7 @@ namespace C__Project.FaresAwad
                             {
                                 case "Admin":
                                     UserSession.Id = -1;
+                                    UserSession.Type = userType;
                                     this.Hide();
                                     AdminProfile adminForm = new AdminProfile(this);
                                     adminForm.Show();
@@ -70,6 +71,7 @@ namespace C__Project.FaresAwad
                                         .FirstOrDefault();
 
                                     UserSession.Id = managerId;
+                                    UserSession.Type = userType;
                                     this.Hide();
                                     ManagerProfile managerForm = new ManagerProfile(this);
                                     managerForm.Show();
@@ -82,6 +84,7 @@ namespace C__Project.FaresAwad
                                         .FirstOrDefault();
 
                                     UserSession.Id = instructorId;
+                                    UserSession.Type = userType;
 
                                     this.Hide();
                                     InstructorForm instructorForm = new InstructorForm(this);
@@ -95,6 +98,7 @@ namespace C__Project.FaresAwad
                                         .FirstOrDefault();
 
                                     UserSession.Id = studentId;
+                                    UserSession.Type = userType;
                                     this.Hide();
                                     StudentProfile studentProfile = new StudentProfile(this);
                                     studentProfile.Show();

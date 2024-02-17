@@ -119,5 +119,12 @@ namespace C__Project.OmarTarek.Manager_Forms
             this.Hide();
             ins.Show();
         }
+
+        private void changePassBTN_Click(object sender, EventArgs e)
+        {
+            ChangePassword password = new ChangePassword(this);
+            this.Hide();
+            password.Show();
+        }
     }
 }

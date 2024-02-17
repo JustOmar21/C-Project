@@ -48,6 +48,7 @@
             returnBTN = new Button();
             instructorsBTN = new Button();
             assignClassBTN = new Button();
+            changePassBTN = new Button();
             SuspendLayout();
             // 
             // coursesBTN
@@ -240,11 +241,23 @@
             assignClassBTN.Text = "Assign Classes and Courses";
             assignClassBTN.UseVisualStyleBackColor = true;
             // 
+            // changePassBTN
+            // 
+            changePassBTN.Location = new Point(12, 13);
+            changePassBTN.Margin = new Padding(3, 4, 3, 4);
+            changePassBTN.Name = "changePassBTN";
+            changePassBTN.Size = new Size(174, 29);
+            changePassBTN.TabIndex = 45;
+            changePassBTN.Text = "Change Password";
+            changePassBTN.UseVisualStyleBackColor = true;
+            changePassBTN.Click += changePassBTN_Click;
+            // 
             // ManagerProfile
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(changePassBTN);
             Controls.Add(assignClassBTN);
             Controls.Add(instructorsBTN);
             Controls.Add(returnBTN);
@@ -293,5 +306,6 @@
         private Button returnBTN;
         private Button instructorsBTN;
         private Button assignClassBTN;
+        private Button changePassBTN;
     }
 }
