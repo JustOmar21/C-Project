@@ -36,7 +36,7 @@ namespace C__Project.FaresAwad
                 {
                     // Retrieve questions related to the specified course and instructor
                     var questions = dbContext.Questions
-                        .Where(q => q.CourseId == courseId && q.InstructorId == instructorId)
+                        .Where(q => q.CourseId == courseId)
                         .ToList();
 
                     // Check if dataGridView1 is not null before setting its DataSource

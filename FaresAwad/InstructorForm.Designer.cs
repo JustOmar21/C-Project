@@ -35,13 +35,14 @@
             btnEdit = new Button();
             btnDelete = new Button();
             btnAddEx = new Button();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
             SuspendLayout();
             // 
             // dataGridView
             // 
             dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView.Location = new Point(12, 32);
+            dataGridView.Location = new Point(12, 12);
             dataGridView.Name = "dataGridView";
             dataGridView.RowHeadersWidth = 51;
             dataGridView.Size = new Size(488, 236);
@@ -51,7 +52,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Times New Roman", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(76, 282);
+            label1.Location = new Point(74, 249);
             label1.Name = "label1";
             label1.Size = new Size(358, 32);
             label1.TabIndex = 1;
@@ -59,7 +60,7 @@
             // 
             // btnAdd
             // 
-            btnAdd.Location = new Point(76, 368);
+            btnAdd.Location = new Point(74, 335);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new Size(358, 29);
             btnAdd.TabIndex = 2;
@@ -69,7 +70,7 @@
             // 
             // btnDisplay
             // 
-            btnDisplay.Location = new Point(76, 326);
+            btnDisplay.Location = new Point(74, 293);
             btnDisplay.Name = "btnDisplay";
             btnDisplay.Size = new Size(358, 29);
             btnDisplay.TabIndex = 3;
@@ -79,7 +80,7 @@
             // 
             // btnEdit
             // 
-            btnEdit.Location = new Point(76, 453);
+            btnEdit.Location = new Point(74, 420);
             btnEdit.Name = "btnEdit";
             btnEdit.Size = new Size(358, 29);
             btnEdit.TabIndex = 4;
@@ -89,7 +90,7 @@
             // 
             // btnDelete
             // 
-            btnDelete.Location = new Point(76, 495);
+            btnDelete.Location = new Point(74, 462);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(358, 29);
             btnDelete.TabIndex = 5;
@@ -99,7 +100,7 @@
             // 
             // btnAddEx
             // 
-            btnAddEx.Location = new Point(76, 411);
+            btnAddEx.Location = new Point(74, 378);
             btnAddEx.Name = "btnAddEx";
             btnAddEx.Size = new Size(358, 29);
             btnAddEx.TabIndex = 6;
@@ -107,11 +108,22 @@
             btnAddEx.UseVisualStyleBackColor = true;
             btnAddEx.Click += btnAddEx_Click;
             // 
+            // button1
+            // 
+            button1.Location = new Point(74, 508);
+            button1.Name = "button1";
+            button1.Size = new Size(358, 29);
+            button1.TabIndex = 7;
+            button1.Text = "Change Password";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // InstructorForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(521, 549);
+            Controls.Add(button1);
             Controls.Add(btnAddEx);
             Controls.Add(btnDelete);
             Controls.Add(btnEdit);
@@ -136,5 +148,6 @@
         private Button btnEdit;
         private Button btnDelete;
         private Button btnAddEx;
+        private Button button1;
     }
 }

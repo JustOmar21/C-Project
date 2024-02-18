@@ -1,4 +1,5 @@
 ﻿using C__Project.Models;
+using C__Project.OmarTarek;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -63,6 +64,13 @@ namespace C__Project.FaresAwad
         private void InstructorForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             previousForm.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ChangePassword password = new ChangePassword(this);
+            this.Hide();
+            password.Show();
         }
     }
 }
