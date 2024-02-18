@@ -106,7 +106,8 @@ namespace C__Project.Khateep
                     Name = nameTXT.Text.Trim(),
                     CourseId = (int)corsCB.SelectedValue,
                     StartTime = startTimeDP.Value,
-                    EndTime = endTimeDP.Value
+                    EndTime = endTimeDP.Value,
+                    InstructorId = UserSession.Type == "Instructor" ? UserSession.Id : null
 
                 };
 
@@ -205,6 +206,7 @@ namespace C__Project.Khateep
             exam.CourseId = (int)corsCB.SelectedValue;
             exam.StartTime = startTimeDP.Value;
             exam.EndTime = endTimeDP.Value;
+            exam.InstructorId = UserSession.Type == "Instructor" ? UserSession.Id : null;
             if (exam.EndTime <= exam.StartTime) throw new Exception("Exam Start Time must be earlier than End Time");
             if (exam.EndTime - exam.StartTime < new TimeSpan(1, 0, 0)) throw new Exception("Exam time must be more than one hour");
             if (exam.EndTime - exam.StartTime >= new TimeSpan(4, 0, 0)) throw new Exception("Exam time must be less than four hours");
