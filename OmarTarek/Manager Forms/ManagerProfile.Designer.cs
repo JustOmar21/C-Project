@@ -49,6 +49,7 @@
             instructorsBTN = new Button();
             assignClassBTN = new Button();
             changePassBTN = new Button();
+            examsBTN = new Button();
             SuspendLayout();
             // 
             // coursesBTN
@@ -240,6 +241,7 @@
             assignClassBTN.TabIndex = 44;
             assignClassBTN.Text = "Assign Classes and Courses";
             assignClassBTN.UseVisualStyleBackColor = true;
+            assignClassBTN.Click += assignClassBTN_Click;
             // 
             // changePassBTN
             // 
@@ -252,11 +254,23 @@
             changePassBTN.UseVisualStyleBackColor = true;
             changePassBTN.Click += changePassBTN_Click;
             // 
+            // examsBTN
+            // 
+            examsBTN.Location = new Point(560, 6);
+            examsBTN.Margin = new Padding(3, 4, 3, 4);
+            examsBTN.Name = "examsBTN";
+            examsBTN.Size = new Size(111, 29);
+            examsBTN.TabIndex = 47;
+            examsBTN.Text = "Exams";
+            examsBTN.UseVisualStyleBackColor = true;
+            examsBTN.Click += examsBTN_Click;
+            // 
             // ManagerProfile
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(examsBTN);
             Controls.Add(changePassBTN);
             Controls.Add(assignClassBTN);
             Controls.Add(instructorsBTN);
@@ -307,5 +321,6 @@
         private Button instructorsBTN;
         private Button assignClassBTN;
         private Button changePassBTN;
+        private Button examsBTN;
     }
 }

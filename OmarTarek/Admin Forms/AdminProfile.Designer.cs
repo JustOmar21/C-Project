@@ -39,6 +39,7 @@
             deptBTN = new Button();
             branchBTN = new Button();
             assignClassBTN = new Button();
+            examsBTN = new Button();
             SuspendLayout();
             // 
             // mgrBTN
@@ -150,12 +151,25 @@
             assignClassBTN.TabIndex = 43;
             assignClassBTN.Text = "Assign Classes and Courses";
             assignClassBTN.UseVisualStyleBackColor = true;
+            assignClassBTN.Click += assignClassBTN_Click;
+            // 
+            // examsBTN
+            // 
+            examsBTN.Location = new Point(12, 259);
+            examsBTN.Margin = new Padding(3, 4, 3, 4);
+            examsBTN.Name = "examsBTN";
+            examsBTN.Size = new Size(776, 29);
+            examsBTN.TabIndex = 48;
+            examsBTN.Text = "Exams";
+            examsBTN.UseVisualStyleBackColor = true;
+            examsBTN.Click += examsBTN_Click;
             // 
             // AdminProfile
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(examsBTN);
             Controls.Add(assignClassBTN);
             Controls.Add(mgrBTN);
             Controls.Add(instructorsBTN);
@@ -186,5 +200,6 @@
         private Button deptBTN;
         private Button branchBTN;
         private Button assignClassBTN;
+        private Button examsBTN;
     }
 }

@@ -119,5 +119,19 @@ namespace C__Project.OmarTarek.Admin_Forms
             this.Hide();
             manager.Show();
         }
+
+        private void assignClassBTN_Click(object sender, EventArgs e)
+        {
+            TeachesAtClass teachesAtClass = new TeachesAtClass(this);
+            this.Hide();
+            teachesAtClass.Show();
+        }
+
+        private void examsBTN_Click(object sender, EventArgs e)
+        {
+            Exams exam = new Exams(this);
+            this.Hide();
+            exam.Show();
+        }
     }
 }
